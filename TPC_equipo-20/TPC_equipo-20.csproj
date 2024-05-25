@@ -103,6 +103,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\conexion\conexion.csproj">
+      <Project>{c3c93a0b-59c5-45ea-a062-168e18be05d7}</Project>
+      <Name>conexion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{16d5a689-4def-4a8b-b3eb-1d3b2e450a1f}</Project>
       <Name>dominio</Name>
