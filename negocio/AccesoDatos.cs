@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    internal class PrioridadNegocio
+    public class AccesoDatos
     {
     }
 }
