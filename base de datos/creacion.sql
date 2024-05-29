@@ -6,9 +6,9 @@ Create Table Clientes(
 	ID bigint not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
-	Dni tinyint not null,
-	Telefono tinyint null,
-	Email varchar(50) null,
+	Dni varchar(15) not null unique,
+	Telefono varchar(30) null,
+	Email varchar(50) not null unique,
 	FechaNacimiento date null,
 	FechaCreacion date not null
 )
@@ -18,23 +18,32 @@ Create Table Usuarios(
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
 	Nick varchar(100) not null,
-	Dni tinyint not null,
-	Telefono tinyint null,
-	Email varchar(50) null,
+	Dni varchar(15) not null unique,
+	Telefono varchar(30) null,
+	Email varchar(50) not null unique,
 	Pass varchar(100) not null,
+	IDRol int not null foreign key references Roles(ID),
+)
+Go
+Create Table Paises (
+	ID smallint not null primary key identity (1, 1),
+	Nombre varchar(100) not null
+)
+Go
+Create Table Localidades(
+	ID smallint not null primary key identity (1, 1),
+	Nombre varchar(100) not null,
+	IDPais smallint not null foreign key references Paises(ID),
 )
 Go
 Create Table Domicilios(
-    ID bigint not null primary key identity (1, 1),
+    ID bigint not null primary key foreign key references Clientes(ID),
     Calle varchar(50) not null,
 	Numero smallint not null,
 	Piso tinyint not null,
 	Departamento tinyint not null,
 	Observaciones varchar(200) not null,
-	Localidad smallint not null,
-	Provincia smallint not null,
-	Pais smallint not null,
-	CodigoPostal varchar(50) null
+	IDLocalidad smallint not null foreign key references Localidades(ID),
 )
 Go
 Create Table Estados(
@@ -59,9 +68,9 @@ Create Table Roles(
 Go
 Create Table Incidentes(
 	ID bigint not null primary key identity (1, 1),
-    Tipo smallint not null foreign key references TiposIncidentes(ID),
-    Prioridad smallint not null foreign key references Prioridades(ID),
-	Estado smallint not null foreign key references Estados(ID),
+    IDTipo smallint not null foreign key references TiposIncidentes(ID),
+    IDPrioridad smallint not null foreign key references Prioridades(ID),
+	IDEstado smallint not null foreign key references Estados(ID),
 	Detalle varchar (200) not null,
 	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
