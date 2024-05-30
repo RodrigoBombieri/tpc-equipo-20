@@ -13,6 +13,11 @@ Create Table Clientes(
 	FechaCreacion date not null
 )
 Go
+Create Table Roles(
+    ID int not null primary key identity (1, 1),
+    Nombre varchar(100) not null
+)
+Go
 Create Table Usuarios(
 	ID bigint not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
@@ -61,11 +66,6 @@ Create Table TiposIncidentes(
     Nombre varchar(100) not null
 )
 Go
-Create Table Roles(
-    ID int not null primary key identity (1, 1),
-    Nombre varchar(100) not null
-)
-Go
 Create Table Incidentes(
 	ID bigint not null primary key identity (1, 1),
     IDTipo smallint not null foreign key references TiposIncidentes(ID),
@@ -75,3 +75,12 @@ Create Table Incidentes(
 	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 )
+GO
+
+insert into ROLES values ('Administrador'), ('Telefonista'), ('Supervisor')
+insert into ESTADOS values ('Abierto'), ('En análisis'), ('Cerrado'), ('Reabierto'), ('Asignado'), ('Resuelto')
+insert into PRIORIDADES values ('Urgente'), ('Alta'), ('Media'), ('Baja')
+insert into TIPOSINCIDENTES values ('Producto dañado'), ('Problema en el cobro'), ('Entrega fallida'), ('Otro')
+
+
+select * from ROLES
