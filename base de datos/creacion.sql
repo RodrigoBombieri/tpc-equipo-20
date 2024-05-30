@@ -76,3 +76,11 @@ Create Table Incidentes(
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 )
 GO
+
+insert into ROLES values ('Administrador'), ('Telefonista'), ('Supervisor')
+insert into ESTADOS values ('Abierto'), ('En análisis'), ('Cerrado'), ('Reabierto'), ('Asignado'), ('Resuelto')
+insert into PRIORIDADES values ('Urgente'), ('Alta'), ('Media'), ('Baja')
+insert into TIPOSINCIDENTES values ('Producto dañado'), ('Problema en el cobro'), ('Entrega fallida'), ('Otro')
+
+
+select * from ROLES
