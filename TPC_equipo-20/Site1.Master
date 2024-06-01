@@ -13,21 +13,25 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
+                <a class="navbar-brand" href="#">CALL CENTER</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Default.aspx">CALL CENTER</a>
+                            <a class="nav-link active" aria-current="page" href="Default.aspx">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link 1</a>
+                            <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link 2</a>
+                            <a class="nav-link" href="Incidencias.aspx">Incidencias</a>
                         </li>
-                        <li cass="nav-item">
-                            <a class="nav-link" href="#">Mi Perfil </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ListadoClientes.aspx">Clientes</a>
                         </li>
                     </ul>
                 </div>
@@ -39,8 +43,8 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
-        <footer>
-            <p>&copy; <%: DateTime.Now.Year %> - UTN -  PROGRAMACIÓN III </p>
+        <footer class="bg-dark text-light text-center py-3">
+            <p>&copy; <%: DateTime.Now.Year %> - UTN - PROGRAMACIÓN III</p>
         </footer>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

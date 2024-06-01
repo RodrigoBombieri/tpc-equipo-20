@@ -88,3 +88,6 @@ select * from ROLES
 select * from ESTADOS
 select * from PRIORIDADES
 select * from TIPOSINCIDENTES
+
+ALTER TABLE Usuarios
+ADD urlImagenPerfil varchar(500) null
