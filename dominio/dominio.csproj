@@ -44,6 +44,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Domicilio.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="Imagen.cs" />
     <Compile Include="Incidente.cs" />
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

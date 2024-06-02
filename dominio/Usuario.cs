@@ -17,5 +17,6 @@ namespace dominio
         public string Email { get; set; }
         public Rol Rol { get; set; }
         public string Password { get; set; }
+        public string ImagenPerfil { get; set; }
     }
 }
