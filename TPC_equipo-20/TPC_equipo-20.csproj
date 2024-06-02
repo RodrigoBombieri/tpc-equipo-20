@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Usuarios.aspx" />
     <Content Include="Incidencias.aspx" />
     <Content Include="ListadoClientes.aspx" />
     <Content Include="MiPerfil.aspx" />
@@ -81,6 +82,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Incidencias.aspx.cs">
       <DependentUpon>Incidencias.aspx</DependentUpon>

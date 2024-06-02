@@ -9,6 +9,7 @@ namespace negocio
 {
     public class ImagenNegocio
     {
+        
         public List<Imagen> listar(int ID)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -59,7 +60,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
+        
         public void modificar(Imagen aux)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -99,5 +100,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        
     }
 }
