@@ -44,6 +44,7 @@ namespace negocio
 
         public List<Usuario> listarConImagenes()
         {
+            Imagen x;
             AccesoDatos datos = new AccesoDatos();
             List<Usuario> lista = new List<Usuario>();
             List<Imagen> imagenes = new List<Imagen>();
