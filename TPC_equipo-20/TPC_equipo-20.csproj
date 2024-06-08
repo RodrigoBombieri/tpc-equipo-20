@@ -67,6 +67,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\miFoto.jpg" />
     <Content Include="Usuarios.aspx" />
     <Content Include="Incidencias.aspx" />
     <Content Include="ListadoClientes.aspx" />
