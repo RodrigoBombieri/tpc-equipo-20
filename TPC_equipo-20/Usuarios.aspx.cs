@@ -12,14 +12,14 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Seguridad.EsAdmin(Session["usuario"])) || !(Seguridad.EsSupervisor(Session["usuario"])))
+            if (Seguridad.EsTelefonista(Session["usuario"]))
             {
                 Session.Add("error", "No tiene permisos para acceder a esta página.");
                 Response.Redirect("Error.aspx");
             }
             else
             {
-               
+               Response.Redirect("Default.aspx");
             }
         }
     }

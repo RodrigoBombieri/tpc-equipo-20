@@ -27,7 +27,7 @@ namespace TPC_equipo_20
                 }
             }
 
-            //if(!(Page is Login || Page is Default || Page is Error))
+            //if (!(Page is Login || Page is Default || Page is Error))
             //{
             //    if (!Seguridad.SesionActiva(Session["usuario"]))
             //    {

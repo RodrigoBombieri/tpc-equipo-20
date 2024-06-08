@@ -20,7 +20,8 @@ namespace negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=192.168.1.2,1433\\sql-server-express; database=creacion; integrated security = false; user=SA; password=Cor12345!; "); //Franco
+            //conexion = new SqlConnection("server=192.168.1.2,1433\\sql-server-express; database=creacion; integrated security = false; user=SA; password=Cor12345!; "); //Franco
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TPC; integrated security = true; "); //Bomba
             comando = new SqlCommand();
         }
 

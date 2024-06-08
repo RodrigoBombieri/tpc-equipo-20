@@ -160,8 +160,8 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE USUARIOS SET Email = @email, Nombre = @nombre, Apellido = @apellido " +
-                    "Nick = @nick, Telefono = @telefono, Dni = @dni, urlImagenPerfil = @imagen, Rol = @rol INNER JOIN Roles ON Usuarios.IDRol = Roles.ID Where ID = @id");
+                datos.setearConsulta("UPDATE USUARIOS SET Email = @email, Nombre = @nombre, Apellido = @apellido," +
+                    " Nick = @nick, Telefono = @telefono, Dni = @dni, urlImagenPerfil = @imagen Where ID = @id");
                 datos.setearParametro("@id", aux.Id);
                 datos.setearParametro("@email", aux.Email);
                 datos.setearParametro("@nombre", aux.Nombre);
@@ -170,8 +170,8 @@ namespace negocio
                 datos.setearParametro("@telefono", aux.Telefono);
                 datos.setearParametro("@dni", aux.Dni);
                 datos.setearParametro("@imagen", (object)aux.ImagenPerfil ?? DBNull.Value);
-                datos.setearParametro("@rol", aux.Rol.Descripcion);
-                datos.setearParametro("@idRol", aux.Rol.Id);
+                //datos.setearParametro("@rol", aux.Rol.Descripcion);
+                //datos.setearParametro("@idRol", aux.Rol.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -225,14 +225,14 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT * FROM USUARIOS WHERE Email = @Email AND Password = @Password");
+                datos.setearConsulta("SELECT U.ID, U.Nombre, Apellido, Email, Nick, Telefono, Dni, urlImagenPerfil, R.ID, R.Nombre FROM USUARIOS U, ROLES R WHERE U.IDRol = R.ID AND Email = @Email AND Pass = @Password");
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Password", usuario.Password);
                 datos.ejecutarLectura();
                 if (datos.Lector.Read())
                 {
-                    usuario.Id = (int)datos.Lector["ID"];
-                    if (!(datos.Lector["nombre"] is DBNull))
+                    usuario.Id = (long)datos.Lector["ID"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
                         usuario.Nombre = (string)datos.Lector["Nombre"];
                     if (!(datos.Lector["Apellido"] is DBNull))
                         usuario.Apellido = (string)datos.Lector["Apellido"];
@@ -242,8 +242,8 @@ namespace negocio
                     usuario.Dni = (string)datos.Lector["Dni"];
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
-                    usuario.Rol.Id = (int)datos.Lector["IDRol"];
-                    usuario.Rol.Descripcion = (string)datos.Lector["Descripcion"];
+                    //usuario.Rol.Id = (int)datos.Lector["ID"];
+                    //usuario.Rol.Descripcion = (string)datos.Lector["Nombre"];
                     return true;
                 }
                 else
