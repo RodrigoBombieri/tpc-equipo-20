@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace negocio
 {
-    public class Seguridad
+    public static class Seguridad
     {
         /// Verifica si la sesión está activa, es decir, si el usuario está logueado.
         /// obj es el objeto que se recibe en la página, que debería ser un Usuario.
         /// Retorna true si la sesión está activa, false en caso contrario.
-        //public static bool SesionActiva(Object obj)
-        //{
-        //    Usuario usuario = obj != null ? (Usuario)obj : null;
-        //    if(usuario != null && usuario.Id != 0)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        public static bool SesionActiva(Object obj)
+        {
+            Usuario usuario = obj != null ? (Usuario)obj : null;
+            if (usuario != null && usuario.Id != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }

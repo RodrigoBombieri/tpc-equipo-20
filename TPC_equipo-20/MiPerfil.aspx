@@ -16,9 +16,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <h1>Mi Perfil - (Acá también debería decir el Rol que tiene) </h1>
+        <h1> Perfil </h1>
         <div class="row">
             <div class="col-md-4">
+                <div class="mb-3">
+                    <label id="lblRol" class="form-label">Rol</label>
+                    <asp:TextBox ID="txtRol" CssClass="form-control" runat="server" />
+                </div>
                 <div class="mb-3">
                     <label id="lblEmail" class="form-label">Email</label>
                     <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
