@@ -15,6 +15,15 @@ namespace TPC_equipo_20
     {
 
         /// <summary>
+        /// txtRol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRol;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
