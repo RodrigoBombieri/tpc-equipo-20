@@ -225,7 +225,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT U.ID, U.Nombre, Apellido, Email, Nick, Telefono, Dni, urlImagenPerfil, R.ID, R.Nombre FROM USUARIOS U, ROLES R WHERE U.IDRol = R.ID AND Email = @Email AND Pass = @Password");
+                datos.setearConsulta("SELECT U.ID, U.Nombre, Apellido, Email, Nick, Telefono, Dni, urlImagenPerfil, IDRol, R.ID AS RolID, R.Nombre AS RolNombre FROM USUARIOS U INNER JOIN ROLES R ON U.IDRol = R.ID Where Email = @Email AND Pass = @Password");
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Password", usuario.Password);
                 datos.ejecutarLectura();
@@ -242,8 +242,9 @@ namespace negocio
                     usuario.Dni = (string)datos.Lector["Dni"];
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
-                    //usuario.Rol.Id = (int)datos.Lector["ID"];
-                    //usuario.Rol.Descripcion = (string)datos.Lector["Nombre"];
+                    usuario.Rol = new Rol();
+                    usuario.Rol.Id = (int)datos.Lector["RolID"];
+                    usuario.Rol.Descripcion = (string)datos.Lector["RolNombre"];
                     return true;
                 }
                 else

@@ -33,9 +33,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="ListadoClientes.aspx">Clientes</a>
                         </li>
+                        <%if (negocio.Seguridad.EsAdmin(Session["usuario"]))
+                            { %>
                         <li class="nav-item">
                             <a class="nav-link" href="Usuarios.aspx">Usuarios</a>
                         </li>
+                        <% } %>
                     </ul>
                 </div>
                 <div class="d-flex">

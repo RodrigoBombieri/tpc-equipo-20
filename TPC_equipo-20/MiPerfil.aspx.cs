@@ -20,7 +20,11 @@ namespace TPC_equipo_20
                     if (Seguridad.SesionActiva(Session["usuario"]))
                     {
                         Usuario usuario = (Usuario)Session["usuario"];
-                        //txtRol.Text = usuario.Rol.Descripcion;
+                        if(usuario.Rol.Descripcion != "Administrador")
+                        {
+                            txtRol.Enabled = false;
+                        }
+                        txtRol.Text = usuario.Rol.Descripcion;
                         txtEmail.Text = usuario.Email;
                         txtNombre.Text = usuario.Nombre;
                         txtApellido.Text = usuario.Apellido;
@@ -63,7 +67,7 @@ namespace TPC_equipo_20
                 usuario.Nick = txtNickName.Text;
                 usuario.Telefono = txtTelefono.Text;
                 usuario.Dni = txtDni.Text;
-                //usuario.Rol.Descripcion = txtRol.Text;
+                usuario.Rol.Descripcion = txtRol.Text;
 
                 negocio.modificar(usuario);
 
