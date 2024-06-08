@@ -10,15 +10,17 @@ Go
 Create Table Localidades(
 	ID smallint not null primary key identity (1, 1),
 	Nombre varchar(100) not null,
+	Provincia varchar(100) not null,
+	CodigoPostal varchar(50) not null,
 	IDPais smallint not null foreign key references Paises(ID),
 )
 Go
 Create Table Domicilios(
     ID bigint not null primary key identity (1,1),
-    Calle varchar(50) not null,
-	Numero smallint not null,
-	Piso tinyint not null,
-	Departamento tinyint not null,
+    Calle varchar(100) not null,
+	Numero varchar(50) not null,
+	Piso varchar(50) not null,
+	Departamento varchar(50) not null,
 	Observaciones varchar(200) not null,
 	IDLocalidad smallint not null foreign key references Localidades(ID),
 )
@@ -37,7 +39,7 @@ Create Table Clientes(
 Go
 Create Table Roles(
     ID int not null primary key identity (1, 1),
-    Nombre varchar(100) not null
+    Nombre varchar(100) not null,
 )
 Go
 Create Table Usuarios(

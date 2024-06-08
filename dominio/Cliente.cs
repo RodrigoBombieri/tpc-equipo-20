@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    internal class Cliente
+    public class Cliente
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -17,5 +17,6 @@ namespace dominio
         public Domicilio Domicilio { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaCreacion { get; set; }
+        List< Incidente> Incidentes { get; set; }
     }
 }
