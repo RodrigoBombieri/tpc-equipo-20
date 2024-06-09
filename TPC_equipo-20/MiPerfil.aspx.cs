@@ -20,7 +20,7 @@ namespace TPC_equipo_20
                     if (Seguridad.SesionActiva(Session["usuario"]))
                     {
                         Usuario usuario = (Usuario)Session["usuario"];
-                        if(usuario.Rol.Descripcion != "Administrador")
+                        if (usuario.Rol.Descripcion != "Administrador")
                         {
                             txtRol.Enabled = false;
                         }
@@ -75,7 +75,7 @@ namespace TPC_equipo_20
                 if (img != null)
                 {
 
-                img.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
+                    img.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                 }
             }
             catch (Exception ex)
@@ -85,5 +85,6 @@ namespace TPC_equipo_20
             }
 
         }
+
     }
 }

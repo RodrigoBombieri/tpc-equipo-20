@@ -18,14 +18,27 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("");
+                datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Usuario aux = new Usuario();
                     if (!(datos.Lector["ID"] is DBNull))
-                        aux.Id = (int)datos.Lector["ID"];
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nick = (string)datos.Lector["Nick"];
+                    aux.Dni = (string)datos.Lector["Dni"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Password = (string)datos.Lector["Pass"];
+                    aux.Rol = new Rol();
+                    aux.Rol.Id = (int)datos.Lector["RolID"];
+                    aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
+                    if (!(datos.Lector["urlImagenPerfil"] is DBNull))
+                        aux.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
+
 
                     lista.Add(aux);
                 }
@@ -78,12 +91,19 @@ namespace negocio
         public void agregar(Usuario nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
-            int id = -1;
+            //int id = -1;
             try
             {
-                datos.setearConsulta("");
-                //datos.setearParametro("@Codigo", nuevo.Codigo);
-                
+                datos.setearConsulta("INSERT INTO USUARIOS (Nombre, Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil) VALUES (@nombre, @apellido, @nick, @dni, @telefono, @email, @pass, @IDRol, @urlImagenPerfil)");
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@apellido", nuevo.Apellido);
+                datos.setearParametro("@nick", nuevo.Nick);
+                datos.setearParametro("@dni", nuevo.Dni);
+                datos.setearParametro("@telefono", nuevo.Telefono);
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@pass", nuevo.Password);
+                datos.setearParametro("@IDRol", nuevo.Rol.Id);
+                datos.setearParametro("@urlImagenPerfil", (object)nuevo.ImagenPerfil ?? DBNull.Value);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

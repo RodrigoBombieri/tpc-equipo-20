@@ -16,7 +16,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <h1> Perfil </h1>
+        <h1>Perfil </h1>
         <div class="row">
             <div class="col-md-4">
                 <div class="mb-3">
@@ -68,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnGuardar" Text="Guardar cambios" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
                 <a href="/">Regresar</a>
             </div>
         </div>

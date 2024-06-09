@@ -77,17 +77,17 @@ Create Table Incidentes(
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 )
 GO
+ALTER TABLE Usuarios
+ADD urlImagenPerfil varchar(500) null
+GO
 
 insert into ROLES values ('Administrador'), ('Telefonista'), ('Supervisor')
 insert into ESTADOS values ('Abierto'), ('En análisis'), ('Cerrado'), ('Reabierto'), ('Asignado'), ('Resuelto')
 insert into PRIORIDADES values ('Urgente'), ('Alta'), ('Media'), ('Baja')
 insert into TIPOSINCIDENTES values ('Producto dañado'), ('Problema en el cobro'), ('Entrega fallida'), ('Otro')
-
+insert into USUARIOS values ('Admin', 'Admin', 'admin', '12345678', '12345678', 'admin@admin.com', 'admin', 1, null)
 
 select * from ROLES
 select * from ESTADOS
 select * from PRIORIDADES
 select * from TIPOSINCIDENTES
-
-ALTER TABLE Usuarios
-ADD urlImagenPerfil varchar(500) null
