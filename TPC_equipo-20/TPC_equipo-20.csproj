@@ -69,7 +69,6 @@
     <Content Include="FormularioUsuario.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\miFoto.jpg" />
-    <Content Include="IncidenciaForm.aspx" />
     <Content Include="Incidencias.aspx" />
     <Content Include="ListadoClientes.aspx" />
     <Content Include="Login.aspx" />
@@ -92,23 +91,8 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="IncidenciaForm.aspx.cs">
-      <DependentUpon>IncidenciaForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="IncidenciaForm.aspx.designer.cs">
-      <DependentUpon>IncidenciaForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Usuarios.aspx.cs">
-      <DependentUpon>Usuarios.aspx</DependentUpon>
-
     <Compile Include="FormularioUsuario.aspx.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
-
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FormularioUsuario.aspx.designer.cs">
