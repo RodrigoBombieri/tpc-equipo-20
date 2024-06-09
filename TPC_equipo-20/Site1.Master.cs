@@ -43,6 +43,13 @@ namespace TPC_equipo_20
                     }
                 }
             }
+
+            if (Session["listaClientes"] == null)
+            {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                List<Cliente> listaCliente = clienteNegocio.listar();
+                Session.Add("listaClientes", listaCliente);
+            }
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)

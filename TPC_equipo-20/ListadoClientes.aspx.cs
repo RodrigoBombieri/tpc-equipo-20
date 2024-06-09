@@ -11,7 +11,17 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["listaClientes"] != null)
+            {
+            dgvClientes.DataSource = Session["listaClientes"];
+            dgvClientes.DataBind();
+            }
+        }
+        
+        protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var id = dgvClientes.SelectedDataKey.Value.ToString();
+            Response.Redirect("DetalleCliente.aspx?id=" + id);
         }
     }
 }
