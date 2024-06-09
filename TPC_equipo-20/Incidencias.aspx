@@ -15,30 +15,62 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
-        <h1>Incidencias </h1>
+    <h1>Incidencias </h1>
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-3">
+                <asp:Label Text="Filtrar" runat="server" />
+                <asp:TextBox ID="txtFiltro" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" />
+            </div>
+        </div>
+        <div class="col-4" style="display: flex; flex-direction: column; justify-content: flex-end;">
+            <div class="mb-3">
+                <asp:CheckBox ID="chkFiltroAvanzado" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
+            </div>
+        </div>
+         <div class="col-4">
+             <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
+        </div>
+        <%if (chkFiltroAvanzado.Checked)
+            //<%if (filtroAvanzado)
+            {%>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-3">
                 <div class="mb-3">
-                    <label id="lblPrioridad" class="form-label">Prioridad</label>
-                    <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblCampo" Text="Campo" runat="server" />
+                    <asp:DropDownList ID="ddlCampo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+                        <asp:ListItem Text="Precio" />
+                        <asp:ListItem Text="Nombre" />
+                        <asp:ListItem Text="Descripcion" />
+                    </asp:DropDownList>
                 </div>
+            </div>
+            <div class="col-3">
                 <div class="mb-3">
-                    <label id="lblEstado" class="form-label">Estado</label>
-                    <asp:DropDownList ID="ddlEstado" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblCriterio" Text="Criterio" runat="server" />
+                    <asp:DropDownList ID="ddlCriterio" runat="server" CssClass="form-control" AutoPostBack="true">
+                        <asp:ListItem Text="Igual a" />
+                        <asp:ListItem Text="Mayor a" />
+                        <asp:ListItem Text="Menor a" />
+                    </asp:DropDownList>
                 </div>
+            </div>
+            <div class="col-3">
                 <div class="mb-3">
-                    <label id="lblDetalle" class="form-label">Detalle</label>
-                    <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                    <asp:Label ID="lblFiltroAvanzado" Text="Filtro" runat="server" />
+                    <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server" />
                 </div>
-                
+                <asp:Label ID="lblValidarFiltro" Text="" runat="server" ForeColor="Red" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
-                <a href="/">Regresar</a>
+            <div class="col-3">
+                <div class="mb-3">
+                    <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
+                    <asp:Button ID="BtnLimpiarFiltros" Text="Limpiar filtros" runat="server" CssClass="btn btn-primary" OnClick="btnLimpiarFiltro_Click" />
+                </div>
             </div>
         </div>
+        <% } %>
     </div>
 </asp:Content>

@@ -13,14 +13,78 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ddlPrioridad.Items.Add("Baja");
-            ddlPrioridad.Items.Add("Media");
-            ddlPrioridad.Items.Add("Alta");
-            ddlEstado.Items.Add("1");
-            ddlEstado.Items.Add("2");
-            ddlEstado.Items.Add("3");
+            
         }
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnCrear_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("IncidenciaForm.aspx");
+        }
+        protected void chkFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFiltro.Enabled = !chkFiltroAvanzado.Checked;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
+                //List<Articulo> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Codigo.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Descripcion.ToLower().Contains(txtFiltro.Text.ToLower()));
+                //repRepeater.DataSource = listaFiltrada;
+                //repRepeater.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlCriterio.Items.Clear();
+                if (ddlCampo.SelectedItem.ToString() == "Precio")
+                {
+                    ddlCriterio.Items.Add("Mayor a");
+                    ddlCriterio.Items.Add("Menor a");
+                    ddlCriterio.Items.Add("Igual a");
+                }
+                else
+                {
+                    ddlCriterio.Items.Add("Contiene");
+                    ddlCriterio.Items.Add("Empieza con");
+                    ddlCriterio.Items.Add("Termina con");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        private bool validarFiltro()
+        {       
+            return false;
+        }
+        protected void btnLimpiarFiltro_Click(object sender, EventArgs e)
+        {
+            txtFiltro.Text = "";
+            txtFiltro.Enabled = true;
+            lblValidarFiltro.Text = "";
+            chkFiltroAvanzado.Checked = false;
+            //recargar grilla
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -28,9 +92,9 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
-
         }
     }
 }
