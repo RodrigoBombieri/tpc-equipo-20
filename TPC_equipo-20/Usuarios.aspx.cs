@@ -12,15 +12,33 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Seguridad.EsTelefonista(Session["usuario"]))
+            if(!IsPostBack  )
             {
-                Session.Add("error", "No tiene permisos para acceder a esta página.");
-                Response.Redirect("Error.aspx");
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                Session.Add("listaUsuarios", negocio.listar());
+                dgvUsuarios.DataSource = Session["listaUsuarios"];
+                dgvUsuarios.DataBind();
             }
-            else
+        }
+
+        protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
             {
-               Response.Redirect("Default.aspx");
+                var id = dgvUsuarios.SelectedDataKey.Value.ToString();
+                Response.Redirect("FormularioUsuario.aspx?id=" + id, false);
             }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
         }
     }
 }

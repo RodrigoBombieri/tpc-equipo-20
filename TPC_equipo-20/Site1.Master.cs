@@ -27,22 +27,22 @@ namespace TPC_equipo_20
                 }
             }
 
-            //if (!(Page is Login || Page is Default || Page is Error))
-            //{
-            //    if (!Seguridad.SesionActiva(Session["usuario"]))
-            //    {
-            //        Response.Redirect("Login.aspx");
-            //    }
-            //    else
-            //    {
-            //        Usuario usuario = (Usuario)Session["usuario"];
-            //        lblSalir.Text = usuario.Email;
-            //        if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
-            //        {
-            //            imgAvatar.ImageUrl = "~/Images/" + usuario.ImagenPerfil;
-            //        }
-            //    }
-            //}
+            if (!(Page is Login || Page is Default || Page is Error))
+            {
+                if (!Seguridad.SesionActiva(Session["usuario"]))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    lblSalir.Text = usuario.Email;
+                    if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
+                    {
+                        imgAvatar.ImageUrl = "~/Images/" + usuario.ImagenPerfil;
+                    }
+                }
+            }
         }
 
         protected void btnSalir_Click(object sender, EventArgs e)
