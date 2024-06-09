@@ -34,7 +34,7 @@ namespace negocio
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Password = (string)datos.Lector["Pass"];
                     aux.Rol = new Rol();
-                    aux.Rol.Id = (int)datos.Lector["RolID"];
+                    aux.Rol.Id = (short)datos.Lector["RolID"];
                     aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         aux.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
@@ -263,7 +263,7 @@ namespace negocio
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
                     usuario.Rol = new Rol();
-                    usuario.Rol.Id = (int)datos.Lector["RolID"];
+                    usuario.Rol.Id = (short)datos.Lector["RolID"];
                     usuario.Rol.Descripcion = (string)datos.Lector["RolNombre"];
                     return true;
                 }
