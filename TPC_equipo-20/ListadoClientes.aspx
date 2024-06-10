@@ -11,9 +11,9 @@
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
                     <asp:BoundField HeaderText="Dni" DataField="Dni" />
-                    <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
+                    <asp:BoundField HeaderText="Teléfono" DataField="Telefono1" />
                     <asp:BoundField HeaderText="Email" DataField="Email" />
-                    <asp:BoundField HeaderText="Email" DataField="Email" />
+                    <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
                     <asp:CommandField ShowSelectButton="true" SelectText="Ver más" />
                 </columns>
             </asp:GridView>
