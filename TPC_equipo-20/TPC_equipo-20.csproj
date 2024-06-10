@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="FormularioIncidencia.aspx" />
     <Content Include="FormularioUsuario.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\miFoto.jpg" />
@@ -90,6 +91,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioIncidencia.aspx.cs">
+      <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioIncidencia.aspx.designer.cs">
+      <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioUsuario.aspx.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
