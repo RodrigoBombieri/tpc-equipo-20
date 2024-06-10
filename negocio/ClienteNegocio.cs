@@ -30,7 +30,10 @@ namespace negocio
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Dni = (string)datos.Lector["Dni"];
                     if (!(datos.Lector["Telefono"] is DBNull))
-                        aux.Telefono = (string)datos.Lector["Telefono"];
+                    {
+                        aux.Telefono1 = (string)datos.Lector["Telefono"];
+                        aux.Telefono2 = (string)datos.Lector["Telefono"];
+                    }
                     aux.Email = (string)datos.Lector["Email"];
                     aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
                     aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];

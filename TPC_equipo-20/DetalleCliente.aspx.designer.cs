@@ -33,13 +33,13 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtDni;
 
         /// <summary>
-        /// Control txtTelefono.
+        /// Control txtTelefono1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono1;
 
         /// <summary>
         /// Control txtFechaNac.
@@ -69,6 +69,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// Control txtTelefono2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono2;
+
+        /// <summary>
         /// Control txtFechaCreacion.
         /// </summary>
         /// <remarks>
@@ -87,15 +96,6 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtCalle;
 
         /// <summary>
-        /// Control txtNumero.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumero;
-
-        /// <summary>
         /// Control txtPiso.
         /// </summary>
         /// <remarks>
@@ -103,24 +103,6 @@ namespace TPC_equipo_20
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPiso;
-
-        /// <summary>
-        /// Control txtDepartamento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDepartamento;
-
-        /// <summary>
-        /// Control txtObservaciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
 
         /// <summary>
         /// Control txtLocalidad.
@@ -132,6 +114,42 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtLocalidad;
 
         /// <summary>
+        /// Control txtPais.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPais;
+
+        /// <summary>
+        /// Control txtNumero.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumero;
+
+        /// <summary>
+        /// Control txtDepartamento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDepartamento;
+
+        /// <summary>
+        /// Control txtCodigoPostal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCodigoPostal;
+
+        /// <summary>
         /// Control txtProvincia.
         /// </summary>
         /// <remarks>
@@ -141,13 +159,13 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtProvincia;
 
         /// <summary>
-        /// Control txtPais.
+        /// Control txtObservaciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPais;
+        protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
 
         /// <summary>
         /// Control btnEliminar.

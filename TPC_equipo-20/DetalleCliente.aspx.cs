@@ -22,11 +22,29 @@ namespace TPC_equipo_20
                         int id = int.Parse(Request.QueryString["id"].ToString());
                         List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
                         Cliente aux = temp.Find(x => x.Id == id);
+                        txtNombre.Enabled = false;
+                        txtApellido.Enabled = false;
+                        txtDni.Enabled = false;
+                        txtEmail.Enabled = false;
+                        txtTelefono1.Enabled = false;
+                        txtTelefono2.Enabled = false;
+                        txtFechaNac.Enabled = false;
+                        txtFechaCreacion.Enabled = false;
+                        txtCalle.Enabled = false;
+                        txtNumero.Enabled = false;
+                        txtPiso.Enabled = false;
+                        txtDepartamento.Enabled = false;
+                        txtLocalidad.Enabled = false;
+                        txtProvincia.Enabled = false;
+                        txtPais.Enabled = false;
+                        txtCodigoPostal.Enabled = false;
+                        txtObservaciones.Enabled = false;
                         txtNombre.Text = aux.Nombre;
                         txtApellido.Text = aux.Apellido;
                         txtDni.Text = aux.Dni;
                         txtEmail.Text = aux.Email;
-                        txtTelefono.Text = aux.Telefono;
+                        txtTelefono1.Text = aux.Telefono1;
+                        txtTelefono2.Text = aux.Telefono2;
                         txtFechaNac.Text = aux.FechaNacimiento.ToString();
                         txtFechaCreacion.Text = aux.FechaCreacion.ToString();
                         txtCalle.Text = aux.Domicilio.Calle;
@@ -37,6 +55,7 @@ namespace TPC_equipo_20
                         txtLocalidad.Text = aux.Domicilio.Localidad;
                         txtProvincia.Text = aux.Domicilio.Provincia;
                         txtPais.Text = aux.Domicilio.Pais;
+                        txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
                     }
                 }
             }
