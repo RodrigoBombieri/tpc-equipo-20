@@ -1,4 +1,6 @@
-﻿using System;
+﻿using negocio;
+using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,25 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+			try
+			{
+                if (!IsPostBack)
+                {
+                    RolNegocio rolNegocio = new RolNegocio();
+                    List<Rol> listaRoles = rolNegocio.listar();
 
+                    ddlRoles.DataSource = listaRoles;
+                    ddlRoles.DataValueField = "Id";
+                    ddlRoles.DataTextField = "Descripcion";
+                    ddlRoles.DataBind();
+                }
+			}
+			catch (Exception ex)
+			{
+
+				Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

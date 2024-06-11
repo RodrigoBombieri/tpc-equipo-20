@@ -26,7 +26,7 @@ namespace TPC_equipo_20
                 if(Validacion.ValidaTextoVacio(txtEmail) || Validacion.ValidaTextoVacio(txtPassword))
                 {
                     Session.Add("error", "Debe completar todos los campos");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx", false);
                 }
 
                 usuario.Email = txtEmail.Text;
@@ -40,7 +40,7 @@ namespace TPC_equipo_20
                 else
                 {
                     Session.Add("error", "Usuario o contraseña incorrectos");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx", false);
                 }
             }
             catch (Exception ex)
