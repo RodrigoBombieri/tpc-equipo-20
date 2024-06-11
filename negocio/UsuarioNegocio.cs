@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -208,7 +209,88 @@ namespace negocio
         public List<Usuario> filtrar(string campo, string criterio, string filtro)
         {
             List<Usuario> list = new List<Usuario>();
-            return list;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID AND ";
+
+                if(campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "U.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "U.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "U.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if(campo == "Apellido")
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "U.Apellido LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "U.Apellido LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "U.Apellido LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "Email LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "Email LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "Email LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario();
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nick = (string)datos.Lector["Nick"];
+                    aux.Dni = (string)datos.Lector["Dni"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Password = (string)datos.Lector["Pass"];
+                    aux.Rol = new Rol();
+                    aux.Rol.Id = (short)datos.Lector["RolID"];
+                    aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
+                    if (!(datos.Lector["urlImagenPerfil"] is DBNull))
+                        aux.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
+                    list.Add(aux);
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         public void eliminar(int id)
         {
