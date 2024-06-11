@@ -23,5 +23,10 @@ namespace TPC_equipo_20
             var id = dgvClientes.SelectedDataKey.Value.ToString();
             Response.Redirect("DetalleCliente.aspx?id=" + id);
         }
+
+        protected void btnCrear_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DetalleCliente.aspx");
+        }
     }
 }

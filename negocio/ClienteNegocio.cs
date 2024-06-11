@@ -18,7 +18,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, l.Nombre as Localidad, pr.Nombre as Provincia, p.Nombre as Pais,  l.CodigoPostal FROM Clientes c JOIN Domicilios d ON d.Id=c.IDDomicilio JOIN Localidades l on d.IDLocalidad=l.ID JOIN Provincias pr ON pr.ID=l.IDProvincia JOIN Paises p on p.Id=pr.IDPais");
+                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.Nombre as Provincia " +
+                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Localidades l on d.IDLocalidad = l.ID JOIN Provincias pr ON pr.ID = l.IDProvincia");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -29,14 +30,13 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Dni = (string)datos.Lector["Dni"];
-                    if (!(datos.Lector["Telefono"] is DBNull))
-                    {
-                        aux.Telefono1 = (string)datos.Lector["Telefono"];
-                        aux.Telefono2 = (string)datos.Lector["Telefono"];
-                    }
+                    if (!(datos.Lector["Telefono1"] is DBNull))
+                        aux.Telefono1 = (string)datos.Lector["Telefono1"];
+                    if (!(datos.Lector["Telefono2"] is DBNull))
+                        aux.Telefono2 = (string)datos.Lector["Telefono2"];
                     aux.Email = (string)datos.Lector["Email"];
-                    aux.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
+                    aux.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
+                    aux.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                     aux.Domicilio = new Domicilio();
                     aux.Domicilio.Calle = (string)datos.Lector["Calle"];
                     aux.Domicilio.Numero = (string)datos.Lector["Numero"];
@@ -48,7 +48,6 @@ namespace negocio
                         aux.Domicilio.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.Domicilio.Localidad = (string)datos.Lector["Localidad"];
                     aux.Domicilio.Provincia = (string)datos.Lector["Provincia"];
-                    aux.Domicilio.Pais = (string)datos.Lector["Pais"];
 
                     lista.Add(aux);
                 }
@@ -64,5 +63,33 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregar(Cliente nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO CLIENTES (Nombre, Apellido, Dni, Telefono1, Telefono2, Email, FechaNacimiento, FechaCreacion) VALUES (@nombre, @apellido, @nick, @dni, @telefono1, @telefono2, @email, @fechanac, @fechacreac)");
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@apellido", nuevo.Apellido);
+                datos.setearParametro("@dni", nuevo.Dni);
+                datos.setearParametro("@telefono1", nuevo.Telefono1);
+                datos.setearParametro("@telefono2", nuevo.Telefono2);
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@fechanac", nuevo.FechaNacimiento);
+                datos.setearParametro("@fechacreac", nuevo.FechaCreacion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

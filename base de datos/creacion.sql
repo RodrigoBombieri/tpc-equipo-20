@@ -2,22 +2,15 @@ Create Database Ticketera
 Go
 Use Ticketera
 Go
-Create Table Paises (
-	ID smallint not null primary key identity (1, 1),
-	Nombre varchar(100) not null
-)
-Go
 Create Table Provincias (
 	ID smallint not null primary key identity (1, 1),
-	IDPais smallint not null foreign key references Paises(ID),
 	Nombre varchar(100) not null
 )
 Go
 Create Table Localidades(
 	ID smallint not null primary key identity (1, 1),
 	IDProvincia smallint not null foreign key references Provincias(ID),
-	Nombre varchar(100) not null,
-	CodigoPostal varchar(50) not null
+	Nombre varchar(100) not null
 )
 Go
 Create Table Domicilios(
@@ -27,6 +20,7 @@ Create Table Domicilios(
 	Numero varchar(50) not null,
 	Piso varchar(50) null,
 	Departamento varchar(50) null,
+	CodigoPostal varchar(50) not null,
 	Observaciones varchar(200) null
 )
 Go
@@ -36,7 +30,8 @@ Create Table Clientes(
 	Nombre varchar(100) not null,
 	Apellido varchar(100) not null,
 	Dni varchar(15) not null unique,
-	Telefono varchar(30) null,
+	Telefono1 varchar(30) null,
+	Telefono2 varchar(30) null,
 	Email varchar(50) not null unique,
 	FechaNacimiento date not null,
 	FechaCreacion date not null
@@ -128,57 +123,45 @@ insert into USUARIOS (IDRol, Nombre, Apellido, Nick, Dni, Telefono, Email, Pass)
 select 1, 'Admin', 'Admin', 'admin', '12345678', '12345678', 'admin@admin.com', 'admin'
 GO
 
-insert into PAISES (Nombre)
-select 'Argentina' UNION
-select 'Bolivia' UNION
-select 'Chile' UNION
-select 'Colombia' UNION
-select 'Ecuador' UNION
-select 'Paraguay' UNION
-select 'Perú' UNION
-select 'Uruguay' UNION
-select 'Venezuela'
+insert into PROVINCIAS (Nombre)
+select 'Buenos Aires' UNION
+select 'Capital Federal' UNION
+select 'Catamarca' UNION
+select 'Chaco' UNION
+select 'Chubut' UNION
+select 'Córdoba' UNION
+select 'Corrientes' UNION
+select 'Entre Ríos' UNION
+select 'Formosa' UNION
+select 'Jujuy' UNION
+select 'La Pampa' UNION
+select 'La Rioja' UNION
+select 'Mendoza' UNION
+select 'Misiones' UNION
+select 'Neuquén' UNION
+select 'Río Negro' UNION
+select 'Salta' UNION
+select 'San Juan' UNION
+select 'San Luis' UNION
+select 'Santa Cruz' UNION
+select 'Santa Fe' UNION
+select 'Santiago del Estero' UNION
+select 'Tierra del Fuego' UNION
+select 'Tucumán'
 GO
 
-insert into PROVINCIAS (IDPais, Nombre)
-select 1, 'Buenos Aires' UNION
-select 1, 'Capital Federal' UNION
-select 1, 'Catamarca' UNION
-select 1, 'Chaco' UNION
-select 1, 'Chubut' UNION
-select 1, 'Córdoba' UNION
-select 1, 'Corrientes' UNION
-select 1, 'Entre Ríos' UNION
-select 1, 'Formosa' UNION
-select 1, 'Jujuy' UNION
-select 1, 'La Pampa' UNION
-select 1, 'La Rioja' UNION
-select 1, 'Mendoza' UNION
-select 1, 'Misiones' UNION
-select 1, 'Neuquén' UNION
-select 1, 'Río Negro' UNION
-select 1, 'Salta' UNION
-select 1, 'San Juan' UNION
-select 1, 'San Luis' UNION
-select 1, 'Santa Cruz' UNION
-select 1, 'Santa Fe' UNION
-select 1, 'Santiago del Estero' UNION
-select 1, 'Tierra del Fuego' UNION
-select 1, 'Tucumán'
+insert into LOCALIDADES (IDProvincia, Nombre)
+select 2, 'Capital Federal' UNION
+select 1, 'Mar del Plata'
 GO
 
-insert into LOCALIDADES (IDProvincia, Nombre, CodigoPostal)
-select 2, 'Capital Federal', '1084' UNION
-select 1, 'Mar del Plata', '7600'
+insert into DOMICILIOS (IDLocalidad, Calle, Numero, Piso, Departamento, CodigoPostal) 
+select 1, 'Pichincha', '410', '4', 'E', '1082' UNION
+select 2, 'Libres del Sud', '523', null, null, '7600' UNION
+select 2, 'Moreno', '3730', null, null, '7600'
 GO
 
-insert into DOMICILIOS (IDLocalidad, Calle, Numero, Piso, Departamento) 
-select 1, 'Pichincha', '410', '4', 'E' UNION
-select 2, 'Libres del Sud', '523', null, null UNION
-select 2, 'Moreno', '3730', null, null
-GO
-
-insert into CLIENTES (IDDomicilio, Nombre, Apellido, Dni, Telefono, Email, FechaNacimiento, FechaCreacion)
+insert into CLIENTES (IDDomicilio, Nombre, Apellido, Dni, Telefono1, Email, FechaNacimiento, FechaCreacion)
 select 1, 'Franco', 'Cataldo', '37719580', '223-4374184', 'francocataldo7@gmail.com', '1992-10-12', '2024-06-08' UNION
 select 2, 'Florencia', 'Cataldo', '1111111', '223-6332691', 'florenciacataldo@gmail.com', '1994-07-03', '2024-06-08' UNION
 select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com', '1956-07-04', '2024-06-08'

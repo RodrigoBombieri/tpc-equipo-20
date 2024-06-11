@@ -21,7 +21,7 @@
                 </div>
                 <div class="mb-3">
                     <label id="lblFechaNac" class="form-label">Fecha de Nacimiento</label>
-                    <asp:TextBox ID="txtFechaNac" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtFechaNac" CssClass="form-control" runat="server" TextMode="Date" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -38,8 +38,8 @@
                     <asp:TextBox ID="txtTelefono2" CssClass="form-control" runat="server" />
                 </div>
                 <div class="mb-3">
-                    <label id="lblFechaCreacion" class="form-label">Fecha de Creación</label>
-                    <asp:TextBox ID="txtFechaCreacion" CssClass="form-control" runat="server" />
+                    <label id="lblFechaCreacion" class="form-label">Fecha de Alta</label>
+                    <asp:TextBox ID="txtFechaCreacion" CssClass="form-control" runat="server" TextMode="Date" />
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@
                     <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server" />
                 </div>
                 <div class="mb-3">
-                    <label id="lblPais" class="form-label">País</label>
-                    <asp:TextBox ID="txtPais" CssClass="form-control" runat="server" />
+                    <label id="lblProvincia" class="form-label">Provincia</label>
+                    <asp:TextBox ID="txtProvincia" CssClass="form-control" runat="server" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -76,10 +76,6 @@
                     <label id="lblCodigoPostal" class="form-label">Código Postal</label>
                     <asp:TextBox ID="txtCodigoPostal" CssClass="form-control" runat="server" />
                 </div>
-                <div class="mb-3">
-                    <label id="lblProvincia" class="form-label">Provincia</label>
-                    <asp:TextBox ID="txtProvincia" CssClass="form-control" runat="server" />
-                </div>
             </div>
             <div class="row">
                 <div class="mb-3">
@@ -90,7 +86,11 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
+                <%if (Request.QueryString["id"] != null)
+                    {%>
                 <asp:Button ID="btnEliminar" Text="Eliminar" CssClass="btn btn-primary" runat="server" OnClick="btnEliminar_Click" />
+                <%  }%>
                 <a href="/ListadoClientes.aspx">Volver al listado</a>
             </div>
         </div>
