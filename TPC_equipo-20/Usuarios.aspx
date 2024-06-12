@@ -70,6 +70,7 @@
             <asp:ImageField DataImageUrlField="ImagenPerfil" HeaderText="Foto de Perfil" />
             <asp:BoundField DataField="Nick" HeaderText="Nickname" />
             <asp:BoundField DataField="Password" HeaderText="Contraseña" />
+            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Editar" HeaderText="Accion" />
         </Columns>
     </asp:GridView>
     <a href="FormularioUsuario.aspx" class="btn btn-primary">Agregar Usuario</a>

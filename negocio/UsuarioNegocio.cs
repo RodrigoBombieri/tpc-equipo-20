@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using dominio;
+using System.Data.SqlClient;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace negocio
@@ -53,6 +54,50 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public List<Usuario> listar(string id = "")
+        {
+            List<Usuario> lista = new List<Usuario>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID ");
+                if(id != "")
+                {
+                    datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID AND U.ID = @id");
+                    datos.setearParametro("@id", id);
+                    datos.ejecutarLectura();
+                }
+
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario();
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Nick = (string)datos.Lector["Nick"];
+                    aux.Dni = (string)datos.Lector["Dni"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Password = (string)datos.Lector["Pass"];
+                    aux.Rol = new Rol();
+                    aux.Rol.Id = (short)datos.Lector["RolID"];
+                    aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
+
+                    lista.Add(aux);
+                }
+
+                datos.cerrarConexion();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 
@@ -182,7 +227,7 @@ namespace negocio
             try
             {
                 datos.setearConsulta("UPDATE USUARIOS SET Email = @email, Nombre = @nombre, Apellido = @apellido," +
-                    " Nick = @nick, Telefono = @telefono, Dni = @dni, urlImagenPerfil = @imagen Where ID = @id");
+                    " Nick = @nick, IDRol = @idRol, Telefono = @telefono, Dni = @dni, urlImagenPerfil = @imagen Where ID = @id");
                 datos.setearParametro("@id", aux.Id);
                 datos.setearParametro("@email", aux.Email);
                 datos.setearParametro("@nombre", aux.Nombre);
@@ -191,8 +236,7 @@ namespace negocio
                 datos.setearParametro("@telefono", aux.Telefono);
                 datos.setearParametro("@dni", aux.Dni);
                 datos.setearParametro("@imagen", (object)aux.ImagenPerfil ?? DBNull.Value);
-                //datos.setearParametro("@rol", aux.Rol.Descripcion);
-                //datos.setearParametro("@idRol", aux.Rol.Id);
+                datos.setearParametro("@idRol", aux.Rol.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
