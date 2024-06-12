@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
 
-namespace negocio
+namespace dominio
 {
-    public class DomicilioNegocio
+    public class Provincia
     {
-        public void agregar(Domicilio nuevo)
-        {
-
-        }
-
+        public short Id { get; set; }
+        public string Descripcion  { get; set; }
     }
 }

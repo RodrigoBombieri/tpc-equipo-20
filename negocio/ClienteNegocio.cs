@@ -18,7 +18,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.Nombre as Provincia " +
+                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.ID as IDProvincia, pr.Nombre as Provincia " +
                     "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Localidades l on d.IDLocalidad = l.ID JOIN Provincias pr ON pr.ID = l.IDProvincia");
                 datos.ejecutarLectura();
 
@@ -38,6 +38,7 @@ namespace negocio
                     aux.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
                     aux.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                     aux.Domicilio = new Domicilio();
+                    aux.Domicilio.Provincia = new Provincia();
                     aux.Domicilio.Calle = (string)datos.Lector["Calle"];
                     aux.Domicilio.Numero = (string)datos.Lector["Numero"];
                     if (!(datos.Lector["Piso"] is DBNull))
@@ -47,7 +48,8 @@ namespace negocio
                     if (!(datos.Lector["Observaciones"] is DBNull))
                         aux.Domicilio.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.Domicilio.Localidad = (string)datos.Lector["Localidad"];
-                    aux.Domicilio.Provincia = (string)datos.Lector["Provincia"];
+                    aux.Domicilio.Provincia.Id = (short)datos.Lector["IDProvincia"];
+                    aux.Domicilio.Provincia.Descripcion = (string)datos.Lector["Provincia"];
 
                     lista.Add(aux);
                 }

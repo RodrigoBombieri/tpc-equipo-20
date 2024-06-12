@@ -60,7 +60,7 @@
                 </div>
                 <div class="mb-3">
                     <label id="lblProvincia" class="form-label">Provincia</label>
-                    <asp:TextBox ID="txtProvincia" CssClass="form-control" runat="server" />
+                    <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
             </div>
             <div class="col-md-6">

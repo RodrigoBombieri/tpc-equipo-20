@@ -17,6 +17,14 @@ namespace TPC_equipo_20
             {
                 if (!IsPostBack)
                 {
+                        ProvinciaNegocio provinciaNegocio = new ProvinciaNegocio();
+                        List<Provincia> listaProvincias = provinciaNegocio.listar();
+
+                        ddlProvincias.DataSource = listaProvincias;
+                        ddlProvincias.DataValueField = "Id";
+                        ddlProvincias.DataTextField = "Descripcion";
+                        ddlProvincias.DataBind();
+
                     txtFechaCreacion.Enabled = false;
                     if (Request.QueryString["id"] != null)
                     {
@@ -35,7 +43,7 @@ namespace TPC_equipo_20
                         txtPiso.Enabled = false;
                         txtDepartamento.Enabled = false;
                         txtLocalidad.Enabled = false;
-                        txtProvincia.Enabled = false;
+                        ddlProvincias.Enabled = false;
                         txtCodigoPostal.Enabled = false;
                         txtObservaciones.Enabled = false;
                         txtNombre.Text = aux.Nombre;
@@ -52,7 +60,7 @@ namespace TPC_equipo_20
                         txtDepartamento.Text = aux.Domicilio.Departamento;
                         txtObservaciones.Text = aux.Domicilio.Observaciones;
                         txtLocalidad.Text = aux.Domicilio.Localidad;
-                        txtProvincia.Text = aux.Domicilio.Provincia;
+                        ddlProvincias.SelectedValue = aux.Domicilio.Provincia.Id.ToString();
                         txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
                     }
                     else
