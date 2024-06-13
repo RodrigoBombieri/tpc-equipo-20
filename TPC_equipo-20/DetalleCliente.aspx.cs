@@ -11,6 +11,7 @@ namespace TPC_equipo_20
 {
     public partial class DetalleCliente : System.Web.UI.Page
     {
+        public bool confirmaEliminar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,7 +29,7 @@ namespace TPC_equipo_20
                     txtFechaCreacion.Enabled = false;
                     if (Request.QueryString["id"] != null)
                     {
-                        int id = int.Parse(Request.QueryString["id"].ToString());
+                        long id = long.Parse(Request.QueryString["id"].ToString());
                         List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
                         Cliente aux = temp.Find(x => x.Id == id);
                         txtNombre.Enabled = false;
@@ -77,7 +78,7 @@ namespace TPC_equipo_20
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            confirmaEliminar = true;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -102,6 +103,29 @@ namespace TPC_equipo_20
             aux.Domicilio.CodigoPostal = txtCodigoPostal.Text;*/
 
             cliNeg.agregar(aux);
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmaEliminar.Checked)
+                {
+                    long id = long.Parse(Request.QueryString["id"].ToString());
+                    List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
+                    Cliente aux = temp.Find(x => x.Id == id);
+                    ClienteNegocio negocio = new ClienteNegocio();
+                    negocio.eliminar(aux);
+                    Session.Add("listaClientes", negocio.listar());
+                    Response.Redirect("ListadoClientes.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using dominio;
+using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace negocio
@@ -18,7 +19,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.ID as IDProvincia, pr.Nombre as Provincia " +
+                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Id as IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.ID as IDProvincia, pr.Nombre as Provincia " +
                     "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Localidades l on d.IDLocalidad = l.ID JOIN Provincias pr ON pr.ID = l.IDProvincia");
                 datos.ejecutarLectura();
 
@@ -39,6 +40,7 @@ namespace negocio
                     aux.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                     aux.Domicilio = new Domicilio();
                     aux.Domicilio.Provincia = new Provincia();
+                    aux.Domicilio.Id = (long)datos.Lector["IDDomicilio"];
                     aux.Domicilio.Calle = (string)datos.Lector["Calle"];
                     aux.Domicilio.Numero = (string)datos.Lector["Numero"];
                     if (!(datos.Lector["Piso"] is DBNull))
@@ -90,6 +92,30 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(Cliente cliente)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                DomicilioNegocio negocio = new DomicilioNegocio();
+
+                long idDom = cliente.Domicilio.Id;
+                long idCliente = cliente.Id;
+
+                datos.setearConsulta("delete from CLIENTES where id = @id");
+                datos.setearParametro("@id", idCliente);
+                datos.ejecutarAccion();
+
+                negocio.eliminar(idDom);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
             }
         }
 

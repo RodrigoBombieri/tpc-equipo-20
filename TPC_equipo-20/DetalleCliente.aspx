@@ -89,7 +89,21 @@
                 <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
                 <%if (Request.QueryString["id"] != null)
                     {%>
-                <asp:Button ID="btnEliminar" Text="Eliminar" CssClass="btn btn-primary" runat="server" OnClick="btnEliminar_Click" />
+                <asp:ScriptManager runat="server" />
+                <asp:UpdatePanel ID="UpdatePanel" runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3">
+                            <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" OnClick="btnEliminar_Click" Text="Eliminar" />
+                        </div>
+                        <% if (confirmaEliminar)
+                            { %>
+                        <div class="mb-3">
+                            <asp:CheckBox ID="chkConfirmaEliminar" runat="server" Text="Confirmar eliminación" />
+                            <asp:Button ID="btnConfirmaEliminar" runat="server" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" Text="Eliminar" />
+                        </div>
+                        <% } %>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <%  }%>
                 <a href="/ListadoClientes.aspx">Volver al listado</a>
             </div>
