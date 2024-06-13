@@ -14,8 +14,7 @@ namespace dominio
         public string Departamento { get; set; }
         public string Observaciones { get; set; }
         public string Localidad { get; set; }
-        public string Provincia { get; set; }
-        public string Pais { get; set; }
+        public Provincia Provincia { get; set; }
         public string CodigoPostal { get; set; }
     }
 }

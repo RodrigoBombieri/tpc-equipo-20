@@ -17,6 +17,15 @@ namespace TPC_equipo_20
             {
                 if (!IsPostBack)
                 {
+                        ProvinciaNegocio provinciaNegocio = new ProvinciaNegocio();
+                        List<Provincia> listaProvincias = provinciaNegocio.listar();
+
+                        ddlProvincias.DataSource = listaProvincias;
+                        ddlProvincias.DataValueField = "Id";
+                        ddlProvincias.DataTextField = "Descripcion";
+                        ddlProvincias.DataBind();
+
+                    txtFechaCreacion.Enabled = false;
                     if (Request.QueryString["id"] != null)
                     {
                         int id = int.Parse(Request.QueryString["id"].ToString());
@@ -29,14 +38,12 @@ namespace TPC_equipo_20
                         txtTelefono1.Enabled = false;
                         txtTelefono2.Enabled = false;
                         txtFechaNac.Enabled = false;
-                        txtFechaCreacion.Enabled = false;
                         txtCalle.Enabled = false;
                         txtNumero.Enabled = false;
                         txtPiso.Enabled = false;
                         txtDepartamento.Enabled = false;
                         txtLocalidad.Enabled = false;
-                        txtProvincia.Enabled = false;
-                        txtPais.Enabled = false;
+                        ddlProvincias.Enabled = false;
                         txtCodigoPostal.Enabled = false;
                         txtObservaciones.Enabled = false;
                         txtNombre.Text = aux.Nombre;
@@ -45,17 +52,20 @@ namespace TPC_equipo_20
                         txtEmail.Text = aux.Email;
                         txtTelefono1.Text = aux.Telefono1;
                         txtTelefono2.Text = aux.Telefono2;
-                        txtFechaNac.Text = aux.FechaNacimiento.ToString();
-                        txtFechaCreacion.Text = aux.FechaCreacion.ToString();
+                        txtFechaNac.Text = aux.FechaNacimiento.ToString("yyyy-MM-dd");
+                        txtFechaCreacion.Text = aux.FechaCreacion.ToString("yyyy-MM-dd");
                         txtCalle.Text = aux.Domicilio.Calle;
                         txtNumero.Text = aux.Domicilio.Numero;
                         txtPiso.Text = aux.Domicilio.Piso;
                         txtDepartamento.Text = aux.Domicilio.Departamento;
                         txtObservaciones.Text = aux.Domicilio.Observaciones;
                         txtLocalidad.Text = aux.Domicilio.Localidad;
-                        txtProvincia.Text = aux.Domicilio.Provincia;
-                        txtPais.Text = aux.Domicilio.Pais;
+                        ddlProvincias.SelectedValue = aux.Domicilio.Provincia.Id.ToString();
                         txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
+                    }
+                    else
+                    {
+                        txtFechaCreacion.Text = DateTime.Today.ToString("yyyy-MM-dd");
                     }
                 }
             }
@@ -68,6 +78,30 @@ namespace TPC_equipo_20
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Cliente aux = new Cliente();
+            ClienteNegocio cliNeg = new ClienteNegocio();
+            aux.Nombre = txtNombre.Text;
+            aux.Apellido = txtApellido.Text;
+            aux.Dni = txtDni.Text;
+            aux.Email = txtEmail.Text;
+            aux.Telefono1 = txtTelefono1.Text;
+            aux.Telefono2 = txtTelefono2.Text;
+            aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+            aux.FechaCreacion = DateTime.Parse(txtFechaCreacion.Text);
+            /*aux.Domicilio.Calle = txtCalle.Text;
+            aux.Domicilio.Numero = txtNumero.Text;
+            aux.Domicilio.Piso = txtPiso.Text;
+            aux.Domicilio.Departamento = txtDepartamento.Text;
+            aux.Domicilio.Observaciones = txtObservaciones.Text;
+            aux.Domicilio.Localidad = txtLocalidad.Text;
+            aux.Domicilio.Provincia = txtProvincia.Text;
+            aux.Domicilio.CodigoPostal = txtCodigoPostal.Text;*/
+
+            cliNeg.agregar(aux);
         }
     }
 }
