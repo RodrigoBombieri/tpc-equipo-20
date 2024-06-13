@@ -19,8 +19,8 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, d.Id as IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.CodigoPostal, l.Nombre as Localidad, pr.ID as IDProvincia, pr.Nombre as Provincia " +
-                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Localidades l on d.IDLocalidad = l.ID JOIN Provincias pr ON pr.ID = l.IDProvincia");
+                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
+                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -39,7 +39,6 @@ namespace negocio
                     aux.FechaNacimiento = DateTime.Parse(datos.Lector["FechaNacimiento"].ToString());
                     aux.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                     aux.Domicilio = new Domicilio();
-                    aux.Domicilio.Provincia = new Provincia();
                     aux.Domicilio.Id = (long)datos.Lector["IDDomicilio"];
                     aux.Domicilio.Calle = (string)datos.Lector["Calle"];
                     aux.Domicilio.Numero = (string)datos.Lector["Numero"];
@@ -50,6 +49,8 @@ namespace negocio
                     if (!(datos.Lector["Observaciones"] is DBNull))
                         aux.Domicilio.Observaciones = (string)datos.Lector["Observaciones"];
                     aux.Domicilio.Localidad = (string)datos.Lector["Localidad"];
+                    aux.Domicilio.CodigoPostal = (string)datos.Lector["CodigoPostal"];
+                    aux.Domicilio.Provincia = new Provincia();
                     aux.Domicilio.Provincia.Id = (short)datos.Lector["IDProvincia"];
                     aux.Domicilio.Provincia.Descripcion = (string)datos.Lector["Provincia"];
 
@@ -74,7 +75,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO CLIENTES (Nombre, Apellido, Dni, Telefono1, Telefono2, Email, FechaNacimiento, FechaCreacion) VALUES (@nombre, @apellido, @nick, @dni, @telefono1, @telefono2, @email, @fechanac, @fechacreac)");
+                datos.setearConsulta("INSERT INTO CLIENTES (Nombre, Apellido, Dni, Telefono1, Telefono2, Email, FechaNacimiento, FechaCreacion, IDDomicilio) VALUES (@nombre, @apellido, @dni, @telefono1, @telefono2, @email, @fechanac, @fechacreac, @iddom)");
                 datos.setearParametro("@nombre", nuevo.Nombre);
                 datos.setearParametro("@apellido", nuevo.Apellido);
                 datos.setearParametro("@dni", nuevo.Dni);
@@ -83,7 +84,9 @@ namespace negocio
                 datos.setearParametro("@email", nuevo.Email);
                 datos.setearParametro("@fechanac", nuevo.FechaNacimiento);
                 datos.setearParametro("@fechacreac", nuevo.FechaCreacion);
+                datos.setearParametro("@iddom", nuevo.Domicilio.Id);
                 datos.ejecutarAccion();
+
             }
             catch (Exception ex)
             {

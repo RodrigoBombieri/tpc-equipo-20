@@ -7,19 +7,14 @@ Create Table Provincias (
 	Nombre varchar(100) not null
 )
 Go
-Create Table Localidades(
-	ID smallint not null primary key identity (1, 1),
-	IDProvincia smallint not null foreign key references Provincias(ID),
-	Nombre varchar(100) not null
-)
-Go
 Create Table Domicilios(
     	ID bigint not null primary key identity (1,1),
-    	IDLocalidad smallint not null foreign key references Localidades(ID),
+    	IDProvincia smallint not null foreign key references Provincias(ID),
     	Calle varchar(100) not null,
 	Numero varchar(50) not null,
 	Piso varchar(50) null,
 	Departamento varchar(50) null,
+    	Localidad varchar(100) not null,
 	CodigoPostal varchar(50) not null,
 	Observaciones varchar(200) null
 )
@@ -150,15 +145,10 @@ select 'Tierra del Fuego' UNION
 select 'Tucumán'
 GO
 
-insert into LOCALIDADES (IDProvincia, Nombre)
-select 2, 'Capital Federal' UNION
-select 1, 'Mar del Plata'
-GO
-
-insert into DOMICILIOS (IDLocalidad, Calle, Numero, Piso, Departamento, CodigoPostal) 
-select 1, 'Pichincha', '410', '4', 'E', '1082' UNION
-select 2, 'Libres del Sud', '523', null, null, '7600' UNION
-select 2, 'Moreno', '3730', null, null, '7600'
+insert into DOMICILIOS (IDProvincia, Calle, Numero, Piso, Departamento, Localidad, CodigoPostal) VALUES
+(2, 'Pichincha', '410', '4', 'E', 'CABA', '1082'),
+(1, 'Libres del Sud', '523', null, null, 'Mar del Plata', '7600'),
+(1, 'Moreno', '3730', null, null, 'Mar del Plata', '7600');
 GO
 
 insert into CLIENTES (IDDomicilio, Nombre, Apellido, Dni, Telefono1, Email, FechaNacimiento, FechaCreacion)
@@ -166,4 +156,3 @@ select 1, 'Franco', 'Cataldo', '37719580', '223-4374184', 'francocataldo7@gmail.
 select 2, 'Florencia', 'Cataldo', '1111111', '223-6332691', 'florenciacataldo@gmail.com', '1994-07-03', '2024-06-08' UNION
 select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com', '1956-07-04', '2024-06-08'
 GO
-
