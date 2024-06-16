@@ -21,7 +21,7 @@ namespace negocio
                 {
                     Prioridad aux = new Prioridad();
                     aux.Id = (int)acceso.Lector["ID"];
-                    aux.Descripcion = (string)acceso.Lector["Nombre"];
+                    aux.Nombre = (string)acceso.Lector["Nombre"];
 
                     lista.Add(aux);
                 }

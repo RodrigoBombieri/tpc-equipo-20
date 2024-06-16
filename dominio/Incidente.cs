@@ -13,7 +13,10 @@ namespace dominio
         public Prioridad Prioridad { get; set; }
         public Estado Estado { get; set; }
         public string Detalle { get; set; }
-        public Usuario UsuarioAsignado { get; set; }
-        public Usuario UsuarioCreador { get; set; }
+        public int UsuarioAsignado { get; set; }
+        public int UsuarioCreador { get; set; }
+        public DateTime FechaCreacion {  get; set; }
+        public DateTime FechaCierre { get; set; }
+
     }
 }
