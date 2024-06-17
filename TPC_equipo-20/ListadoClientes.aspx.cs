@@ -14,10 +14,12 @@ namespace TPC_equipo_20
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["listaClientes"] != null)
+            if (!IsPostBack)
             {
-            dgvClientes.DataSource = Session["listaClientes"];
-            dgvClientes.DataBind();
+                ClienteNegocio cliNeg = new ClienteNegocio();
+                Session.Add("listaClientes", cliNeg.listar());
+                dgvClientes.DataSource = Session["listaClientes"];
+                dgvClientes.DataBind();
             }
         }
         
