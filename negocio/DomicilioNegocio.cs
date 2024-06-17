@@ -51,6 +51,33 @@ namespace negocio
             }
         }
 
+        public void modificar(Domicilio dom)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE DOMICILIOS SET IDProvincia = @idprovincia, Calle = @calle, Numero = @numero, Piso = @piso, Departamento = @departamento, Observaciones = @observaciones, Localidad = @localidad, CodigoPostal = @codigopostal WHERE Id=@id");
+                datos.setearParametro("@id", dom.Id);
+                datos.setearParametro("@idprovincia", dom.Provincia.Id);
+                datos.setearParametro("@calle", dom.Calle);
+                datos.setearParametro("@numero", dom.Numero);
+                datos.setearParametro("@piso", dom.Piso);
+                datos.setearParametro("@departamento", dom.Departamento);
+                datos.setearParametro("@observaciones", dom.Observaciones);
+                datos.setearParametro("@localidad", dom.Localidad);
+                datos.setearParametro("@codigopostal", dom.CodigoPostal);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public long buscarUltimo()
         {
             AccesoDatos datos = new AccesoDatos();

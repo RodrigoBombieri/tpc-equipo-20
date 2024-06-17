@@ -15,22 +15,22 @@ namespace TPC_equipo_20
     {
 
         /// <summary>
-        /// Control txtFiltro.
+        /// Control txtFiltroCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltro;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroCliente;
 
         /// <summary>
-        /// Control chkFiltroAvanzado.
+        /// Control chkFiltroAvanzadoCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkFiltroAvanzado;
+        protected global::System.Web.UI.WebControls.CheckBox chkFiltroAvanzadoCliente;
 
         /// <summary>
         /// Control lblCampo.
@@ -78,13 +78,13 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblFiltroAvanzado;
 
         /// <summary>
-        /// Control txtFiltroAvanzado.
+        /// Control txtFiltroAvanzadoCliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzado;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzadoCliente;
 
         /// <summary>
         /// Control btnBuscar.
