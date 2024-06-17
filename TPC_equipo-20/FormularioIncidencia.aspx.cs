@@ -17,12 +17,21 @@ namespace TPC_equipo_20
             {
                 if (!IsPostBack)
                 {
-                    ddlPrioridad.Items.Add("Baja");
-                    ddlPrioridad.Items.Add("Media");
-                    ddlPrioridad.Items.Add("Alta");
-                    ddlEstado.Items.Add("1");
-                    ddlEstado.Items.Add("2");
-                    ddlEstado.Items.Add("3");
+                    PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
+                    List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
+
+                    ddlPrioridad.DataSource = listaPrioridades;
+                    ddlPrioridad.DataValueField = "Id";
+                    ddlPrioridad.DataTextField = "Nombre";
+                    ddlPrioridad.DataBind();
+
+                    EstadoNegocio EstadoNegocio = new EstadoNegocio();
+                    List<Estado> listaEstados = EstadoNegocio.listar();
+
+                    ddlEstado.DataSource = listaEstados;
+                    ddlEstado.DataValueField = "Id";
+                    ddlEstado.DataTextField = "Nombre";
+                    ddlEstado.DataBind();
                 }
 
                 // En caso de que se haya pasado un id por querystring, se cargan los datos del incidente
@@ -34,8 +43,8 @@ namespace TPC_equipo_20
                     Incidente aux = (negocio.listar(id))[0];
 
                     txtDetalle.Text = aux.Detalle;
-                    ddlEstado.SelectedValue = "1";
-                    ddlPrioridad.SelectedValue = "2";
+                    ddlEstado.SelectedValue = aux.Estado.Id.ToString();
+                    ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
                 }
             }
             catch (Exception ex)
