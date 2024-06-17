@@ -20,7 +20,7 @@ namespace negocio
                 while (acceso.Lector.Read())
                 {
                     Prioridad aux = new Prioridad();
-                    aux.Id = (int)acceso.Lector["ID"];
+                    aux.Id = (short)acceso.Lector["ID"];
                     aux.Nombre = (string)acceso.Lector["Nombre"];
 
                     lista.Add(aux);

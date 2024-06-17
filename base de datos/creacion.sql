@@ -156,3 +156,12 @@ select 1, 'Franco', 'Cataldo', '37719580', '223-4374184', 'francocataldo7@gmail.
 select 2, 'Florencia', 'Cataldo', '1111111', '223-6332691', 'florenciacataldo@gmail.com', '1994-07-03', '2024-06-08' UNION
 select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com', '1956-07-04', '2024-06-08'
 GO
+
+
+insert into Incidentes (IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, Detalle,	FechaCreacion, FechaCierre)
+values
+(1,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(3,1,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(2,2,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(3,2,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(1,2,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007');

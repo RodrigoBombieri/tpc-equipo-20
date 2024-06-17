@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Incidencias.aspx.cs" Inherits="TPC_equipo_20.Incidencias" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-      <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -14,7 +15,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <h1>Incidencias </h1>
+    <h1>Incidencias </h1>
     <div class="row">
         <div class="col-4">
             <div class="mb-3">
@@ -27,8 +28,8 @@
                 <asp:CheckBox ID="chkFiltroAvanzado" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
             </div>
         </div>
-         <div class="col-4">
-             <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
+        <div class="col-4">
+            <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
         </div>
         <%if (chkFiltroAvanzado.Checked)
             //<%if (filtroAvanzado)
@@ -71,5 +72,22 @@
             </div>
         </div>
         <% } %>
+    </div>
+    <div class="row">
+        <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
+            CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
+            AllowPaging="true" PageSize="5" runat="server">
+            <Columns>
+                <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
+                <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
+                <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+                <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
+                <asp:BoundField DataField="UsuarioAsignado" HeaderText="Usuario asignado" />
+                <asp:BoundField DataField="UsuarioCreador" HeaderText="Usuario creador" />
+                <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
+                <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
+                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+            </Columns>
+        </asp:GridView>
     </div>
 </asp:Content>
