@@ -12,6 +12,8 @@ namespace TPC_equipo_20
     public partial class DetalleCliente : System.Web.UI.Page
     {
         public bool confirmaEliminar { get; set; }
+
+        public bool confirmarEditar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -133,6 +135,61 @@ namespace TPC_equipo_20
             aux.FechaCreacion = DateTime.Parse(txtFechaCreacion.Text);
 
             cliNeg.agregar(aux);
+
+            Session.Add("listaClientes", cliNeg.listar());
+            Response.Redirect("ListadoClientes.aspx", false);
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            txtNombre.Enabled = true;
+            txtApellido.Enabled = true;
+            txtDni.Enabled = true;
+            txtEmail.Enabled = true;
+            txtTelefono1.Enabled = true;
+            txtTelefono2.Enabled = true;
+            txtFechaNac.Enabled = true;
+            txtCalle.Enabled = true;
+            txtNumero.Enabled = true;
+            txtPiso.Enabled = true;
+            txtDepartamento.Enabled = true;
+            txtLocalidad.Enabled = true;
+            ddlProvincias.Enabled = true;
+            txtCodigoPostal.Enabled = true;
+            txtObservaciones.Enabled = true;
+
+            confirmarEditar = true;
+        }
+
+        protected void btnGuardarEdicion_Click(object sender, EventArgs e)
+        {
+            long id = long.Parse(Request.QueryString["id"].ToString());
+            List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
+            Cliente aux = temp.Find(x => x.Id == id);
+
+            aux.Nombre = txtNombre.Text;
+            aux.Apellido = txtApellido.Text;
+            aux.Dni = txtDni.Text;
+            aux.Email = txtEmail.Text;
+            aux.Telefono1 = txtTelefono1.Text;
+            aux.Telefono2 = txtTelefono2.Text;
+            aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+            aux.Domicilio.Calle = txtCalle.Text;
+            aux.Domicilio.Numero = txtNumero.Text;
+            aux.Domicilio.Piso = txtPiso.Text;
+            aux.Domicilio.Departamento = txtDepartamento.Text;
+            aux.Domicilio.Observaciones = txtObservaciones.Text;
+            aux.Domicilio.Localidad = txtLocalidad.Text;
+            aux.Domicilio.CodigoPostal = txtCodigoPostal.Text;
+            aux.Domicilio.Provincia.Id = short.Parse(ddlProvincias.SelectedValue);
+
+            ClienteNegocio cliNeg = new ClienteNegocio();
+            DomicilioNegocio domNeg = new DomicilioNegocio();
+
+            Domicilio dom = aux.Domicilio;
+
+            cliNeg.modificar(aux);
+            domNeg.modificar(dom);
 
             Session.Add("listaClientes", cliNeg.listar());
             Response.Redirect("ListadoClientes.aspx", false);

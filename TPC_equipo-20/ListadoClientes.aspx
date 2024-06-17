@@ -8,16 +8,16 @@
         <div class="col-6">
             <div class="mb-3">
                 <asp:Label runat="server" Text="Filtrar: "></asp:Label>
-                <asp:TextBox ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFiltroCliente" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroCliente_TextChanged" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="col-6" style="display:flex; flex-direction:column; justify-content:flex-end;">
             <div class="mb-3">
-                <asp:CheckBox ID="chkFiltroAvanzado" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
+                <asp:CheckBox ID="chkFiltroAvanzadoCliente" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzadoCliente_CheckedChanged" runat="server" />
             </div>
         </div>
 
-        <%if (chkFiltroAvanzado.Checked)
+        <%if (chkFiltroAvanzadoCliente.Checked)
             { %>
         <div class="row">
             <div class="col-3">
@@ -43,7 +43,7 @@
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Label ID="lblFiltroAvanzado" runat="server" Text="Filtro"></asp:Label>
-                    <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFiltroAvanzadoCliente" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
         </div>

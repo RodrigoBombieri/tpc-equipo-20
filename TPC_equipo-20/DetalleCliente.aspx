@@ -86,9 +86,13 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
-                <%if (Request.QueryString["id"] != null)
+                <%if (Request.QueryString["id"] == null)
                     {%>
+                <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
+                <%  }
+                    else
+                    {%>
+                <asp:Button ID="btnEditar" Text="Editar" CssClass="btn btn-primary" runat="server" OnClick="btnEditar_Click" AutoPostBack="false" />
                 <asp:ScriptManager runat="server" />
                 <asp:UpdatePanel ID="UpdatePanel" runat="server">
                     <ContentTemplate>
@@ -104,7 +108,11 @@
                         <% } %>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <%  }%>
+                <% if (confirmarEditar)
+                    { %>
+                <asp:Button ID="btnGuardarEdicion" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarEdicion_Click" />
+                <% }
+                }%>
                 <a href="/ListadoClientes.aspx">Volver al listado</a>
             </div>
         </div>
