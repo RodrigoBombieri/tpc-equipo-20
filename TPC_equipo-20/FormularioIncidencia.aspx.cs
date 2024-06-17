@@ -32,6 +32,14 @@ namespace TPC_equipo_20
                     ddlEstado.DataValueField = "Id";
                     ddlEstado.DataTextField = "Nombre";
                     ddlEstado.DataBind();
+
+                    TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
+                    List<TipoIncidente> listaTipos = TipoNegocio.listar();
+
+                    ddlTipo.DataSource = listaTipos;
+                    ddlTipo.DataValueField = "Id";
+                    ddlTipo.DataTextField = "Nombre";
+                    ddlTipo.DataBind();
                 }
 
                 // En caso de que se haya pasado un id por querystring, se cargan los datos del incidente
@@ -45,6 +53,7 @@ namespace TPC_equipo_20
                     txtDetalle.Text = aux.Detalle;
                     ddlEstado.SelectedValue = aux.Estado.Id.ToString();
                     ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
+                    ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
                 }
             }
             catch (Exception ex)

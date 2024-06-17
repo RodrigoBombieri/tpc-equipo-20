@@ -30,6 +30,10 @@
                 <label id="lblEstado" class="form-label">Estado</label>
                 <asp:DropDownList ID="ddlEstado" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
             </div>
+            <div class="mb-3">
+                <label id="lblTipo" class="form-label">Tipo de incidente</label>
+                <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
