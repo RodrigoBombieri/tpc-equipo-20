@@ -8,7 +8,12 @@ namespace dominio
 {
     public class Rol
     {
-        public int Id { get; set; }
-        public int Descripcion { get; set; }
+        public short Id { get; set; }
+        public string Descripcion { get; set; }
+
+        public override string ToString()
+        {
+            return Descripcion;
+        }
     }
 }

@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    internal class Incidente
+    public class Incidente
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public TipoIncidente Tipo { get; set; }
         public Prioridad Prioridad { get; set; }
         public Estado Estado { get; set; }
         public string Detalle { get; set; }
-        public Usuario UsuarioAsignado { get; set; }
-        public Usuario UsuarioCreador { get; set; }
+        public long UsuarioAsignado { get; set; }
+        public long UsuarioCreador { get; set; }
+        public DateTime FechaCreacion {  get; set; }
+        public DateTime FechaCierre { get; set; }
+
     }
 }

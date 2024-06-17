@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    internal class PrioridadNegocio
+    public class PrioridadNegocio
     {
         public List<Prioridad> listar()
         {
@@ -20,8 +20,8 @@ namespace negocio
                 while (acceso.Lector.Read())
                 {
                     Prioridad aux = new Prioridad();
-                    aux.Id = (int)acceso.Lector["ID"];
-                    aux.Descripcion = (string)acceso.Lector["Nombre"];
+                    aux.Id = (short)acceso.Lector["ID"];
+                    aux.Nombre = (string)acceso.Lector["Nombre"];
 
                     lista.Add(aux);
                 }
