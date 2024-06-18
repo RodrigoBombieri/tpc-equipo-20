@@ -60,8 +60,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <asp:GridView runat="server" ID="dgvClientes" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged" OnPageIndexChanging="dgvClientes_PageIndexChanging"
-                AllowPaging="true" PageSize="5">
+            <asp:GridView runat="server" ID="dgvClientes" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged" OnRowDeleting="dgvClientes_RowDeleting" OnPageIndexChanging="dgvClientes_PageIndexChanging"
+                AllowPaging="true" PageSize="20">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                     <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
@@ -70,6 +70,7 @@
                     <asp:BoundField HeaderText="Email" DataField="Email" />
                     <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
                     <asp:CommandField ShowSelectButton="true" SelectText="Ver más" />
+                    <asp:CommandField ShowDeleteButton="true" SelectText="Eliminar" />
                 </Columns>
             </asp:GridView>
         </div>
