@@ -9,6 +9,7 @@
             <asp:Button ID="btnPrioridades" Text="Prioridades" runat="server" CssClass="btn btn-primary" OnClick="btnPrioridades_Click" />
             <asp:Button ID="btnEstados" Text="Estados" runat="server" CssClass="btn btn-primary" OnClick="btnEstados_Click" />
             <asp:Button ID="btnTipos" Text="Tipos incidentes" runat="server" CssClass="btn btn-primary" OnClick="btnTipos_Click" />
+            <asp:Button ID="btnRoles" Text="Roles" runat="server" CssClass="btn btn-primary" OnClick="btnRoles_Click" />
 
         </div>
     </div>

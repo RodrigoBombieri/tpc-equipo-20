@@ -24,6 +24,7 @@ namespace TPC_equipo_20
                     ddlPrioridad.DataValueField = "Id";
                     ddlPrioridad.DataTextField = "Nombre";
                     ddlPrioridad.DataBind();
+                    ddlPrioridad.SelectedValue = "1";
 
                     EstadoNegocio EstadoNegocio = new EstadoNegocio();
                     List<Estado> listaEstados = EstadoNegocio.listar();
@@ -32,6 +33,7 @@ namespace TPC_equipo_20
                     ddlEstado.DataValueField = "Id";
                     ddlEstado.DataTextField = "Nombre";
                     ddlEstado.DataBind();
+                    ddlEstado.SelectedValue = "1";
 
                     TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
                     List<TipoIncidente> listaTipos = TipoNegocio.listar();
@@ -40,6 +42,7 @@ namespace TPC_equipo_20
                     ddlTipo.DataValueField = "Id";
                     ddlTipo.DataTextField = "Nombre";
                     ddlTipo.DataBind();
+                    ddlTipo.SelectedValue = "1";
                 }
 
                 // En caso de que se haya pasado un id por querystring, se cargan los datos del incidente
@@ -71,10 +74,13 @@ namespace TPC_equipo_20
             {
                 Incidente aux = new Incidente();
                 IncidenteNegocio negocio = new IncidenteNegocio();
-
+                // falta usuario
                 aux.Detalle = txtDetalle.Text;
+                aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
+                aux.Estado = new Estado();
                 aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
+                aux.Tipo = new TipoIncidente();
                 aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);  
                 
                 if (Request.QueryString["id"] != null)

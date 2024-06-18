@@ -124,16 +124,16 @@ namespace negocio
                     "(IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, " +
                     "Detalle, FechaCreacion, FechaCierre) " +
                     "VALUES (@IDTipo, @IDPrioridad, @IDEstado, @UsuarioAsignado, @UsuarioCreador, " +
-                    "@Detalle, @FechaCreacion, @FechaCierre");            
+                    "@Detalle, GETDATE(), GETDATE())");            
 
-                datos.setearParametro("@IdTipo", aux.Tipo);
-                datos.setearParametro("@IDPrioridad", aux.Prioridad);
-                datos.setearParametro("@IDEstado", aux.Estado);
+                datos.setearParametro("@IdTipo", aux.Tipo.Id);
+                datos.setearParametro("@IDPrioridad", aux.Prioridad.Id);
+                datos.setearParametro("@IDEstado", aux.Estado.Id);
                 datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado);
                 datos.setearParametro("@UsuarioCreador", aux.UsuarioCreador);
                 datos.setearParametro("@Detalle", aux.Detalle);
-                datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
-                datos.setearParametro("@FechaCierre", aux.FechaCierre);
+                //datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
+                //datos.setearParametro("@FechaCierre", aux.FechaCierre);
 
                 datos.ejecutarAccion();
             }

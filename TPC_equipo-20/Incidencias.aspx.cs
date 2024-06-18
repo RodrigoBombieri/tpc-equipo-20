@@ -52,6 +52,7 @@ namespace TPC_equipo_20
                 Response.Redirect("Error.aspx", false);
             }
         }
+
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             Response.Redirect("FormularioIncidencia.aspx");
