@@ -70,10 +70,15 @@
     <Content Include="Error.aspx" />
     <Content Include="Estados.aspx" />
     <Content Include="FormularioIncidencia.aspx" />
+    <Content Include="FormularioPrioridades.aspx" />
     <Content Include="FormularioTipos.aspx" />
     <Content Include="FormularioUsuario.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Estado.jpg" />
     <Content Include="Images\miFoto.jpg" />
+    <Content Include="Images\prioridades.jpg" />
+    <Content Include="Images\roles.jpg" />
+    <Content Include="Images\tiposIncidente.png" />
     <Content Include="Incidencias.aspx" />
     <Content Include="ListadoClientes.aspx" />
     <Content Include="Login.aspx" />
@@ -127,6 +132,13 @@
     </Compile>
     <Compile Include="FormularioIncidencia.aspx.designer.cs">
       <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioPrioridades.aspx.cs">
+      <DependentUpon>FormularioPrioridades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioPrioridades.aspx.designer.cs">
+      <DependentUpon>FormularioPrioridades.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioTipos.aspx.cs">
       <DependentUpon>FormularioTipos.aspx</DependentUpon>
