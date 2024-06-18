@@ -22,7 +22,7 @@ namespace negocio
                     "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
                     "I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
-                    "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
+                    "inner join TiposIncidentes TI on I.IDTipo = TI.ID " +
                     "inner join Prioridades P on I.IDPrioridad = P.ID " +
                     "inner join Estados E on I.IDEstado = E.ID");
                 datos.ejecutarLectura();
@@ -77,7 +77,7 @@ namespace negocio
                     "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
                     "I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
-                    "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
+                    "inner join TiposIncidentes TI on I.IDTipo = TI.ID " +
                     "inner join Prioridades P on I.IDPrioridad = P.ID " +
                     "inner join Estados E on I.IDEstado = E.ID " +
                     "Where I.ID = @id");
