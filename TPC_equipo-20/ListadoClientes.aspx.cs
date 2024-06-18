@@ -14,10 +14,12 @@ namespace TPC_equipo_20
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["listaClientes"] != null)
+            if (!IsPostBack)
             {
-            dgvClientes.DataSource = Session["listaClientes"];
-            dgvClientes.DataBind();
+                ClienteNegocio cliNeg = new ClienteNegocio();
+                Session.Add("listaClientes", cliNeg.listar());
+                dgvClientes.DataSource = Session["listaClientes"];
+                dgvClientes.DataBind();
             }
         }
         
@@ -26,7 +28,7 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvClientes.SelectedDataKey.Value.ToString();
-                Response.Redirect("DetalleCliente.aspx?id=" + id);
+                Response.Redirect("DetalleCliente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {
@@ -51,12 +53,12 @@ namespace TPC_equipo_20
             }
         }
 
-        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        protected void txtFiltroCliente_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 List<Cliente> lista = (List<Cliente>)Session["listaClientes"];
-                List<Cliente> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltro.Text.ToLower()));
+                List<Cliente> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltroCliente.Text.ToLower()));
                 dgvClientes.DataSource = listaFiltrada;
                 dgvClientes.DataBind();
             }
@@ -68,12 +70,12 @@ namespace TPC_equipo_20
             }
         }
 
-        protected void chkFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
+        protected void chkFiltroAvanzadoCliente_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                FiltroAvanzado = chkFiltroAvanzado.Checked;
-                txtFiltro.Enabled = !FiltroAvanzado;
+                FiltroAvanzado = chkFiltroAvanzadoCliente.Checked;
+                txtFiltroCliente.Enabled = !FiltroAvanzado;
             }
             catch (Exception ex)
             {
@@ -106,14 +108,14 @@ namespace TPC_equipo_20
             {
                 ClienteNegocio negocio = new ClienteNegocio();
 
-                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
                 {
                     dgvClientes.DataSource = negocio.listar();
                 }
                 else
                 {
                     dgvClientes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
-                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzadoCliente.Text);
                 }
 
                 dgvClientes.DataBind();

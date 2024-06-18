@@ -99,6 +99,33 @@ namespace negocio
             }
         }
 
+        public void modificar(Cliente nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE CLIENTES SET Nombre = @nombre, Apellido = @apellido, Dni = @dni, Telefono1 = @telefono1, Telefono2 = @telefono2, Email = @email, FechaNacimiento = @fechanac WHERE ID=@id");
+                datos.setearParametro("@id", nuevo.Id);
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@apellido", nuevo.Apellido);
+                datos.setearParametro("@dni", nuevo.Dni);
+                datos.setearParametro("@telefono1", nuevo.Telefono1);
+                datos.setearParametro("@telefono2", nuevo.Telefono2);
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@fechanac", nuevo.FechaNacimiento);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void eliminar(Cliente cliente)
         {
             try
@@ -130,20 +157,20 @@ namespace negocio
             try
             {
                 string consulta = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
-                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia";
+                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia AND ";
 
                 if (campo == "Nombre")
                 {
                     switch (criterio)
                     {
                         case "Empieza con":
-                            consulta += "Nombre LIKE '" + filtro + "%'";
+                            consulta += "c.Nombre LIKE '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Nombre LIKE '%" + filtro + "'";
+                            consulta += "c.Nombre LIKE '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "Nombre LIKE '%" + filtro + "%'";
+                            consulta += "c.Nombre LIKE '%" + filtro + "%'";
                             break;
                     }
                 }
@@ -152,13 +179,13 @@ namespace negocio
                     switch (criterio)
                     {
                         case "Empieza con":
-                            consulta += "Apellido LIKE '" + filtro + "%'";
+                            consulta += "c.Apellido LIKE '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Apellido LIKE '%" + filtro + "'";
+                            consulta += "c.Apellido LIKE '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "Apellido LIKE '%" + filtro + "%'";
+                            consulta += "c.Apellido LIKE '%" + filtro + "%'";
                             break;
                     }
                 }
@@ -167,13 +194,13 @@ namespace negocio
                     switch (criterio)
                     {
                         case "Empieza con":
-                            consulta += "Email LIKE '" + filtro + "%'";
+                            consulta += "c.Email LIKE '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Email LIKE '%" + filtro + "'";
+                            consulta += "c.Email LIKE '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "Email LIKE '%" + filtro + "%'";
+                            consulta += "c.Email LIKE '%" + filtro + "%'";
                             break;
                     }
                 }
@@ -182,13 +209,13 @@ namespace negocio
                     switch (criterio)
                     {
                         case "Empieza con":
-                            consulta += "Dni LIKE '" + filtro + "%'";
+                            consulta += "c.Dni LIKE '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "Dni LIKE '%" + filtro + "'";
+                            consulta += "c.Dni LIKE '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "Dni LIKE '%" + filtro + "%'";
+                            consulta += "c.Dni LIKE '%" + filtro + "%'";
                             break;
                     }
                 }

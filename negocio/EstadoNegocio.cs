@@ -1,25 +1,25 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
 
 namespace negocio
 {
-    public class TipoIncidenteNegocio
+    public class EstadoNegocio
     {
-        public List<TipoIncidente> listar()
+        public List<Estado> listar()
         {
-            List<TipoIncidente> lista = new List<TipoIncidente>();
+            List<Estado> lista = new List<Estado>();
             AccesoDatos acceso = new AccesoDatos();
             try
             {
-                acceso.setearConsulta("select ID, Nombre from TiposIncidente");
+                acceso.setearConsulta("select ID, Nombre from Estados");
                 acceso.ejecutarLectura();
                 while (acceso.Lector.Read())
                 {
-                    TipoIncidente aux = new TipoIncidente();
+                    Estado aux = new Estado();
                     aux.Id = (short)acceso.Lector["ID"];
                     aux.Nombre = (string)acceso.Lector["Nombre"];
 
