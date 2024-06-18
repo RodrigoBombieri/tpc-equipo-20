@@ -10,10 +10,12 @@
                 <div class="mb-3">
                     <label id="lblNombre" class="form-label">Nombre</label>
                     <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un nombre" ControlToValidate="txtNombre" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblDni" class="form-label">DNI</label>
                     <asp:TextBox ID="txtDni" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un DNI" ControlToValidate="txtDni" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblTelefono1" class="form-label">Telefono 1</label>
@@ -28,10 +30,12 @@
                 <div class="mb-3">
                     <label id="lblApellido" class="form-label">Apellido</label>
                     <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un apellido" ControlToValidate="txtApellido" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblEmail" class="form-label">Email</label>
                     <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un email" ControlToValidate="txtEmail" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblTelefono2" class="form-label">Telefono 2</label>
@@ -49,6 +53,7 @@
                 <div class="mb-3">
                     <label id="lblCalle" class="form-label">Calle</label>
                     <asp:TextBox ID="txtCalle" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una calle" ControlToValidate="txtCalle" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblPiso" class="form-label">Piso</label>
@@ -57,6 +62,7 @@
                 <div class="mb-3">
                     <label id="lblLocalidad" class="form-label">Localidad</label>
                     <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una localidad" ControlToValidate="txtLocalidad" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblProvincia" class="form-label">Provincia</label>
@@ -67,6 +73,7 @@
                 <div class="mb-3">
                     <label id="lblNumero" class="form-label">Número</label>
                     <asp:TextBox ID="txtNumero" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un número" ControlToValidate="txtNumero" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblDepartamento" class="form-label">Departamento</label>
@@ -75,6 +82,7 @@
                 <div class="mb-3">
                     <label id="lblCodigoPostal" class="form-label">Código Postal</label>
                     <asp:TextBox ID="txtCodigoPostal" CssClass="form-control" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un código postal" ControlToValidate="txtCodigoPostal" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="row">
