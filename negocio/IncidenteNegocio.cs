@@ -69,15 +69,6 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select I.ID, I.IDtipo, " +
-                    "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
-                    "I.IDEstado, E.Nombre as EstadoNombre,  " +
-                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
-                    "I.FechaCreacion, I.FechaCierre " +
-                    "FROM Incidentes I " +
-                    "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
-                    "inner join Prioridades P on I.IDPrioridad = P.ID " +
-                    "inner join Estados E on I.IDEstado = E.ID");
                 if (id != "")
                 {
                     datos.setearConsulta("Select I.ID, I.IDtipo, " +
@@ -124,24 +115,26 @@ namespace negocio
                 throw ex;
             }
         }
-        public void agregar(Incidente nuevo)
+        public void agregar(Incidente aux)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-
                 datos.setearConsulta("insert into Incidentes " +
-                    "(IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, " +
+                    "(IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, " +
                     "Detalle, FechaCreacion, FechaCierre) " +
-                    "VALUES (@IDPrioridad, @IDEstado, @UsuarioAsignado, @UsuarioCreador, " +
-                    "@Detalle, @FechaCreacion, @FechaCierre");
-                datos.setearParametro("@IDPrioridad", nuevo.Prioridad.Id);
-                datos.setearParametro("@IDEstado", nuevo.Estado.Id);
-                datos.setearParametro("@UsuarioAsignado", nuevo.UsuarioAsignado);
-                datos.setearParametro("@UsuarioCreador", nuevo.UsuarioCreador);
-                datos.setearParametro("@Detalle", nuevo.Detalle);
-                datos.setearParametro("@FechaCreacion", nuevo.FechaCreacion);
-                datos.setearParametro("@FechaCierre", nuevo.FechaCierre);
+                    "VALUES (@IDTipo, @IDPrioridad, @IDEstado, @UsuarioAsignado, @UsuarioCreador, " +
+                    "@Detalle, @FechaCreacion, @FechaCierre");            
+
+                datos.setearParametro("@IdTipo", aux.Tipo);
+                datos.setearParametro("@IDPrioridad", aux.Prioridad);
+                datos.setearParametro("@IDEstado", aux.Estado);
+                datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado);
+                datos.setearParametro("@UsuarioCreador", aux.UsuarioCreador);
+                datos.setearParametro("@Detalle", aux.Detalle);
+                datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
+                datos.setearParametro("@FechaCierre", aux.FechaCierre);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -154,58 +147,24 @@ namespace negocio
             }
         }
 
-        public Incidente buscar(string id)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            Incidente aux = new Incidente();
-            try
-            {
-                return aux;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public int buscarUltimo()
-        {
-            AccesoDatos datos = new AccesoDatos();
-            int id = -1;
-            try
-            {
-                return id;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public void modificar(Usuario aux)
+        public void modificar(Incidente aux)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE USUARIOS SET Email = @email, Nombre = @nombre, Apellido = @apellido," +
-                    " Nick = @nick, IDRol = @idRol, Telefono = @telefono, Dni = @dni, urlImagenPerfil = @imagen Where ID = @id");
+                datos.setearConsulta("UPDATE Incidentes SET IDTipo = @IdTipo, IDPrioridad = @IDPrioridad, IDEstado = @IDEstado," +
+                    " UsuarioAsignado = @UsuarioAsignado, UsuarioCreador = @UsuarioCreador, Detalle = @Detalle, " +
+                    "FechaCreacion = @FechaCreacion, FechaCierre = @FechaCierre " +
+                    "where ID = @id");
                 datos.setearParametro("@id", aux.Id);
-                datos.setearParametro("@email", aux.Email);
-                datos.setearParametro("@nombre", aux.Nombre);
-                datos.setearParametro("@apellido", aux.Apellido);
-                datos.setearParametro("@nick", aux.Nick);
-                datos.setearParametro("@telefono", aux.Telefono);
-                datos.setearParametro("@dni", aux.Dni);
-                datos.setearParametro("@imagen", (object)aux.ImagenPerfil ?? DBNull.Value);
-                datos.setearParametro("@idRol", aux.Rol.Id);
+                datos.setearParametro("@IdTipo", aux.Tipo);
+                datos.setearParametro("@IDPrioridad", aux.Prioridad);
+                datos.setearParametro("@IDEstado", aux.Estado);
+                datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado);
+                datos.setearParametro("@UsuarioCreador", aux.UsuarioCreador);
+                datos.setearParametro("@Detalle", aux.Detalle);
+                datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
+                datos.setearParametro("@FechaCierre", aux.FechaCierre);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -215,21 +174,6 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
-            }
-        }
-        public void eliminar(int id)
-        {
-            try
-            {
-                AccesoDatos datos = new AccesoDatos();
-                datos.setearConsulta("delete from Incidentes where id = @id");
-                datos.setearParametro("@id", id);
-                datos.ejecutarAccion();
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
         }
     }

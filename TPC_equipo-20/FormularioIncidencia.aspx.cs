@@ -69,13 +69,32 @@ namespace TPC_equipo_20
         {
             try
             {
+                Incidente aux = new Incidente();
+                IncidenteNegocio negocio = new IncidenteNegocio();
 
+                aux.Detalle = txtDetalle.Text;
+                aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
+                aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);  
+                
+                if (Request.QueryString["id"] != null)
+                {
+                    aux.Id = long.Parse(Request.QueryString["id"].ToString());
+                    negocio.modificar(aux);
+                }
+                else
+                {
+                    negocio.agregar(aux);
+                }
+
+                Response.Redirect("Usuarios.aspx", false);
             }
             catch (Exception ex)
             {
-                throw ex;
-            }
 
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

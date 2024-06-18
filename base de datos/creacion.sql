@@ -74,7 +74,7 @@ Create Table Incidentes(
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) not null,
 	FechaCreacion date not null,
-	FechaCierre date not null    
+	FechaCierre date null    
 )
 GO
 Create Table Eventos(
