@@ -16,9 +16,10 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select I.ID, I.IDTipo, TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
+                datos.setearConsulta("Select I.ID, I.IDtipo, " +
+                    "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
                     "I.IDEstado, E.Nombre as EstadoNombre,  " +
-                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle " +
+                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
                     "I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
                     "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
@@ -30,19 +31,22 @@ namespace negocio
                 {
                     Incidente aux = new Incidente();
                     if (!(datos.Lector["ID"] is DBNull))
-                        aux.Id = (int)datos.Lector["ID"];
-                    aux.Tipo.Id = (int)datos.Lector["IDTipo"];
-                    aux.Tipo.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Prioridad.Id = (int)datos.Lector["IDPrioridad"];
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Tipo = new TipoIncidente();
+                    aux.Tipo.Id = (short)datos.Lector["IDTipo"];
+                    aux.Tipo.Nombre = (string)datos.Lector["TipoNombre"];
+                    aux.Prioridad = new Prioridad();
+                    aux.Prioridad.Id = (short)datos.Lector["IDPrioridad"];
                     aux.Prioridad.Nombre = (string)datos.Lector["PrioridadNombre"];
-                    aux.Estado.Id = (int)datos.Lector["IDEstado"];
+                    aux.Estado = new Estado();
+                    aux.Estado.Id = (short)datos.Lector["IDEstado"];
                     aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
-                    aux.UsuarioAsignado = (int)datos.Lector["UsuarioAsignado"];
-                    aux.UsuarioCreador = (int)datos.Lector["UsuarioCreador"];
+                    aux.UsuarioAsignado = (long)datos.Lector["UsuarioAsignado"];
+                    aux.UsuarioCreador = (long)datos.Lector["UsuarioCreador"];
                     aux.Detalle = (string)datos.Lector["Detalle"];
                     aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
                     aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
-                  
+
                     lista.Add(aux);
                 }
 
@@ -65,9 +69,10 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select I.ID, I.IDTipo, TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
+                datos.setearConsulta("Select I.ID, I.IDtipo, " +
+                    "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
                     "I.IDEstado, E.Nombre as EstadoNombre,  " +
-                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle " +
+                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
                     "I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
                     "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
@@ -75,16 +80,17 @@ namespace negocio
                     "inner join Estados E on I.IDEstado = E.ID");
                 if (id != "")
                 {
-                    datos.setearConsulta("Select I.ID, I.IDTipo, TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
+                    datos.setearConsulta("Select I.ID, I.IDtipo, " +
+                    "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
                     "I.IDEstado, E.Nombre as EstadoNombre,  " +
-                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle " +
+                    "I.UsuarioAsignado, I.UsuarioCreador, I.Detalle, " +
                     "I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
                     "inner join TiposIncidente TI on I.IDTipo = TI.ID " +
                     "inner join Prioridades P on I.IDPrioridad = P.ID " +
                     "inner join Estados E on I.IDEstado = E.ID " +
                     "Where I.ID = @id");
-                                        
+
                     datos.setearParametro("@id", id);
                     datos.ejecutarLectura();
                 }
@@ -92,15 +98,18 @@ namespace negocio
                 {
                     Incidente aux = new Incidente();
                     if (!(datos.Lector["ID"] is DBNull))
-                        aux.Id = (int)datos.Lector["ID"];
-                    aux.Tipo.Id = (int)datos.Lector["IDTipo"];
-                    aux.Tipo.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Prioridad.Id = (int)datos.Lector["IDPrioridad"];
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Tipo = new TipoIncidente();
+                    aux.Tipo.Id = (short)datos.Lector["IDTipo"];
+                    aux.Tipo.Nombre = (string)datos.Lector["TipoNombre"];
+                    aux.Prioridad = new Prioridad();
+                    aux.Prioridad.Id = (short)datos.Lector["IDPrioridad"];
                     aux.Prioridad.Nombre = (string)datos.Lector["PrioridadNombre"];
-                    aux.Estado.Id = (int)datos.Lector["IDEstado"];
+                    aux.Estado = new Estado();
+                    aux.Estado.Id = (short)datos.Lector["IDEstado"];
                     aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
-                    aux.UsuarioAsignado = (int)datos.Lector["UsuarioAsignado"];
-                    aux.UsuarioCreador = (int)datos.Lector["UsuarioCreador"];
+                    aux.UsuarioAsignado = (long)datos.Lector["UsuarioAsignado"];
+                    aux.UsuarioCreador = (long)datos.Lector["UsuarioCreador"];
                     aux.Detalle = (string)datos.Lector["Detalle"];
                     aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
                     aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
@@ -120,7 +129,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-      
+
                 datos.setearConsulta("insert into Incidentes " +
                     "(IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, " +
                     "Detalle, FechaCreacion, FechaCierre) " +
@@ -150,7 +159,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             Incidente aux = new Incidente();
             try
-            {                
+            {
                 return aux;
             }
             catch (Exception ex)
@@ -208,7 +217,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-         public void eliminar(int id)
+        public void eliminar(int id)
         {
             try
             {

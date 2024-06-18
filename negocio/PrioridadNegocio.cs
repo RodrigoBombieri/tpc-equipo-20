@@ -20,7 +20,7 @@ namespace negocio
                 while (acceso.Lector.Read())
                 {
                     Prioridad aux = new Prioridad();
-                    aux.Id = (int)acceso.Lector["ID"];
+                    aux.Id = (short)acceso.Lector["ID"];
                     aux.Nombre = (string)acceso.Lector["Nombre"];
 
                     lista.Add(aux);
@@ -58,24 +58,7 @@ namespace negocio
              id = (int)conexion.Lector["ProximoId"];
              return id;
          }
-
-         public List<String> ListaPrioridades()
-         {
-             List<string> prioridad = new List<string>();
-             Prioridad aux = new Prioridad();
-             AccesoDatos datos = new AccesoDatos();
-             datos.setearConsulta("select Nombre from PRIORIDADES");
-             datos.ejecutarLectura();
-             while (datos.Lector.Read())
-             {
-
-                 aux.Descripcion = (string)datos.Lector["Nombre"];
-                 prioridad.Add(aux.Descripcion.ToUpper());
-             }
-
-
-             return prioridad;
-         }*/
+       */
 
 
         public void ModificarPrioridad(int id, string nombre)
@@ -87,7 +70,6 @@ namespace negocio
             datos.ejecutarLectura();
             datos.cerrarConexion();
         }
-
         public void EliminarPrioridad(int id)
         {
             AccesoDatos datos = new AccesoDatos();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,45 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                IncidenteNegocio negocio = new IncidenteNegocio();
+                Session.Add("listadoIncidentes", negocio.listar());
+                dgvIncidentes.DataSource = Session["listadoIncidentes"];
+                //dgvIncidentes.DataSource = negocio.listar();
+                dgvIncidentes.DataBind();
+            }
+        }
 
+        protected void dgvIncidentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = dgvIncidentes.SelectedDataKey.Value.ToString();
+                Response.Redirect("FormularioIncidencia.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvIncidentes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {          
+            try
+            {
+                dgvIncidentes.DataSource = Session["listadoIncidentes"];
+                dgvIncidentes.PageIndex = e.NewPageIndex;
+                dgvIncidentes.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
         protected void btnCrear_Click(object sender, EventArgs e)
         {
