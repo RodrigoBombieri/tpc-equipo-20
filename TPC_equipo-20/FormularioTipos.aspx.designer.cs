@@ -11,25 +11,25 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class TiposIncidentes
+    public partial class FormularioTipos
     {
 
         /// <summary>
-        /// btnCrear control.
+        /// txtNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrear;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// dgvTipos control.
+        /// btnGuardar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvTipos;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

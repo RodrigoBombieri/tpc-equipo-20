@@ -60,28 +60,35 @@ Create Table Prioridades(
     Nombre varchar(100) not null
 )
 Go
-Create Table TiposIncidente(
+Create Table TiposIncidentes(
+    ID smallint not null primary key identity (1, 1),
+    Nombre varchar(100) not null
+)
+Go
+Create Table TiposAcciones(
     ID smallint not null primary key identity (1, 1),
     Nombre varchar(100) not null
 )
 Go
 Create Table Incidentes(
 	ID bigint not null primary key identity (1, 1),
-    IDTipo smallint not null foreign key references TiposIncidente(ID),
+    IDTipo smallint not null foreign key references TiposIncidentes(ID),
     IDPrioridad smallint not null foreign key references Prioridades(ID),
 	IDEstado smallint not null foreign key references Estados(ID),
 	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) not null,
 	FechaCreacion date not null,
-	FechaCierre date not null    
+	FechaCierre date null    
 )
 GO
-Create Table Eventos(
+Create Table Acciones(
     ID bigint not null primary key identity (1, 1),
 	IDIncidente bigint not null foreign key references Incidentes(ID),
+	Usuario bigint not null foreign key references Usuarios(ID),
 	FechaCreacion date not null,   
-    Detalle varchar(200) not null
+    Detalle varchar(200) not null,
+	IDTipo smallint not null foreign key references TiposAcciones(ID),
 )
 GO
 
@@ -107,9 +114,11 @@ select 'Media' UNION
 select 'Baja' 
 GO
 
-insert into TIPOSINCIDENTE (Nombre)
+insert into TIPOSINCIDENTES (Nombre)
 select 'Producto dañado' UNION
 select 'Problema en el cobro' UNION
+select 'Entrega ok' UNION
+select 'Garantia' UNION
 select 'Entrega fallida' UNION
 select 'Otro' 
 GO
@@ -162,6 +171,8 @@ insert into Incidentes (IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioC
 values
 (1,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
 (3,1,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(2,2,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(3,2,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(1,2,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007');
+(4,3,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(5,5,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(1,4,4,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007');
+
+

@@ -28,5 +28,10 @@ namespace TPC_equipo_20
         {
             Response.Redirect("TiposIncidentes.aspx");
         }
+
+        protected void btnRoles_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Roles.aspx");
+        }
     }
 }
