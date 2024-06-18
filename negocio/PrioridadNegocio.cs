@@ -96,5 +96,38 @@ namespace negocio
             }
 
         }
+
+        public List<Prioridad> buscar(string id = "")
+        {
+            List<Prioridad> lista = new List<Prioridad>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if (id != "")
+                {
+                    datos.setearConsulta("Select ID, Nombre " +
+                    "FROM Prioridades " +
+                    "Where ID = @id");
+                    datos.setearParametro("@id", id);
+                    datos.ejecutarLectura();
+                }
+                while (datos.Lector.Read())
+                {
+                    Prioridad aux = new Prioridad();
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (short)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+                datos.cerrarConexion();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
