@@ -15,9 +15,9 @@ namespace TPC_equipo_20
             if (!IsPostBack)
             {
                 IncidenteNegocio negocio = new IncidenteNegocio();
-                //Session.Add("listadoIncidentes", negocio.listar());
-                //dgvIncidentes.DataSource = Session["listadoIncidentes"];
-                dgvIncidentes.DataSource = negocio.listar();
+                Session.Add("listadoIncidentes", negocio.listar());
+                dgvIncidentes.DataSource = Session["listadoIncidentes"];
+                //dgvIncidentes.DataSource = negocio.listar();
                 dgvIncidentes.DataBind();
             }
         }
@@ -38,10 +38,10 @@ namespace TPC_equipo_20
         }
 
         protected void dgvIncidentes_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
+        {          
             try
             {
-                dgvIncidentes.DataSource = Session["listaUsuarios"];
+                dgvIncidentes.DataSource = Session["listadoIncidentes"];
                 dgvIncidentes.PageIndex = e.NewPageIndex;
                 dgvIncidentes.DataBind();
             }
