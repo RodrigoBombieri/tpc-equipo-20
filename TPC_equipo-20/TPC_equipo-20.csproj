@@ -69,6 +69,7 @@
     <Content Include="DetalleCliente.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Estados.aspx" />
+    <Content Include="FormularioEstado.aspx" />
     <Content Include="FormularioIncidencia.aspx" />
     <Content Include="FormularioPrioridades.aspx" />
     <Content Include="FormularioTipos.aspx" />
@@ -125,6 +126,13 @@
     </Compile>
     <Compile Include="Estados.aspx.designer.cs">
       <DependentUpon>Estados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioEstado.aspx.cs">
+      <DependentUpon>FormularioEstado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioEstado.aspx.designer.cs">
+      <DependentUpon>FormularioEstado.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioIncidencia.aspx.cs">
       <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
