@@ -43,7 +43,7 @@ namespace negocio
             AccesoDatos conexion = new AccesoDatos();
             conexion.setearConsulta("  INSERT INTO PRIORIDADES (Nombre) VALUES (@nombre)");
             conexion.setearParametro("nombre", nombre);
-            conexion.ejecutarLectura();
+            conexion.ejecutarAccion();
 
             conexion.cerrarConexion();
         }
@@ -67,7 +67,7 @@ namespace negocio
             datos.setearConsulta("update PRIORIDADES set Nombre = @nombre where ID = @id");
             datos.setearParametro("nombre", nombre);
             datos.setearParametro("id", id);
-            datos.ejecutarLectura();
+            datos.ejecutarAccion();
             datos.cerrarConexion();
         }
         public void EliminarPrioridad(int id)
@@ -79,7 +79,7 @@ namespace negocio
 
                 datos.setearConsulta("delete from PRIORIDADES where ID = @id ");
                 datos.setearParametro("id", id);
-                datos.ejecutarLectura();
+                datos.ejecutarAccion();
 
             }
             catch (Exception ex)
