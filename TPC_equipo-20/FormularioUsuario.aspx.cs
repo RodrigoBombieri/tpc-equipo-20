@@ -25,7 +25,7 @@ namespace TPC_equipo_20
 
                     ddlRoles.DataSource = listaRoles;
                     ddlRoles.DataValueField = "Id";
-                    ddlRoles.DataTextField = "Nombre";
+                    ddlRoles.DataTextField = "Descripcion";
                     ddlRoles.DataBind();
                 }
 
