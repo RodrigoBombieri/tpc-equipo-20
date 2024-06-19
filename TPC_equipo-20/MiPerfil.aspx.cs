@@ -54,6 +54,14 @@ namespace TPC_equipo_20
                 UsuarioNegocio negocio = new UsuarioNegocio();
                 Usuario usuario = (Usuario)Session["usuario"];
 
+                if(txtPassword.Text != txtConfirmPassword.Text)
+                {
+                    lblError.Text = "Las contraseñas no coinciden";
+                    lblError.Visible = true;
+                    return;
+
+                }
+
                 if (txtImgPerfil.PostedFile.FileName != "")
                 {
                     string ruta = Server.MapPath("./Images/");
