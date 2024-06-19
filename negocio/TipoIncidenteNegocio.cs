@@ -38,14 +38,14 @@ namespace negocio
             }
         }
 
-        public List<TipoIncidente> buscar(string id = "")
+        public TipoIncidente buscar(int id = -1)
         {
             List<TipoIncidente> lista = new List<TipoIncidente>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                if (id != "")
+                if (id != -1)
                 {
                     datos.setearConsulta("Select ID, Nombre " +
                     "FROM TiposIncidentes " +
@@ -53,17 +53,57 @@ namespace negocio
                     datos.setearParametro("@id", id);
                     datos.ejecutarLectura();
                 }
-                while (datos.Lector.Read())
+                TipoIncidente aux = new TipoIncidente();
+                if (datos.Lector.Read())
                 {
-                    TipoIncidente aux = new TipoIncidente();
                     if (!(datos.Lector["ID"] is DBNull))
                         aux.Id = (short)datos.Lector["ID"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
 
-                    lista.Add(aux);
+                    //lista.Add(aux);
+                }
+                else
+                {
+                    aux = null;
                 }
                 datos.cerrarConexion();
-                return lista;
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public TipoIncidente buscar(string nombre = "")
+        {
+            List<TipoIncidente> lista = new List<TipoIncidente>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if (nombre != "")
+                {
+                    datos.setearConsulta("Select ID, Nombre " +
+                    "FROM TiposIncidentes " +
+                    "Where Nombre = @Nombre");
+                    datos.setearParametro("@Nombre", nombre);
+                    datos.ejecutarLectura();
+                }
+                TipoIncidente aux = new TipoIncidente();
+                if (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (short)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+
+                    //lista.Add(aux);
+                }
+                else
+                {
+                    aux = null;
+                }
+                datos.cerrarConexion();
+                return aux;
             }
             catch (Exception ex)
             {

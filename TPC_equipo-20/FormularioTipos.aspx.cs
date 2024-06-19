@@ -23,14 +23,21 @@ namespace TPC_equipo_20
                 if (id != "" && !IsPostBack)
                 {
                     TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
-                    TipoIncidente aux = (negocio.buscar(id))[0];
-
-                    txtNombre.Text = aux.Nombre;
+                    TipoIncidente aux = negocio.buscar(int.Parse(id));
+                    if (aux != null)
+                    {
+                        Session.Add("tipo", aux);
+                        txtNombre.Text = aux.Nombre;
+                    }
+                    else
+                    {
+                        Session.Add("error", "Tipo no encontrado");
+                        Response.Redirect("Error.aspx", false);
+                    }                    
                 }
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -40,21 +47,43 @@ namespace TPC_equipo_20
         {
             try
             {
-                TipoIncidente aux = new TipoIncidente();
-                TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
-                aux.Nombre = txtNombre.Text;
-
-                if (Request.QueryString["id"] != null)
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+                //TipoIncidente tipoOriginal = Session["tipo"] != null ? (TipoIncidente)Session["tipo"] : null;
+                TipoIncidente tipoOriginal = (TipoIncidente)Session["tipo"];
+                if (tipoOriginal != null && tipoOriginal.Id != 0)
                 {
-                    aux.Id = short.Parse(Request.QueryString["id"].ToString());
-                    negocio.modificar(aux);
+                    if (tipoOriginal.Nombre == txtNombre.Text){
+                        Response.Redirect("TiposIncidentes.aspx", false);
+                        return;
+                    }
+                }
+                //else
+                //{
+                //}
+                if (!chequearRepetido())
+                {
+                    TipoIncidente aux = new TipoIncidente();
+                    TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
+                    aux.Nombre = txtNombre.Text;
+
+                    if (Request.QueryString["id"] != null)
+                    {
+                        aux.Id = short.Parse(Request.QueryString["id"].ToString());
+                        negocio.modificar(aux);
+                    }
+                    else
+                    {
+                        negocio.agregar(aux);
+                    }
+                    Response.Redirect("TiposIncidentes.aspx", false);
                 }
                 else
                 {
-                    negocio.agregar(aux);
+                    Session.Add("error", "El tipo ya existe");
+                    Response.Redirect("Error.aspx", false);
                 }
-
-                Response.Redirect("TiposIncidentes.aspx", false);
             }
             catch (Exception ex)
             {
@@ -62,6 +91,19 @@ namespace TPC_equipo_20
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
+        }
+        protected bool chequearRepetido()
+        {
+            TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
+            TipoIncidente aux = negocio.buscar(txtNombre.Text);
+            if (aux != null)
+                return true;
+            else
+            {
+                Session.Add("error", "Tipo no encontrado");
+                Response.Redirect("Error.aspx", false);
+            }
+            return false;
         }
     }
 }
