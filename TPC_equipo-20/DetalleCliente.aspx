@@ -16,6 +16,7 @@
                     <label id="lblDni" class="form-label">DNI</label>
                     <asp:TextBox ID="txtDni" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un DNI" ControlToValidate="txtDni" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ErrorMessage="Ingrese sólo números" ControlToValidate="txtDni" runat="server" CssClass="text-danger" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblTelefono1" class="form-label">Telefono 1</label>
@@ -24,6 +25,7 @@
                 <div class="mb-3">
                     <label id="lblFechaNac" class="form-label">Fecha de Nacimiento</label>
                     <asp:TextBox ID="txtFechaNac" CssClass="form-control" runat="server" TextMode="Date" />
+                    <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una fecha de nacimiento" ControlToValidate="txtFechaNac" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="col-md-6">
@@ -36,6 +38,7 @@
                     <label id="lblEmail" class="form-label">Email</label>
                     <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un email" ControlToValidate="txtEmail" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ErrorMessage="Email inválido" ControlToValidate="txtEmail" runat="server" CssClass="text-danger" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"></asp:RegularExpressionValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblTelefono2" class="form-label">Telefono 2</label>
@@ -83,6 +86,7 @@
                     <label id="lblCodigoPostal" class="form-label">Código Postal</label>
                     <asp:TextBox ID="txtCodigoPostal" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un código postal" ControlToValidate="txtCodigoPostal" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ErrorMessage="Ingrese sólo números" ControlToValidate="txtCodigoPostal" runat="server" CssClass="text-danger" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
                 </div>
             </div>
             <div class="row">
@@ -93,14 +97,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <%if (Request.QueryString["id"] == null)
-                    {%>
+            <%if (Request.QueryString["id"] == null)
+                {%>
+            <div class="col-md-1">
                 <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
-                <%  }
-                    else
-                    {%>
+            </div>
+            <%  }
+                else
+                {%>
+            <% if (confirmarEditar)
+                {
+            %>
+            <div class="col-md-1">
+                <asp:Button ID="btnGuardarEdicion" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarEdicion_Click" />
+            </div>
+            <%}
+            else
+            { %>
+            <div class="col-md-1">
                 <asp:Button ID="btnEditar" Text="Editar" CssClass="btn btn-primary" runat="server" OnClick="btnEditar_Click" AutoPostBack="false" />
+            </div>
+            <%    }%>
+            <div class="col-md-1">
                 <asp:ScriptManager runat="server" />
                 <asp:UpdatePanel ID="UpdatePanel" runat="server">
                     <ContentTemplate>
@@ -109,18 +127,16 @@
                         </div>
                         <% if (confirmaEliminar)
                             { %>
-                        <div class="mb-3">
+                        <div class="col-md-1">
                             <asp:CheckBox ID="chkConfirmaEliminar" runat="server" Text="Confirmar eliminación" />
                             <asp:Button ID="btnConfirmaEliminar" runat="server" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" Text="Eliminar" />
                         </div>
                         <% } %>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <% if (confirmarEditar)
-                    { %>
-                <asp:Button ID="btnGuardarEdicion" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarEdicion_Click" />
-                <% }
-                }%>
+            </div>
+            <%    }%>
+            <div class="col-md-2">
                 <a href="/ListadoClientes.aspx">Volver al listado</a>
             </div>
         </div>
