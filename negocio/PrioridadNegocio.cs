@@ -43,7 +43,7 @@ namespace negocio
             AccesoDatos conexion = new AccesoDatos();
             conexion.setearConsulta("  INSERT INTO PRIORIDADES (Nombre) VALUES (@nombre)");
             conexion.setearParametro("nombre", nombre);
-            conexion.ejecutarLectura();
+            conexion.ejecutarAccion();
 
             conexion.cerrarConexion();
         }
@@ -67,7 +67,7 @@ namespace negocio
             datos.setearConsulta("update PRIORIDADES set Nombre = @nombre where ID = @id");
             datos.setearParametro("nombre", nombre);
             datos.setearParametro("id", id);
-            datos.ejecutarLectura();
+            datos.ejecutarAccion();
             datos.cerrarConexion();
         }
         public void EliminarPrioridad(int id)
@@ -79,7 +79,7 @@ namespace negocio
 
                 datos.setearConsulta("delete from PRIORIDADES where ID = @id ");
                 datos.setearParametro("id", id);
-                datos.ejecutarLectura();
+                datos.ejecutarAccion();
 
             }
             catch (Exception ex)
@@ -95,6 +95,39 @@ namespace negocio
 
             }
 
+        }
+
+        public List<Prioridad> buscar(string id = "")
+        {
+            List<Prioridad> lista = new List<Prioridad>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if (id != "")
+                {
+                    datos.setearConsulta("Select ID, Nombre " +
+                    "FROM Prioridades " +
+                    "Where ID = @id");
+                    datos.setearParametro("@id", id);
+                    datos.ejecutarLectura();
+                }
+                while (datos.Lector.Read())
+                {
+                    Prioridad aux = new Prioridad();
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (short)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+
+                    lista.Add(aux);
+                }
+                datos.cerrarConexion();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

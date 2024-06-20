@@ -31,8 +31,13 @@
             <div class="mb-3">
                 <label for="txtTelefono" class="form-label">Teléfono: </label>
                 <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regexTelefono" runat="server"
+                    ControlToValidate="txtTelefono"
+                    ErrorMessage="Teléfono inválido. Solo se permiten números."
+                    ValidationExpression="^\d+$"
+                    CssClass="text-danger">
+                </asp:RegularExpressionValidator>
             </div>
-
             <div class="mb-3">
                 <asp:Button ID="btnAceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" runat="server" Text="Aceptar" />
                 <a href="Usuarios.aspx" class="btn btn-secondary">Cancelar</a>

@@ -11,7 +11,7 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnPrioridades_Click(object sender, EventArgs e)
@@ -27,6 +27,11 @@ namespace TPC_equipo_20
         protected void btnTipos_Click(object sender, EventArgs e)
         {
             Response.Redirect("TiposIncidentes.aspx");
+        }
+
+        protected void btnRoles_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Roles.aspx");
         }
     }
 }

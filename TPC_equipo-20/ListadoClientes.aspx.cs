@@ -22,7 +22,7 @@ namespace TPC_equipo_20
                 dgvClientes.DataBind();
             }
         }
-        
+
         protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -131,6 +131,27 @@ namespace TPC_equipo_20
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             Response.Redirect("DetalleCliente.aspx");
+        }
+
+        protected void dgvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                long id = long.Parse(dgvClientes.DataKeys[e.RowIndex].Value.ToString());
+                //long id = long.Parse(dgvClientes.SelectedDataKey.Value.ToString());
+                List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
+                Cliente aux = temp.Find(x => x.Id == id);
+                ClienteNegocio negocio = new ClienteNegocio();
+                negocio.eliminar(aux);
+                Session.Add("listaClientes", negocio.listar());
+                Response.Redirect("ListadoClientes.aspx", false);
+            }
+
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

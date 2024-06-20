@@ -25,7 +25,7 @@ namespace TPC_equipo_20
 
                     ddlRoles.DataSource = listaRoles;
                     ddlRoles.DataValueField = "Id";
-                    ddlRoles.DataTextField = "Nombre";
+                    ddlRoles.DataTextField = "Descripcion";
                     ddlRoles.DataBind();
                 }
 
@@ -50,7 +50,6 @@ namespace TPC_equipo_20
             }
 			catch (Exception ex)
 			{
-
 				Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
