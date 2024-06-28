@@ -133,20 +133,17 @@ namespace TPC_equipo_20
             Response.Redirect("DetalleCliente.aspx");
         }
 
-        protected void dgvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void dgvClientes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
-                long id = long.Parse(dgvClientes.DataKeys[e.RowIndex].Value.ToString());
-                //long id = long.Parse(dgvClientes.SelectedDataKey.Value.ToString());
-                List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
-                Cliente aux = temp.Find(x => x.Id == id);
-                ClienteNegocio negocio = new ClienteNegocio();
-                negocio.eliminar(aux);
-                Session.Add("listaClientes", negocio.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                if (e.CommandName == "nuevoIncidente")
+                {
+                    int rowNum = int.Parse(e.CommandArgument.ToString());
+                    var id = dgvClientes.DataKeys[rowNum].Value.ToString();
+                    Response.Redirect("FormularioIncidencia.aspx?id=" + id, false);
+                }
             }
-
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);

@@ -99,6 +99,31 @@ namespace negocio
             }
         }
 
+        public long buscarUltimo()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            long id = -1;
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1 * FROM CLIENTES ORDER BY ID DESC");
+
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    id = (long)datos.Lector["ID"];
+                }
+                return id;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void modificar(Cliente nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
