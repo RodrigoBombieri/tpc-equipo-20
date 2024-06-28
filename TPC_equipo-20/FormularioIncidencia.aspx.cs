@@ -73,15 +73,21 @@ namespace TPC_equipo_20
             {
                 Incidente aux = new Incidente();
                 IncidenteNegocio negocio = new IncidenteNegocio();
+                EmailService emailService = new EmailService();
                 // falta usuario
+                //Usuario usuario = new Usuario();
+                //UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
                 aux.Detalle = txtDetalle.Text;
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
                 aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
                 aux.Tipo = new TipoIncidente();
-                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);  
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue); 
                 
+                //usuario.Email = txtEmail.Text;
+
                 if (Request.QueryString["id"] != null)
                 {
                     aux.Id = long.Parse(Request.QueryString["id"].ToString());
@@ -90,9 +96,13 @@ namespace TPC_equipo_20
                 else
                 {
                     negocio.agregar(aux);
+                    /*Acá mandaría el correo con el email del usuario*/
+                    //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
+                    //emailService.enviarCorreo();
+                    //Response.Redirect("Incidentes.aspx", false);
                 }
 
-                Response.Redirect("Usuarios.aspx", false);
+                Response.Redirect("Incidentes.aspx", false);
             }
             catch (Exception ex)
             {
