@@ -17,6 +17,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Incidencias </h1>
     <div class="row">
+        <h2>Aca hay que replicar clientes para buscar y asignarle la incidencia......</h2>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="mb-3">
                 <label id="lblDetalle" class="form-label">Detalle</label>
@@ -26,10 +29,10 @@
                 <label id="lblPrioridad" class="form-label">Prioridad</label>
                 <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
             </div>
-            <div class="mb-3">
+          <%--  <div class="mb-3">
                 <label id="lblEstado" class="form-label">Estado</label>
                 <asp:DropDownList ID="ddlEstado" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
-            </div>
+            </div>--%>
             <div class="mb-3">
                 <label id="lblTipo" class="form-label">Tipo de incidente</label>
                 <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
