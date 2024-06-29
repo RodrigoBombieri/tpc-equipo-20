@@ -48,12 +48,19 @@
                 <label id="lblAcciones" class="form-label">Acciones:</label>
                 <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
                     CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
-                    AllowPaging="true" PageSize="5" runat="server">
+                    AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
                     <Columns>
                         <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                         <asp:BoundField DataField="Fecha" HeaderText="Creado" />
                         <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
                     </Columns>
+                        <EmptyDataTemplate>
+        <table style="width:100%;">
+            <tr>
+                <td colspan="2" style="text-align:center;">No hay datos disponibles.</td>
+            </tr>
+        </table>
+    </EmptyDataTemplate>
                 </asp:GridView>
             </div>
         </div>
