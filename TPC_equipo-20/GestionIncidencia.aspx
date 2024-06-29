@@ -27,6 +27,7 @@
         <div class="col-md-4">
             <asp:Button ID="btnCerrar" Text="Cerrar" CssClass="btn btn-primary" runat="server" />
             <asp:Button ID="btnResolver" Text="Resolver" CssClass="btn btn-primary" runat="server" />
+            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" />
         </div>
     </div>
     <div class="row">
@@ -45,7 +46,15 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblAcciones" class="form-label">Acciones:</label>
-                <asp:TextBox ID="TextBox11" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
+                    CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
+                    AllowPaging="true" PageSize="5" runat="server">
+                    <Columns>
+                        <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
+                        <asp:BoundField DataField="Fecha" HeaderText="Creado" />
+                        <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
     </div>

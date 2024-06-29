@@ -75,6 +75,7 @@ Create Table Incidentes(
     IDTipo smallint not null foreign key references TiposIncidentes(ID),
     IDPrioridad smallint not null foreign key references Prioridades(ID),
 	IDEstado smallint not null foreign key references Estados(ID),
+	IDCliente bigint not null foreign key references Clientes(ID),
 	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
 	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) null,
