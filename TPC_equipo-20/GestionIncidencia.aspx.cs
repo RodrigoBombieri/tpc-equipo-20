@@ -18,12 +18,17 @@ namespace TPC_equipo_20
             {
                 if (!IsPostBack)
                 {
-                    PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
-                    List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
-                    EstadoNegocio EstadoNegocio = new EstadoNegocio();
-                    List<Estado> listaEstados = EstadoNegocio.listar();
-                    TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
-                    List<TipoIncidente> listaTipos = TipoNegocio.listar();
+                    //PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
+                    //List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
+                    //EstadoNegocio EstadoNegocio = new EstadoNegocio();
+                    //List<Estado> listaEstados = EstadoNegocio.listar();
+                    //TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
+                    //List<TipoIncidente> listaTipos = TipoNegocio.listar();
+
+                    AccionNegocio negocio = new AccionNegocio();
+                    //dgvAcciones.DataSource = Session["listadoIncidentes"];
+                    dgvAcciones.DataSource = negocio.listar();
+                    dgvAcciones.DataBind();
 
                 }
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
@@ -40,9 +45,20 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
+                throw;
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
+        }
+
+        protected void dgvAcciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dgvAcciones_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
         }
     }
 }

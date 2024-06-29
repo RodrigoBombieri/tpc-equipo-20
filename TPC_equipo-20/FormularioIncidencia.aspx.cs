@@ -26,14 +26,14 @@ namespace TPC_equipo_20
                     ddlPrioridad.DataBind();
                     ddlPrioridad.SelectedValue = "1";
 
-                    EstadoNegocio EstadoNegocio = new EstadoNegocio();
-                    List<Estado> listaEstados = EstadoNegocio.listar();
+                    //EstadoNegocio EstadoNegocio = new EstadoNegocio();
+                    //List<Estado> listaEstados = EstadoNegocio.listar();
 
-                    ddlEstado.DataSource = listaEstados;
-                    ddlEstado.DataValueField = "Id";
-                    ddlEstado.DataTextField = "Nombre";
-                    ddlEstado.DataBind();
-                    ddlEstado.SelectedValue = "1";
+                    //ddlEstado.DataSource = listaEstados;
+                    //ddlEstado.DataValueField = "Id";
+                    //ddlEstado.DataTextField = "Nombre";
+                    //ddlEstado.DataBind();
+                    //ddlEstado.SelectedValue = "1";
 
                     TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
                     List<TipoIncidente> listaTipos = TipoNegocio.listar();
@@ -54,7 +54,7 @@ namespace TPC_equipo_20
                     Incidente aux = (negocio.listar(id))[0];
 
                     txtDetalle.Text = aux.Detalle;
-                    ddlEstado.SelectedValue = aux.Estado.Id.ToString();
+                    //ddlEstado.SelectedValue = aux.Estado.Id.ToString();
                     ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
                     ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
                 }
@@ -82,7 +82,7 @@ namespace TPC_equipo_20
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
-                aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
+                //aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
                 aux.Tipo = new TipoIncidente();
                 aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue); 
                 
