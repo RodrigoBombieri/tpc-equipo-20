@@ -9,7 +9,7 @@ using dominio;
 
 namespace TPC_equipo_20
 {
-    public partial class ListadoClientes : System.Web.UI.Page
+    public partial class Clientes : System.Web.UI.Page
     {
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvClientes.SelectedDataKey.Value.ToString();
-                Response.Redirect("DetalleCliente.aspx?id=" + id, false);
+                Response.Redirect("FormularioCliente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {
@@ -130,7 +130,7 @@ namespace TPC_equipo_20
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DetalleCliente.aspx");
+            Response.Redirect("FormularioCliente.aspx");
         }
 
         protected void dgvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)

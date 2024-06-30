@@ -54,9 +54,6 @@
                 <div class="mb-3">
                     <label id="lblCliente2" class="form-label">Documento:</label>
                 </div>
-                <div class="mb-3">
-                    <label id="lblCliente3" class="form-label">Domicilio:</label>
-                </div>
             </div>
         </div>
 

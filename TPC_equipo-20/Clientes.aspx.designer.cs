@@ -11,35 +11,26 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class Incidencias
+    public partial class Clientes
     {
 
         /// <summary>
-        /// txtFiltro control.
+        /// txtFiltroCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltro;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroCliente;
 
         /// <summary>
-        /// chkFiltroAvanzado control.
+        /// chkFiltroAvanzadoCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkFiltroAvanzado;
-
-        /// <summary>
-        /// btnCrear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrear;
+        protected global::System.Web.UI.WebControls.CheckBox chkFiltroAvanzadoCliente;
 
         /// <summary>
         /// lblCampo control.
@@ -87,22 +78,22 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblFiltroAvanzado;
 
         /// <summary>
-        /// txtFiltroAvanzado control.
+        /// txtFiltroAvanzadoCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzado;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzadoCliente;
 
         /// <summary>
-        /// lblValidarFiltro control.
+        /// lblBtnBuscar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblValidarFiltro;
+        protected global::System.Web.UI.WebControls.Label lblBtnBuscar;
 
         /// <summary>
         /// btnBuscar control.
@@ -114,21 +105,21 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// BtnLimpiarFiltros control.
+        /// dgvClientes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLimpiarFiltros;
+        protected global::System.Web.UI.WebControls.GridView dgvClientes;
 
         /// <summary>
-        /// dgvIncidentes control.
+        /// btnCrear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvIncidentes;
+        protected global::System.Web.UI.WebControls.Button btnCrear;
     }
 }

@@ -10,7 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace TPC_equipo_20
 {
-    public partial class FormularioPrioridades : System.Web.UI.Page
+    public partial class FormularioPrioridad : System.Web.UI.Page
     {
         public bool confirmaEliminar { get; set; }
         protected void Page_Load(object sender, EventArgs e)

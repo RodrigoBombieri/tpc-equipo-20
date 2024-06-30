@@ -9,7 +9,7 @@ using negocio;
 
 namespace TPC_equipo_20
 {
-    public partial class DetalleCliente : System.Web.UI.Page
+    public partial class FormularioCliente : System.Web.UI.Page
     {
         public bool confirmaEliminar { get; set; }
 
@@ -95,7 +95,7 @@ namespace TPC_equipo_20
                     ClienteNegocio negocio = new ClienteNegocio();
                     negocio.eliminar(aux);
                     Session.Add("listaClientes", negocio.listar());
-                    Response.Redirect("ListadoClientes.aspx", false);
+                    Response.Redirect("Clientes.aspx", false);
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace TPC_equipo_20
                 cliNeg.agregar(aux);
 
                 Session.Add("listaClientes", cliNeg.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
             {
@@ -208,7 +208,7 @@ namespace TPC_equipo_20
                 domNeg.modificar(dom);
 
                 Session.Add("listaClientes", cliNeg.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
             {

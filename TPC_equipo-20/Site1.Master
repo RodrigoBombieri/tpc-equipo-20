@@ -31,10 +31,10 @@
                             <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Incidencias.aspx">Incidencias</a>
+                            <a class="nav-link" href="Incidentes.aspx">Incidentes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="ListadoClientes.aspx">Clientes</a>
+                            <a class="nav-link" href="Clientes.aspx">Clientes</a>
                         </li>
                         <% } %>
                         <%if (negocio.Seguridad.EsAdmin(Session["usuario"]))

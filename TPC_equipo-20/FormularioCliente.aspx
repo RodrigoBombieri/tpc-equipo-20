@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="DetalleCliente.aspx.cs" Inherits="TPC_equipo_20.DetalleCliente" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormularioCliente.aspx.cs" Inherits="TPC_equipo_20.FormularioCliente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -137,7 +137,7 @@
             </div>
             <%    }%>
             <div class="col-md-2">
-                <a href="/ListadoClientes.aspx">Volver al listado</a>
+                <a href="/Clientes.aspx">Volver al listado</a>
             </div>
         </div>
     </div>
