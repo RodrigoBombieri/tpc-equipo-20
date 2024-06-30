@@ -168,6 +168,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnGuardar;
 
         /// <summary>
+        /// Control btnGuardarCrear.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarCrear;
+
+        /// <summary>
         /// Control btnGuardarEdicion.
         /// </summary>
         /// <remarks>
@@ -177,6 +186,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnGuardarEdicion;
 
         /// <summary>
+        /// Control btnGuardarEdicionCrear.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarEdicionCrear;
+
+        /// <summary>
         /// Control btnEditar.
         /// </summary>
         /// <remarks>
@@ -184,6 +202,15 @@ namespace TPC_equipo_20
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEditar;
+
+        /// <summary>
+        /// Control CrearIncidencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CrearIncidencia;
 
         /// <summary>
         /// Control UpdatePanel.
