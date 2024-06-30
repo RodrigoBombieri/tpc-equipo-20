@@ -66,7 +66,6 @@
   <ItemGroup>
     <Content Include="Administracion.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="DetalleCliente.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Estados.aspx" />
     <Content Include="FormularioEstado.aspx" />
@@ -82,7 +81,6 @@
     <Content Include="Images\roles.jpg" />
     <Content Include="Images\tiposIncidente.png" />
     <Content Include="Incidencias.aspx" />
-    <Content Include="ListadoClientes.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="Prioridades.aspx" />
@@ -106,13 +104,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DetalleCliente.aspx.cs">
-      <DependentUpon>DetalleCliente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DetalleCliente.aspx.designer.cs">
-      <DependentUpon>DetalleCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
@@ -179,13 +170,6 @@
     </Compile>
     <Compile Include="Incidencias.aspx.designer.cs">
       <DependentUpon>Incidencias.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ListadoClientes.aspx.cs">
-      <DependentUpon>ListadoClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ListadoClientes.aspx.designer.cs">
-      <DependentUpon>ListadoClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
