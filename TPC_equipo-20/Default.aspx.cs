@@ -13,5 +13,10 @@ namespace TPC_equipo_20
         {
 
         }
+
+        protected void btnInicioSesion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx", false);
+        }
     }
 }

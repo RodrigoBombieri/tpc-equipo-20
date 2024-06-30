@@ -31,11 +31,17 @@ namespace TPC_equipo_20
                         txtNickName.Text = usuario.Nick;
                         txtTelefono.Text = usuario.Telefono;
                         txtDni.Text = usuario.Dni;
+                        txtPassword.Text = usuario.Password;
+                        
 
                         if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
                         {
                             imgNuevoPerfil.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                         }
+                        // Captura la contraseña del usuario y la muestra en el campo de texto
+                        // Lo hice con JS porque con ASP no se puede (deja el campo vacío por seguridad)
+                        string script = $"document.getElementById('{txtPassword.ClientID}').value = '{usuario.Password}';";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "MostrarPassword", script, true);
                     }
                 }
             }
@@ -76,6 +82,7 @@ namespace TPC_equipo_20
                 usuario.Telefono = txtTelefono.Text;
                 usuario.Dni = txtDni.Text;
                 usuario.Rol.Descripcion = txtRol.Text;
+               
 
                 negocio.modificar(usuario);
 
@@ -85,6 +92,8 @@ namespace TPC_equipo_20
 
                     img.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                 }
+
+                Response.Redirect("Default.aspx");
             }
             catch (Exception ex)
             {
