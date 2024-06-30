@@ -64,12 +64,12 @@
                 </div>
                 <div class="mb-3">
                     <label id="lblPassword" class="form-label">Contraseña</label>
-                    <asp:TextBox ID="txtPassword" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtPassword" TextMode="Password" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una contraseña" ControlToValidate="txtPassword" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblConfirmPassword" class="form-label">Confirmar Contraseña</label>
-                    <asp:TextBox ID="txtConfirmPassword" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtConfirmPassword" TextMode="Password" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe confirmar la contraseña" ControlToValidate="txtConfirmPassword" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <asp:Label ID="lblError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
