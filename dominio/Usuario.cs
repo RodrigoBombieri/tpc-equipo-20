@@ -18,5 +18,10 @@ namespace dominio
         public Rol Rol { get; set; }
         public string Password { get; set; }
         public string ImagenPerfil { get; set; }
+
+        public override string ToString()
+        {       
+                return Apellido + ", " + Nombre;
+         }
     }
 }
