@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="GestionIncidencia.aspx.cs" Inherits="TPC_equipo_20.GestionIncidencia" %>
-
+<%@ Register Src="~/ControlUsuarios.ascx" TagPrefix="uc" TagName="ControlUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .large-badge {
@@ -14,15 +14,16 @@
         <div class="col-md-8 d-flex align-items-center">
             <asp:Label ID="lblNumIncidencia" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
             <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Estado</asp:Label>
-            <%--<asp:Label ID="lblTipo" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Tipo</asp:Label>
-            <asp:Label ID="lblPrioridad" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Prioridad</asp:Label>--%>
+            <asp:Label ID="lblPrioridad" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Prioridad</asp:Label>
+            <%--<asp:Label ID="lblTipo" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Tipo</asp:Label>--%>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
             <%--<asp:Button ID="btnCerrar" Text="Cerrar" CssClass="btn btn-primary me-2" runat="server" />
             <asp:Button ID="btnResolver" Text="Resolver" CssClass="btn btn-primary me-2" runat="server" />--%>
-            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" />
+            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
+    <uc:ControlUsuarios ID="MiControl1" runat="server" />
     <div class="row">
         <div class="col-md-6" style="padding-right: 15px;">
             <div class="row border mb-4">

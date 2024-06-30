@@ -33,6 +33,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblEstado;
 
         /// <summary>
+        /// lblPrioridad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrioridad;
+
+        /// <summary>
         /// btnVolver control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
+
+        /// <summary>
+        /// MiControl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::TPC_equipo_20.ControlUsuarios MiControl1;
 
         /// <summary>
         /// ddlTipo control.
