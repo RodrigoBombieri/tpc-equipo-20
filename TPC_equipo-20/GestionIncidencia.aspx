@@ -13,8 +13,8 @@
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
             <asp:Label ID="lblNumIncidencia" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
-            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Estado</asp:Label>
-            <asp:Label ID="lblPrioridad" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Prioridad</asp:Label>
+            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
+            <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
             <%--<asp:Label ID="lblTipo" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Tipo</asp:Label>--%>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
@@ -23,7 +23,7 @@
             <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
-    <uc:ControlUsuarios ID="MiControl1" runat="server" />
+    <%--<uc:ControlUsuarios ID="MiControl1" runat="server" />--%>
     <div class="row">
         <div class="col-md-6" style="padding-right: 15px;">
             <div class="row border mb-4">
@@ -36,19 +36,20 @@
                     <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                 </div>
                 <div class="mb-3">
-                    <label id="lblCreado" class="form-label">Creado:</label>
+                    <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>                    
                 </div>
                 <div class="mb-3">
                     <label id="lblDetalle1" class="form-label">Detalle</label>
-                    <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" Enabled="false" runat="server" />
                 </div>
             </div>
             <div class="row border m-6 mb-4">
                 <div class="mb-3">
-                    <label id="lblCliente" class="form-label">Cliente:</label>
+                    <label id="lblCliente" class="form-label"></label>
                 </div>
                 <div class="mb-3">
-                    <label id="lblCliente1" class="form-label">Nombre y apellido:</label>
+                    <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>    
+                    <asp:Label ID="lblDocumento" class="form-label" runat="server"></asp:Label>    
                 </div>
                 <div class="mb-3">
                     <label id="lblCliente2" class="form-label">Documento:</label>

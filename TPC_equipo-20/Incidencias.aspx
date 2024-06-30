@@ -78,12 +78,12 @@
             CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
             AllowPaging="true" PageSize="5" runat="server">
             <Columns>
+                <asp:BoundField DataField="Id" HeaderText="ID" />
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                 <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
                 <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
                 <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
-                <asp:BoundField DataField="UsuarioAsignado" HeaderText="Usuario asignado" />
-                <asp:BoundField DataField="UsuarioCreador" HeaderText="Usuario creador" />
+                <asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
                 <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
                 <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />

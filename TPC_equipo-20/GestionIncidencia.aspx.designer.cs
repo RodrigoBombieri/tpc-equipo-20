@@ -33,13 +33,13 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblEstado;
 
         /// <summary>
-        /// lblPrioridad control.
+        /// lblVigencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrioridad;
+        protected global::System.Web.UI.WebControls.Label lblVigencia;
 
         /// <summary>
         /// btnVolver control.
@@ -49,15 +49,6 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
-
-        /// <summary>
-        /// MiControl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::TPC_equipo_20.ControlUsuarios MiControl1;
 
         /// <summary>
         /// ddlTipo control.
@@ -78,6 +69,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
 
         /// <summary>
+        /// lblCreado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCreado;
+
+        /// <summary>
         /// txtDetalle control.
         /// </summary>
         /// <remarks>
@@ -85,6 +85,24 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDetalle;
+
+        /// <summary>
+        /// lblNombreApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreApellido;
+
+        /// <summary>
+        /// lblDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDocumento;
 
         /// <summary>
         /// ddlTipoAcciones control.
