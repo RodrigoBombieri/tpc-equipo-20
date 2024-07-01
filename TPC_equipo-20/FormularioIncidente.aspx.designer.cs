@@ -24,13 +24,31 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnVolver;
 
         /// <summary>
-        /// btnSeleccionCliente control.
+        /// txtFiltroCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSeleccionCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroCliente;
+
+        /// <summary>
+        /// btnBuscarCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarCliente;
+
+        /// <summary>
+        /// dgvClientes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvClientes;
 
         /// <summary>
         /// ddlPrioridad control.
@@ -96,12 +114,12 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblDocumento;
 
         /// <summary>
-        /// txtDetalleAccion control.
+        /// btnModificarUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDetalleAccion;
+        protected global::System.Web.UI.WebControls.Button btnModificarUsuario;
     }
 }

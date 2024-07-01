@@ -32,7 +32,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
@@ -64,7 +63,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -92,11 +90,9 @@ namespace TPC_equipo_20
                 ddlCriterio.Items.Add("Contiene");
                 ddlCriterio.Items.Add("Empieza con");
                 ddlCriterio.Items.Add("Termina con");
-
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }

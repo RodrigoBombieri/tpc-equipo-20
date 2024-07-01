@@ -13,15 +13,21 @@ namespace negocio
 {
     public class ClienteNegocio
     {
-        public List<Cliente> listar()
+        public List<Cliente> listar(string id = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Cliente> lista = new List<Cliente>();
 
             try
             {
-                datos.setearConsulta("SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
-                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia");
+                string query = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
+                    "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia";
+                if (id != "")
+                {
+                    query += " where c.ID = @id";
+                    datos.setearParametro("@id", id);
+                }
+                datos.setearConsulta(query);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -251,7 +257,7 @@ namespace negocio
                             break;
                     }
                 }
-                else 
+                else
                 {
                     switch (criterio)
                     {

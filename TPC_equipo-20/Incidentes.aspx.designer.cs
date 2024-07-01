@@ -24,15 +24,6 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnCrear;
 
         /// <summary>
-        /// btnVolver control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolver;
-
-        /// <summary>
         /// txtFiltro control.
         /// </summary>
         /// <remarks>

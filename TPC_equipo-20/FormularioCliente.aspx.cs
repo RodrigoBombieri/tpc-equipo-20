@@ -148,7 +148,6 @@ namespace TPC_equipo_20
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
-
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)

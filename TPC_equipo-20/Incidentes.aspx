@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
             <asp:Button ID="btnCrear" Text="Nuevo" CssClass="btn btn-info" runat="server" OnClick="btnCrear_Click"/>
-            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />
+            <%--<asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />--%>
         </div>
     </div>
     <div class="row">
