@@ -77,7 +77,6 @@ Create Table Incidentes(
 	IDEstado smallint not null foreign key references Estados(ID),
 	IDCliente bigint not null foreign key references Clientes(ID),
 	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
-	UsuarioCreador bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) null,
 	FechaCreacion date not null,
 	FechaActualizacion date not null,
@@ -110,6 +109,7 @@ select 'Resuelto'
 GO
 
 insert into PRIORIDADES (Nombre)
+select '' UNION
 select 'Urgente' UNION
 select 'Alta' UNION
 select 'Media' UNION
@@ -117,6 +117,7 @@ select 'Baja'
 GO
 
 insert into TIPOSINCIDENTES (Nombre)
+select '' UNION
 select 'Producto dañado' UNION
 select 'Problema en el cobro' UNION
 select 'Entrega ok' UNION
@@ -180,6 +181,7 @@ GO
 
 insert into TiposAcciones (Nombre)
 values
+(''),
 ('Alta de incidente'),
 ('Cierre de incidente'),
 ('Resolución de incidente'),

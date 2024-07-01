@@ -75,7 +75,7 @@
     <Content Include="FormularioPrioridad.aspx" />
     <Content Include="FormularioTipoIncidente.aspx" />
     <Content Include="FormularioUsuario.aspx" />
-    <Content Include="GestionIncidencia.aspx" />
+    <Content Include="GestionIncidente.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\Estado.jpg" />
     <Content Include="Images\miFoto.jpg" />
@@ -171,12 +171,12 @@
     <Compile Include="FormularioUsuario.aspx.designer.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionIncidencia.aspx.cs">
-      <DependentUpon>GestionIncidencia.aspx</DependentUpon>
+    <Compile Include="GestionIncidente.aspx.cs">
+      <DependentUpon>GestionIncidente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionIncidencia.aspx.designer.cs">
-      <DependentUpon>GestionIncidencia.aspx</DependentUpon>
+    <Compile Include="GestionIncidente.aspx.designer.cs">
+      <DependentUpon>GestionIncidente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

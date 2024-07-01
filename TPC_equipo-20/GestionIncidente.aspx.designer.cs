@@ -11,17 +11,17 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class GestionIncidencia
+    public partial class GestionIncidente
     {
 
         /// <summary>
-        /// lblNumIncidencia control.
+        /// lblNumIncidente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumIncidencia;
+        protected global::System.Web.UI.WebControls.Label lblNumIncidente;
 
         /// <summary>
         /// lblEstado control.
@@ -67,6 +67,24 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
         /// lblCreado control.
@@ -123,6 +141,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtDetalleAccion;
 
         /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
+
+        /// <summary>
         /// btnGuardarAccion control.
         /// </summary>
         /// <remarks>
@@ -139,14 +166,5 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvAcciones;
-
-        /// <summary>
-        /// btnRegresar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegresar;
     }
 }

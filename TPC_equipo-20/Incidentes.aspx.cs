@@ -27,7 +27,7 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvIncidentes.SelectedDataKey.Value.ToString();
-                Response.Redirect("GestionIncidencia.aspx?id=" + id, false);
+                Response.Redirect("GestionIncidente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {

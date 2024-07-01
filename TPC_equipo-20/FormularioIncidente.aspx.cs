@@ -111,5 +111,11 @@ namespace TPC_equipo_20
                 Response.Redirect("Error.aspx", false);
             }
         }
+
+        protected void btnSeleccionCliente_Click(object sender, EventArgs e)
+        {
+            //usamos Session para volver?
+            Response.Redirect("Clientes.aspx?var=1", false);
+        }
     }
 }

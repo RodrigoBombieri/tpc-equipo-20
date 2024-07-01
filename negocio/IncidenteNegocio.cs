@@ -31,7 +31,7 @@ namespace negocio
                     "inner join Clientes c on I.IDCliente = C.ID " +
                     "inner join Domicilios d ON d.Id = c.IDDomicilio " +
                     "inner join Provincias pr ON pr.ID = d.IDProvincia " +
-                    "inner join Usuarios U on I.UsuarioCreador = U.ID " +
+                    "inner join Usuarios U on I.UsuarioAsignado = U.ID " +
                     "inner join Roles R on U.IDRol = R.ID";
                 
                 if (id != "")
