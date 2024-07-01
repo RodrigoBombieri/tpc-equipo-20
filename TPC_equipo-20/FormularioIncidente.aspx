@@ -20,14 +20,12 @@
             <h1>Creando incidente</h1>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" />
+            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
     <%--Cliente--%>
     <% if (!banderaCliente)
-        {
-
-    %>
+        { %>
     <div class="row" style="padding: 20px">
         <div class="mb-3">
             <asp:Label runat="server" Text="Buscar por nombre, apellido o documento (para mas filtros <a href='Clientes.aspx'>aqui</a>)."></asp:Label>
@@ -77,8 +75,8 @@
                     <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" runat="server" />
                 </div>
                 <div class="mb-3 text-end">
-                    <asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />
-                    <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />
+                    <asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" OnClick="btnCancelar_Click" />
+                    <asp:Button ID="btnGuardarIncidente" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" OnClick="btnGuardarIncidente_Click" />
                 </div>
             </div>
         </div>

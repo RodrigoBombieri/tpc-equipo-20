@@ -20,8 +20,11 @@ namespace negocio
                     "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
                     "I.IDEstado, E.Nombre as EstadoNombre, " +
                     "c.ID as IDCliente, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2," +
-                    "c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia, " +
-                    "U.ID as IDUsuario, U.Nombre as NombreUsuario, U.Apellido as ApellidoUsuario, U.Nick, U.Dni as UsuarioDNI, U.Telefono as TelefonoUsuario, U.Email as EmailUsuario, U.urlImagenPerfil, " +
+                    "c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, " +
+                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " + 
+                    "pr.Nombre as Provincia, " +
+                    "U.ID as IDUsuario, U.Nombre as NombreUsuario, U.Apellido as ApellidoUsuario, U.Nick, " +
+                    "U.Dni as UsuarioDNI, U.Telefono as TelefonoUsuario, U.Email as EmailUsuario, U.urlImagenPerfil, " +
                     "R.ID as IDRol, R.Nombre as NombreRol, " +
                     "I.Detalle, I.FechaCreacion, I.FechaCierre " +
                     "FROM Incidentes I " +
@@ -31,7 +34,7 @@ namespace negocio
                     "inner join Clientes c on I.IDCliente = C.ID " +
                     "inner join Domicilios d ON d.Id = c.IDDomicilio " +
                     "inner join Provincias pr ON pr.ID = d.IDProvincia " +
-                    "inner join Usuarios U on I.UsuarioAsignado = U.ID " +
+                    "inner join Usuarios U on I.IDUsuario = U.ID " +
                     "inner join Roles R on U.IDRol = R.ID";
                 
                 if (id != "")
@@ -59,7 +62,9 @@ namespace negocio
                     aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];                    
                     aux.Detalle = (string)datos.Lector["Detalle"];
                     aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
-                    aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
+                    if (!(datos.Lector["FechaCierre"] is DBNull))
+                        aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
+                    
                     //usuario
                     aux.UsuarioAsignado = new Usuario();
                     aux.UsuarioAsignado.Id = (long)datos.Lector["IDUsuario"];
@@ -126,18 +131,19 @@ namespace negocio
             try
             {
                 datos.setearConsulta("insert into Incidentes " +
-                    "(IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, " +
-                    "Detalle, FechaCreacion, FechaCierre) " +
-                    "VALUES (@IDTipo, @IDPrioridad, @IDEstado, @UsuarioAsignado, @UsuarioCreador, " +
-                    "@Detalle, GETDATE(), GETDATE())");            
+                    "(IDTipo, IDPrioridad, IDEstado, IDCliente, IDUsuario, " +
+                    "Detalle, FechaCreacion) " +
+                    "VALUES (@IDTipo, @IDPrioridad, @IDEstado, @IDCliente, @IDUsuario, " +
+                    "@Detalle, GETDATE())");
 
                 datos.setearParametro("@IdTipo", aux.Tipo.Id);
                 datos.setearParametro("@IDPrioridad", aux.Prioridad.Id);
                 datos.setearParametro("@IDEstado", aux.Estado.Id);
-                datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado.Id);
+                datos.setearParametro("@IDCliente", aux.Cliente.Id);
+                datos.setearParametro("@IDUsuario", aux.UsuarioAsignado.Id);
                 datos.setearParametro("@Detalle", aux.Detalle);
-                //datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
-                //datos.setearParametro("@FechaCierre", aux.FechaCierre);
+                //datos.setearParametro("@FechaCreacion", DateTime.Now.Date);
+                //datos.setearParametro("@FechaCierre", null);
 
                 datos.ejecutarAccion();
             }

@@ -19,6 +19,7 @@ namespace TPC_equipo_20
                 if (!IsPostBack)
                 {
                     banderaCliente = false;
+                    Session["Cliente"] = null;
                     PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
                     List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
 
@@ -65,62 +66,50 @@ namespace TPC_equipo_20
                         Response.Redirect("Error.aspx", false);
                     }
                 }
-                else
-                {
-                    banderaCliente = false;
-                }
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGuardarIncidente_Click(object sender, EventArgs e)
         {
             try
             {
-                Incidente aux = new Incidente();
                 IncidenteNegocio negocio = new IncidenteNegocio();
+                Incidente aux = new Incidente();
                 EmailService emailService = new EmailService();
-                // falta usuario
-                //Usuario usuario = new Usuario();
-                //UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
-                aux.Detalle = txtDetalle.Text;
+                aux.Tipo = new TipoIncidente();
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
-                //aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
-                aux.Tipo = new TipoIncidente();
-                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue); 
-                
-                //usuario.Email = txtEmail.Text;
+                aux.Estado.Id = 1;
+                aux.Cliente = new Cliente();
+                aux.Cliente = (Cliente)Session["Cliente"];
+                aux.Detalle = txtDetalle.Text;
+                aux.UsuarioAsignado = new Usuario();
+                aux.UsuarioAsignado = (Usuario)Session["usuario"];
 
-                if (Request.QueryString["id"] != null)
-                {
-                    aux.Id = long.Parse(Request.QueryString["id"].ToString());
-                    negocio.modificar(aux);
-                }
-                else
-                {
-                    negocio.agregar(aux);
-                    /*Acá mandaría el correo con el email del usuario*/
-                    //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
-                    //emailService.enviarCorreo();
-                    //Response.Redirect("Incidentes.aspx", false);
-                }
-
+                negocio.agregar(aux);
                 Response.Redirect("Incidentes.aspx", false);
+
+                /*Acá mandaría el correo con el email del usuario*/
+                //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
+                //emailService.enviarCorreo();
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
+                //Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
+        }
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Incidentes.aspx", false);
         }
 
         protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,6 +120,11 @@ namespace TPC_equipo_20
         protected void dgvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
 
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Incidentes.aspx", false);
         }
     }
 }

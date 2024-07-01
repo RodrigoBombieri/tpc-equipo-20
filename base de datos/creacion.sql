@@ -76,10 +76,9 @@ Create Table Incidentes(
     IDPrioridad smallint not null foreign key references Prioridades(ID),
 	IDEstado smallint not null foreign key references Estados(ID),
 	IDCliente bigint not null foreign key references Clientes(ID),
-	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
+	IDUsuario bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) null,
 	FechaCreacion date not null,
-	FechaActualizacion date not null,
 	FechaCierre date null    
 )
 GO
@@ -170,13 +169,13 @@ select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com
 GO
 
 
-insert into Incidentes (IDTipo, IDPrioridad, IDEstado, IDCliente, UsuarioAsignado, UsuarioCreador, Detalle, FechaCreacion, FechaActualizacion, FechaCierre)
+insert into Incidentes (IDTipo, IDPrioridad, IDEstado, IDCliente, IDUsuario, Detalle, FechaCreacion, FechaCierre)
 values
-(1,2,3,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(3,1,2,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(4,3,1,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(5,2,3,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(1,4,4,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007')
+(1,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(3,1,2,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(4,3,1,3,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(5,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(1,4,4,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007')
 GO
 
 insert into TiposAcciones (Nombre)
