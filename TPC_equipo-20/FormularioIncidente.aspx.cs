@@ -11,12 +11,15 @@ namespace TPC_equipo_20
 {
     public partial class FormularioIncidente : System.Web.UI.Page
     {
+        public bool banderaCliente;
         protected void Page_Load(object sender, EventArgs e)
         {   
             try
             {
                 if (!IsPostBack)
                 {
+                    banderaCliente = false;
+                    Session["Cliente"] = null;
                     PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
                     List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
 
@@ -24,16 +27,7 @@ namespace TPC_equipo_20
                     ddlPrioridad.DataValueField = "Id";
                     ddlPrioridad.DataTextField = "Nombre";
                     ddlPrioridad.DataBind();
-                    ddlPrioridad.SelectedValue = "1";
-
-                    //EstadoNegocio EstadoNegocio = new EstadoNegocio();
-                    //List<Estado> listaEstados = EstadoNegocio.listar();
-
-                    //ddlEstado.DataSource = listaEstados;
-                    //ddlEstado.DataValueField = "Id";
-                    //ddlEstado.DataTextField = "Nombre";
-                    //ddlEstado.DataBind();
-                    //ddlEstado.SelectedValue = "1";
+                    //ddlPrioridad.SelectedValue = "1";
 
                     TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
                     List<TipoIncidente> listaTipos = TipoNegocio.listar();
@@ -42,80 +36,95 @@ namespace TPC_equipo_20
                     ddlTipo.DataValueField = "Id";
                     ddlTipo.DataTextField = "Nombre";
                     ddlTipo.DataBind();
-                    ddlTipo.SelectedValue = "1";
+                    //ddlTipo.SelectedValue = "1";
+
+                    dgvClientes.DataSource = null;
+                    dgvClientes.DataBind();
                 }
 
-                // En caso de que se haya pasado un id por querystring, se cargan los datos del incidente
+                // En caso de que se haya pasado un id por querystring, se cargan los datos del cliente
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
 
                 if (id != "" && !IsPostBack)
                 {
-                    IncidenteNegocio negocio = new IncidenteNegocio();
-                    Incidente aux = (negocio.listar(id))[0];
-
-                    txtDetalle.Text = aux.Detalle;
-                    //ddlEstado.SelectedValue = aux.Estado.Id.ToString();
-                    ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
-                    ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
+                    //buscar y mostrar
+                    ClienteNegocio clienteNegocio = new ClienteNegocio();
+                    List<Cliente> listaAux = clienteNegocio.listar(id);
+                    Cliente aux;
+                    if (listaAux.Count > 0)
+                    {
+                        aux = listaAux[0];
+                        lblNombreApellido.Text = aux.Nombre + " " + aux.Apellido;
+                        lblDocumento.Text = aux.Dni;
+                        //mostrar mas campos.
+                        Session["Cliente"] = aux;
+                        banderaCliente = true;
+                    }
+                    else
+                    {
+                        Session.Add("error", "Cliente no encontrado.");
+                        Response.Redirect("Error.aspx", false);
+                    }
                 }
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
-
-        protected void btnGuardar_Click(object sender, EventArgs e)
+        protected void btnGuardarIncidente_Click(object sender, EventArgs e)
         {
             try
             {
-                Incidente aux = new Incidente();
                 IncidenteNegocio negocio = new IncidenteNegocio();
+                Incidente aux = new Incidente();
                 EmailService emailService = new EmailService();
-                // falta usuario
-                //Usuario usuario = new Usuario();
-                //UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
-                aux.Detalle = txtDetalle.Text;
+                aux.Tipo = new TipoIncidente();
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
-                //aux.Estado.Id = short.Parse(ddlEstado.SelectedValue);
-                aux.Tipo = new TipoIncidente();
-                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue); 
-                
-                //usuario.Email = txtEmail.Text;
+                aux.Estado.Id = 1;
+                aux.Cliente = new Cliente();
+                aux.Cliente = (Cliente)Session["Cliente"];
+                aux.Detalle = txtDetalle.Text;
+                aux.UsuarioAsignado = new Usuario();
+                aux.UsuarioAsignado = (Usuario)Session["usuario"];
 
-                if (Request.QueryString["id"] != null)
-                {
-                    aux.Id = long.Parse(Request.QueryString["id"].ToString());
-                    negocio.modificar(aux);
-                }
-                else
-                {
-                    negocio.agregar(aux);
-                    /*Acá mandaría el correo con el email del usuario*/
-                    //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
-                    //emailService.enviarCorreo();
-                    //Response.Redirect("Incidentes.aspx", false);
-                }
-
+                negocio.agregar(aux);
                 Response.Redirect("Incidentes.aspx", false);
+
+                /*Acá mandaría el correo con el email del usuario*/
+                //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
+                //emailService.enviarCorreo();
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
+                //Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
-
-        protected void btnSeleccionCliente_Click(object sender, EventArgs e)
+        protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            //usamos Session para volver?
-            Response.Redirect("Clientes.aspx?var=1", false);
+            Response.Redirect("Incidentes.aspx", false);
+        }
+
+        protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void dgvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Incidentes.aspx", false);
         }
     }
 }
