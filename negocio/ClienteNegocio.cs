@@ -56,8 +56,30 @@ namespace negocio
                     aux.Domicilio.Provincia.Descripcion = (string)datos.Lector["Provincia"];
 
                     lista.Add(aux);
-                }
 
+                    /*datos.cerrarConexion();
+
+                    datos = new AccesoDatos();
+                    datos.setearConsulta("select i.id, i.IdCliente from incidentes i join estados e on e.id=i.IDEstado where e.nombre not in ('Cerrado','Resuelto')");
+                    datos.ejecutarLectura();
+                    while (datos.Lector.Read())
+                    {
+                        foreach (Cliente item in lista)
+                        {
+                            if (item.Id == (long)datos.Lector["IdCliente"])
+                            {
+                                Incidente inc = new Incidente();
+                                inc.Id = (long)datos.Lector["id"];
+                                if (item.Incidentes == null)
+                                {
+                                    item.Incidentes = new List<Incidente>();
+                                }
+                                item.Incidentes.Add(inc);
+                            }
+                        }
+                    }*/
+
+                }
                 return lista;
             }
             catch (Exception ex)

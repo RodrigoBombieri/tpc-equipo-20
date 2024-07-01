@@ -102,6 +102,12 @@
             <div class="col-md-1">
                 <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
             </div>
+            <div class="col-md-2">
+                <asp:Button ID="btnGuardarCrear" Text="Guardar y Crear incidente" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarCrear_Click" />
+            </div>
+            <div class="col-md-2" style="margin-left: 20px; margin-top: 5px;">
+                <a href="/ListadoClientes.aspx">Volver al listado</a>
+            </div>
             <%  }
                 else
                 {%>
@@ -111,11 +117,17 @@
             <div class="col-md-1">
                 <asp:Button ID="btnGuardarEdicion" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarEdicion_Click" />
             </div>
+            <div class="col-md-2">
+                <asp:Button ID="btnGuardarEdicionCrear" Text="Guardar y Crear incidente" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarEdicionCrear_Click" />
+            </div>
             <%}
-            else
-            { %>
+                else
+                { %>
             <div class="col-md-1">
                 <asp:Button ID="btnEditar" Text="Editar" CssClass="btn btn-primary" runat="server" OnClick="btnEditar_Click" AutoPostBack="false" />
+            </div>
+            <div class="col-md-2">
+                <asp:Button ID="CrearIncidente" Text="Crear incidente" CssClass="btn btn-primary" runat="server" OnClick="CrearIncidente_Click" />
             </div>
             <%    }%>
             <div class="col-md-1">
@@ -135,10 +147,10 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <%    }%>
             <div class="col-md-2">
                 <a href="/Clientes.aspx">Volver al listado</a>
             </div>
+            <%    }%>
         </div>
     </div>
 </asp:Content>
