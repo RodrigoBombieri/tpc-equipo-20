@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormularioIncidencia.aspx.cs" Inherits="TPC_equipo_20.FormularioIncidencia" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormularioIncidente.aspx.cs" Inherits="TPC_equipo_20.FormularioIncidente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -15,7 +15,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Incidencias </h1>
+    <h1>Incidentes </h1>
     <div class="row">
         <h2>Aca hay que replicar clientes para buscar y asignarle la incidencia......</h2>
     </div>
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-4">
                 <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
-                <a href="/Incidencias.aspx">Regresar</a>
+                <a href="/Incidentes.aspx">Regresar</a>
             </div>
         </div>
     </div>

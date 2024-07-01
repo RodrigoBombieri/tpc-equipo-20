@@ -11,142 +11,124 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class GestionIncidencia
+    public partial class Incidentes
     {
 
         /// <summary>
-        /// lblNumIncidencia control.
+        /// txtFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumIncidencia;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltro;
 
         /// <summary>
-        /// lblEstado control.
+        /// chkFiltroAvanzado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstado;
+        protected global::System.Web.UI.WebControls.CheckBox chkFiltroAvanzado;
 
         /// <summary>
-        /// lblVigencia control.
+        /// btnCrear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVigencia;
+        protected global::System.Web.UI.WebControls.Button btnCrear;
 
         /// <summary>
-        /// btnVolver control.
+        /// lblCampo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolver;
+        protected global::System.Web.UI.WebControls.Label lblCampo;
 
         /// <summary>
-        /// ddlTipo control.
+        /// ddlCampo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCampo;
 
         /// <summary>
-        /// ddlPrioridad control.
+        /// lblCriterio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
+        protected global::System.Web.UI.WebControls.Label lblCriterio;
 
         /// <summary>
-        /// lblCreado control.
+        /// ddlCriterio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCreado;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCriterio;
 
         /// <summary>
-        /// txtDetalle control.
+        /// lblFiltroAvanzado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDetalle;
+        protected global::System.Web.UI.WebControls.Label lblFiltroAvanzado;
 
         /// <summary>
-        /// lblNombreApellido control.
+        /// txtFiltroAvanzado control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzado;
 
         /// <summary>
-        /// lblDocumento control.
+        /// lblValidarFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDocumento;
+        protected global::System.Web.UI.WebControls.Label lblValidarFiltro;
 
         /// <summary>
-        /// ddlTipoAcciones control.
+        /// btnBuscar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAcciones;
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
-        /// txtDetalleAccion control.
+        /// BtnLimpiarFiltros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDetalleAccion;
+        protected global::System.Web.UI.WebControls.Button BtnLimpiarFiltros;
 
         /// <summary>
-        /// btnGuardarAccion control.
+        /// dgvIncidentes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardarAccion;
-
-        /// <summary>
-        /// dgvAcciones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvAcciones;
-
-        /// <summary>
-        /// btnRegresar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegresar;
+        protected global::System.Web.UI.WebControls.GridView dgvIncidentes;
     }
 }

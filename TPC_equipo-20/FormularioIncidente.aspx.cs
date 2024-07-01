@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace TPC_equipo_20
 {
-    public partial class FormularioIncidencia : System.Web.UI.Page
+    public partial class FormularioIncidente : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {   

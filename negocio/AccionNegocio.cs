@@ -13,12 +13,13 @@ namespace negocio
         {
             AccesoDatos datos = new AccesoDatos();
             List<Accion> lista = new List<Accion>();
-
             try
             {
                 datos.setearConsulta("Select A.ID, A.IDIncidente, A.Detalle, A.UsuarioCreador, A.IDtipo, A.FechaCreacion, TA.Nombre " +
                     "FROM Acciones A " +
-                    "inner join TiposAcciones TA on A.IDTipo = TA.ID");
+                    "inner join TiposAcciones TA on A.IDTipo = TA.ID " +
+                    "where A.IDIncidente = @id");
+                datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
