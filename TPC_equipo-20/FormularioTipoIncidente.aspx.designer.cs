@@ -11,7 +11,7 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class FormularioTipos
+    public partial class FormularioTipoIncidente
     {
 
         /// <summary>

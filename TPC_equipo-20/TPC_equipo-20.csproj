@@ -73,7 +73,7 @@
     <Content Include="FormularioEstado.aspx" />
     <Content Include="FormularioIncidente.aspx" />
     <Content Include="FormularioPrioridad.aspx" />
-    <Content Include="FormularioTipos.aspx" />
+    <Content Include="FormularioTipoIncidente.aspx" />
     <Content Include="FormularioUsuario.aspx" />
     <Content Include="GestionIncidencia.aspx" />
     <Content Include="Global.asax" />
@@ -157,12 +157,12 @@
     <Compile Include="FormularioPrioridad.aspx.designer.cs">
       <DependentUpon>FormularioPrioridad.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FormularioTipos.aspx.cs">
-      <DependentUpon>FormularioTipos.aspx</DependentUpon>
+    <Compile Include="FormularioTipoIncidente.aspx.cs">
+      <DependentUpon>FormularioTipoIncidente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioTipos.aspx.designer.cs">
-      <DependentUpon>FormularioTipos.aspx</DependentUpon>
+    <Compile Include="FormularioTipoIncidente.aspx.designer.cs">
+      <DependentUpon>FormularioTipoIncidente.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioUsuario.aspx.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
