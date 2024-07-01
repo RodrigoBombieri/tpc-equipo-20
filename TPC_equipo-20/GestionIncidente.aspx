@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="GestionIncidencia.aspx.cs" Inherits="TPC_equipo_20.GestionIncidencia" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="GestionIncidente.aspx.cs" Inherits="TPC_equipo_20.GestionIncidente" %>
+
 <%@ Register Src="~/ControlUsuarios.ascx" TagPrefix="uc" TagName="ControlUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -12,7 +13,7 @@
 
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
-            <asp:Label ID="lblNumIncidencia" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
+            <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
             <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
             <%--<asp:Label ID="lblTipo" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Tipo</asp:Label>--%>
@@ -35,8 +36,12 @@
                     <label id="lblPrioridad" class="form-label">Prioridad</label>
                     <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                 </div>
+                <div class="mb-3 text-end">
+                    <asp:Button ID="Button1" Text="Cancelar" CssClass="btn btn-danger" runat="server" />
+                    <asp:Button ID="Button2" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />
+                </div>
                 <div class="mb-3">
-                    <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>                    
+                    <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>
                 </div>
                 <div class="mb-3">
                     <label id="lblDetalle1" class="form-label">Detalle</label>
@@ -48,8 +53,8 @@
                     <label id="lblCliente" class="form-label"></label>
                 </div>
                 <div class="mb-3">
-                    <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>    
-                    <asp:Label ID="lblDocumento" class="form-label" runat="server"></asp:Label>    
+                    <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>
+                    <asp:Label ID="lblDocumento" class="form-label" runat="server"></asp:Label>
                 </div>
                 <div class="mb-3">
                     <label id="lblCliente2" class="form-label">Documento:</label>
@@ -66,10 +71,13 @@
                 <label id="lblDetalle" class="form-label">Detalle</label>
                 <asp:TextBox ID="txtDetalleAccion" TextMode="MultiLine" CssClass="form-control" runat="server" />
             </div>
-            <div class="mb-3 text-end">
-                <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-primary" runat="server" />
+            <div class="row" style="margin-top: 10px">
+                <div class="mb-3 text-end">
+                    <asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />
+                    <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />
+                </div>
             </div>
-            <div class="mb-3">                
+            <div class="mb-3">
                 <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
                     CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
                     AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
@@ -88,11 +96,5 @@
                 </asp:GridView>
             </div>
         </div>
-    </div>
-    <div class="row" style="margin-top: 10px">
-        <div class="col d-flex m-6">
-            <%--<asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />--%>
-            <asp:Button ID="btnRegresar" Text="Volver" CssClass="btn btn-primary" runat="server" />
-        </div>
-    </div>
+    </div>    
 </asp:Content>

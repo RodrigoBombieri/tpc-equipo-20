@@ -11,11 +11,11 @@ using System.Web.UI.WebControls;
 
 namespace TPC_equipo_20
 {
-    public partial class GestionIncidencia : System.Web.UI.Page
+    public partial class GestionIncidente : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblNumIncidencia.Text = "Incidencia Nº ?";
+            lblNumIncidente.Text = "Incidente Nº ?";
             try
             {
                 if (!IsPostBack)
@@ -46,7 +46,7 @@ namespace TPC_equipo_20
                     ddlTipoAcciones.DataValueField = "Id";
                     ddlTipoAcciones.DataTextField = "Nombre";
                     ddlTipoAcciones.DataBind();
-                    ddlTipoAcciones.SelectedValue = "-1";
+                    ddlTipoAcciones.SelectedIndex = -1;
                 }
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
 
@@ -61,7 +61,7 @@ namespace TPC_equipo_20
                         {
                             aux = listado[0];
 
-                            lblNumIncidencia.Text = "Incidencia Nº " + aux.Id;
+                            lblNumIncidente.Text = "Incidente Nº " + aux.Id;
                             txtDetalle.Text = aux.Detalle;
                             ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
                             ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
@@ -87,14 +87,14 @@ namespace TPC_equipo_20
                         }
                         else
                         {
-                            Session.Add("error", "Incidencia no encontrada222222." + id);
+                            Session.Add("error", "Incidente no encontrado222222." + id);
                             Response.Redirect("Error.aspx", false);
                         }
                     }
                 }
                 else
                 {
-                    Session.Add("error", "Incidencia no encontrada.");
+                    Session.Add("error", "Incidente no encontrado.");
                     Response.Redirect("Error.aspx", false);
                 }
             }

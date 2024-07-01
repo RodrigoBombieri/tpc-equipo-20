@@ -1,12 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Incidentes.aspx.cs" Inherits="TPC_equipo_20.Incidentes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<style>
-       
-    </style>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Incidencias </h1>
+    <div class="row  mb-3 border-bottom">
+        <div class="col-md-8 d-flex align-items-center">
+            <h1>Incidentes</h1>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-end">
+            <asp:Button ID="btnCrear" Text="Nuevo" CssClass="btn btn-info" runat="server" OnClick="btnCrear_Click"/>
+            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />
+        </div>
+    </div>
     <div class="row">
         <div class="col-4">
             <div class="mb-3">
@@ -18,9 +23,6 @@
             <div class="mb-3">
                 <asp:CheckBox ID="chkFiltroAvanzado" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
             </div>
-        </div>
-        <div class="col-4">
-            <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
         </div>
         <%if (chkFiltroAvanzado.Checked)
             //<%if (filtroAvanzado)
