@@ -29,6 +29,7 @@
             width: 350px;
             height: 90px;
             font-size: 50px;
+            margin-top: 20px;
         }
 
             .btnInicio:hover {

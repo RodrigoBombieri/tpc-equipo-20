@@ -8,7 +8,7 @@
 
             .custom-card .card-img-top {
                 object-fit: cover;
-                height: 200px;
+                height: 90px;
             }
         .custom-card:hover{
             /*Poner algún efecto cuando se posiciona el mouse sobre la card*/
