@@ -49,15 +49,11 @@ namespace TPC_equipo_20
                 {
                     //buscar y mostrar
                     ClienteNegocio clienteNegocio = new ClienteNegocio();
-                    List<Cliente> listaAux = clienteNegocio.listar(id);
-                    Cliente aux;
+                    List<Cliente> listaAux = clienteNegocio.listar(true,id);
                     if (listaAux.Count > 0)
                     {
-                        aux = listaAux[0];
-                        lblNombreApellido.Text = aux.Nombre + " " + aux.Apellido;
-                        lblDocumento.Text = aux.Dni;
-                        //mostrar mas campos.
-                        Session["Cliente"] = aux;
+                        cargarInfoCliente(listaAux[0]);                        
+                        Session["Cliente"] = listaAux[0];
                         banderaCliente = true;
                     }
                     else
@@ -103,7 +99,6 @@ namespace TPC_equipo_20
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
-                //Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
@@ -111,10 +106,36 @@ namespace TPC_equipo_20
         {
             Response.Redirect("Incidentes.aspx", false);
         }
-
+        protected void cargarInfoCliente(Cliente aux)
+        {
+            lblNombreApellido.Text = aux.Nombre + " " + aux.Apellido;
+            lblDocumento.Text = aux.Dni;
+            //mostrar mas campos.
+        }
         protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                var id = dgvClientes.SelectedDataKey.Value.ToString();
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                List<Cliente> listaAux = clienteNegocio.listar(true, id);
+                if (listaAux.Count > 0)
+                {
+                    cargarInfoCliente(listaAux[0]);
+                    Session["Cliente"] = listaAux[0];
+                    banderaCliente = true;
+                }
+                else
+                {
+                    Session.Add("error", "Error al seleccionar el cliente.");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void dgvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -125,6 +146,14 @@ namespace TPC_equipo_20
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Incidentes.aspx", false);
+        }
+
+        protected void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            List<Cliente> clientes = clienteNegocio.listar(false,txtFiltroCliente.Text);
+            dgvClientes.DataSource = clientes;
+            dgvClientes.DataBind();         
         }
     }
 }
