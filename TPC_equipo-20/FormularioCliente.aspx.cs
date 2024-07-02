@@ -65,6 +65,10 @@ namespace TPC_equipo_20
                         txtLocalidad.Text = aux.Domicilio.Localidad;
                         ddlProvincias.SelectedValue = aux.Domicilio.Provincia.Id.ToString();
                         txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
+
+                        Session.Add("listaIncidentesCliente", aux.Incidentes);
+                        dgvIncidentes.DataSource = Session["listaIncidentesCliente"];
+                        dgvIncidentes.DataBind();
                     }
                     else
                     {
@@ -317,6 +321,35 @@ namespace TPC_equipo_20
 
                 Session.Add("listaClientes", cliNeg.listar(true));
                 Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvIncidentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = dgvIncidentes.SelectedDataKey.Value.ToString();
+                Response.Redirect("GestionIncidente.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvIncidentes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                dgvIncidentes.DataSource = Session["listaIncidentesCliente"];
+                dgvIncidentes.PageIndex = e.NewPageIndex;
+                dgvIncidentes.DataBind();
             }
             catch (Exception ex)
             {
