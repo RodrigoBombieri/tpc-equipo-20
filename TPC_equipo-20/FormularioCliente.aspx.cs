@@ -94,7 +94,7 @@ namespace TPC_equipo_20
                     Cliente aux = temp.Find(x => x.Id == id);
                     ClienteNegocio negocio = new ClienteNegocio();
                     negocio.eliminar(aux);
-                    Session.Add("listaClientes", negocio.listar());
+                    Session.Add("listaClientes", negocio.listar(true));
                     Response.Redirect("Clientes.aspx", false);
                 }
             }
@@ -140,7 +140,7 @@ namespace TPC_equipo_20
 
                 cliNeg.agregar(aux);
 
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
@@ -206,7 +206,7 @@ namespace TPC_equipo_20
                 cliNeg.modificar(aux);
                 domNeg.modificar(dom);
 
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
@@ -252,7 +252,7 @@ namespace TPC_equipo_20
 
                 cliNeg.agregar(aux);
 
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 long id = cliNeg.buscarUltimo();
                 Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
             }
@@ -315,7 +315,7 @@ namespace TPC_equipo_20
                 cliNeg.modificar(aux);
                 domNeg.modificar(dom);
 
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
             }
             catch (Exception ex)

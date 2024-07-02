@@ -17,7 +17,7 @@ namespace TPC_equipo_20
             if (!IsPostBack)
             {
                 ClienteNegocio cliNeg = new ClienteNegocio();
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 dgvClientes.DataSource = Session["listaClientes"];
                 dgvClientes.DataBind();
             }
@@ -106,7 +106,7 @@ namespace TPC_equipo_20
 
                 if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
                 {
-                    dgvClientes.DataSource = negocio.listar();
+                    dgvClientes.DataSource = negocio.listar(true);
                 }
                 else
                 {

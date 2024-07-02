@@ -15,7 +15,6 @@ namespace TPC_equipo_20
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblNumIncidente.Text = "Incidente Nº ?";
             try
             {
                 if (!IsPostBack)
@@ -60,7 +59,7 @@ namespace TPC_equipo_20
                         if (listado.Count > 0)
                         {
                             aux = listado[0];
-
+                            Session["Incidente"] = listado[0];
                             lblNumIncidente.Text = "Incidente Nº " + aux.Id;
                             txtDetalle.Text = aux.Detalle;
                             ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
@@ -68,6 +67,7 @@ namespace TPC_equipo_20
                             lblCreado.Text = "Creado el día " + aux.FechaCreacion.ToString("D");
                             // "D" -> sábado, 8 de junio de 2024
                             // "d" -> 08/06/2024
+
                             //cliente
                             lblNombreApellido.Text = aux.Cliente.Nombre + " " + aux.Cliente.Apellido;
                             lblDocumento.Text = aux.Cliente.Dni;
@@ -82,7 +82,7 @@ namespace TPC_equipo_20
                             //lblEstado.CssClass = "badge rounded-pill text-bg-success large-badge";
 
                             AccionNegocio accionNegocio = new AccionNegocio();
-                            dgvAcciones.DataSource = accionNegocio.listar();//mandar id
+                            dgvAcciones.DataSource = accionNegocio.listar(aux.Id.ToString());
                             dgvAcciones.DataBind();
                         }
                         else
@@ -117,7 +117,37 @@ namespace TPC_equipo_20
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            //MiControl1.LabelText = "¡Has hecho clic en el botón en MiControl!";
+            Response.Redirect("Incidentes.aspx", false);
+        }
+
+        protected void btnModificarIncidente_Click(object sender, EventArgs e)
+        {
+            Incidente aux = new Incidente();
+            aux = (Incidente)Session["Incidente"];
+            if(aux.Tipo.Id  != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
+            {
+                IncidenteNegocio incidenteNegocio = new IncidenteNegocio();
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
+                aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
+                incidenteNegocio.modificar(aux);
+
+                Usuario user = new Usuario();
+                user = (Usuario)Session["usuario"];
+                Accion accionAux = new Accion();
+                accionAux.IDIncidente = aux.Id;
+                accionAux.IDUsuario = user.Id;
+                accionAux.Detalle = "Modificación tipo incidente y/o prioridad.";
+                accionAux.Tipo = new TipoAccion();
+                accionAux.Tipo.Id = 12;
+
+                AccionNegocio accionNegocio = new AccionNegocio();
+                accionNegocio.agregar(accionAux);
+            }
+        }
+
+        protected void btnGuardarAccion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

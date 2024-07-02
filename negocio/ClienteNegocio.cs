@@ -13,7 +13,7 @@ namespace negocio
 {
     public class ClienteNegocio
     {
-        public List<Cliente> listar(string id = "")
+        public List<Cliente> listar(bool band, string cadena = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Cliente> lista = new List<Cliente>();
@@ -22,11 +22,17 @@ namespace negocio
             {
                 string query = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
                     "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia";
-                if (id != "")
+                if (cadena != "" && band)
                 {
                     query += " where c.ID = @id";
-                    datos.setearParametro("@id", id);
+                    datos.setearParametro("@id", cadena);
+                }else if (cadena!="" && !band)
+                {
+                    
+                    query += " where c.Apellido like '%" + cadena + "%' or c.Nombre like '%" + cadena + "%' or c.Dni like '%" + cadena + "%'";
+                    //datos.setearParametro("@cadena", cadena);
                 }
+
                 datos.setearConsulta(query);
                 datos.ejecutarLectura();
 

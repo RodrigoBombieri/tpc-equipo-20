@@ -163,13 +163,13 @@ namespace negocio
             try
             {
                 datos.setearConsulta("UPDATE Incidentes SET IDTipo = @IdTipo, IDPrioridad = @IDPrioridad, IDEstado = @IDEstado," +
-                    " UsuarioAsignado = @UsuarioAsignado, UsuarioCreador = @UsuarioCreador, Detalle = @Detalle, " +
+                    " IDUsuario = @UsuarioAsignado, Detalle = @Detalle, " +
                     "FechaCreacion = @FechaCreacion, FechaCierre = @FechaCierre " +
                     "where ID = @id");
                 datos.setearParametro("@id", aux.Id);
-                datos.setearParametro("@IdTipo", aux.Tipo);
-                datos.setearParametro("@IDPrioridad", aux.Prioridad);
-                datos.setearParametro("@IDEstado", aux.Estado);
+                datos.setearParametro("@IdTipo", aux.Tipo.Id);
+                datos.setearParametro("@IDPrioridad", aux.Prioridad.Id);
+                datos.setearParametro("@IDEstado", aux.Estado.Id);
                 datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado.Id);
                 datos.setearParametro("@Detalle", aux.Detalle);
                 datos.setearParametro("@FechaCreacion", aux.FechaCreacion);

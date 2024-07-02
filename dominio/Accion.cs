@@ -10,9 +10,9 @@ namespace dominio
     {
         public long Id { get; set; }
         public long IDIncidente { get; set; }
-        public string Detalle { get; set; }
         public long IDUsuario { get; set; }
-        public TipoAccion Tipo { get; set; }
         public DateTime Fecha { get; set; }
+        public string Detalle { get; set; }
+        public TipoAccion Tipo { get; set; }
     }
 }
