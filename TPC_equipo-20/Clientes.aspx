@@ -69,8 +69,9 @@
                     <asp:BoundField HeaderText="Teléfono" DataField="Telefono1" />
                     <asp:BoundField HeaderText="Email" DataField="Email" />
                     <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
-                    <asp:CommandField ShowSelectButton="true" SelectText="Ver más" />
-                    <asp:ButtonField CommandName="nuevoIncidente" Text="Nuevo incidente" />
+                    <asp:BoundField HeaderText="Cantidad de incidentes" DataField="Incidentes.Count" />
+                    <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver más" />
+                    <asp:ButtonField CommandName="nuevoIncidente" ControlStyle-CssClass="btn btn-primary" Text="Crear incidente" />
                 </Columns>
             </asp:GridView>
         </div>

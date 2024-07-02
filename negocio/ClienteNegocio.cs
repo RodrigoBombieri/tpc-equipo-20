@@ -26,9 +26,10 @@ namespace negocio
                 {
                     query += " where c.ID = @id";
                     datos.setearParametro("@id", cadena);
-                }else if (cadena!="" && !band)
+                }
+                else if (cadena != "" && !band)
                 {
-                    
+
                     query += " where c.Apellido like '%" + cadena + "%' or c.Nombre like '%" + cadena + "%' or c.Dni like '%" + cadena + "%'";
                     //datos.setearParametro("@cadena", cadena);
                 }
@@ -68,29 +69,40 @@ namespace negocio
                     aux.Domicilio.Provincia.Descripcion = (string)datos.Lector["Provincia"];
 
                     lista.Add(aux);
-
-                    /*datos.cerrarConexion();
-
-                    datos = new AccesoDatos();
-                    datos.setearConsulta("select i.id, i.IdCliente from incidentes i join estados e on e.id=i.IDEstado where e.nombre not in ('Cerrado','Resuelto')");
-                    datos.ejecutarLectura();
-                    while (datos.Lector.Read())
+                }
+                datos.cerrarConexion();
+                datos = new AccesoDatos();
+                datos.setearConsulta("select i.ID, i.IDCliente, i.IdTipo, ti.Nombre as 'Tipo', i.IdEstado, e.Nombre as 'Estado', i.IdPrioridad, p.Nombre as 'Prioridad', i.IdUsuario, u.Nombre as 'NombreUsuario', u.Apellido as 'ApellidoUsuario'" +
+                    "from Incidentes i  join Estados e on e.id=i.IDEstado  join Prioridades p on p.id=i.idprioridad  join Usuarios u on u.id=i.IDUsuario join TiposIncidentes ti on ti.id=i.IDTipo");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    foreach (Cliente item in lista)
                     {
-                        foreach (Cliente item in lista)
+                        if (item.Id == (long)datos.Lector["IdCliente"])
                         {
-                            if (item.Id == (long)datos.Lector["IdCliente"])
+                            Incidente inc = new Incidente();
+                            inc.Id = (long)datos.Lector["id"];
+                            inc.Tipo = new TipoIncidente();
+                            inc.Tipo.Id = (short)datos.Lector["IdTipo"];
+                            inc.Tipo.Nombre = (string)datos.Lector["Tipo"];
+                            inc.Estado = new Estado();
+                            inc.Estado.Id = (short)datos.Lector["IdEstado"];
+                            inc.Estado.Nombre = (string)datos.Lector["Estado"];
+                            inc.Prioridad = new Prioridad();
+                            inc.Prioridad.Id = (short)datos.Lector["IdPrioridad"];
+                            inc.Prioridad.Nombre = (string)datos.Lector["Prioridad"];
+                            inc.UsuarioAsignado = new Usuario();
+                            inc.UsuarioAsignado.Id = (long)datos.Lector["IdUsuario"];
+                            inc.UsuarioAsignado.Nombre = (string)datos.Lector["NombreUsuario"];
+                            inc.UsuarioAsignado.Apellido = (string)datos.Lector["ApellidoUsuario"];
+                            if (item.Incidentes == null)
                             {
-                                Incidente inc = new Incidente();
-                                inc.Id = (long)datos.Lector["id"];
-                                if (item.Incidentes == null)
-                                {
-                                    item.Incidentes = new List<Incidente>();
-                                }
-                                item.Incidentes.Add(inc);
+                                item.Incidentes = new List<Incidente>();
                             }
+                            item.Incidentes.Add(inc);
                         }
-                    }*/
-
+                    }
                 }
                 return lista;
             }
