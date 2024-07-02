@@ -227,7 +227,152 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia " +
+                string consulta = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion, count(i.Id) as Incidentes " +
+                    "FROM Clientes c LEFT JOIN Incidentes i on i.IdCliente=c.Id ";
+
+                if (campo == "Nombre")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "c.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "c.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "c.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " group by c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion";
+                }
+                else if (campo == "Apellido")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "c.Apellido LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "c.Apellido LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "c.Apellido LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " group by c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion";
+                }
+                else if (campo == "Email")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "c.Email LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "c.Email LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "c.Email LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " group by c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion";
+                }
+                else if (campo == "Cantidad de incidentes")
+                {
+                    consulta += " group by c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion HAVING ";
+                    switch (criterio)
+                    {
+                        case "Igual a":
+                            consulta += "count(i.Id) = " + filtro + "";
+                            break;
+                        case "Mayor o igual a ":
+                            consulta += "count(i.Id) >= " + filtro + ""; 
+                            break;
+                        default:
+                            consulta += "count(i.Id) <= " + filtro + "";
+                            break;
+                    }
+                }
+                else
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "c.Dni LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "c.Dni LIKE '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "c.Dni LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " group by c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Email, c.FechaCreacion";
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Cliente aux = new Cliente();
+                    if (!(datos.Lector["ID"] is DBNull))
+                        aux.Id = (long)datos.Lector["ID"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Dni = (string)datos.Lector["Dni"];
+                    if (!(datos.Lector["Telefono1"] is DBNull))
+                        aux.Telefono1 = (string)datos.Lector["Telefono1"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
+                    list.Add(aux);
+                }
+                datos.cerrarConexion();
+                datos = new AccesoDatos();
+                datos.setearConsulta("select ID, IDCliente from Incidentes");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    foreach (Cliente item in list)
+                    {
+                        if (item.Id == (long)datos.Lector["IdCliente"])
+                        {
+                            Incidente inc = new Incidente();
+                            inc.Id = (long)datos.Lector["id"];
+                            if (item.Incidentes == null)
+                            {
+                                item.Incidentes = new List<Incidente>();
+                            }
+                            item.Incidentes.Add(inc);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        /*public List<Cliente> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Cliente> list = new List<Cliente>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT c.ID, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2, c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, pr.Nombre as Provincia" +
                     "FROM Clientes c JOIN Domicilios d ON d.Id = c.IDDomicilio JOIN Provincias pr ON pr.ID = d.IDProvincia AND ";
 
                 if (campo == "Nombre")
@@ -336,7 +481,7 @@ namespace negocio
                 throw ex;
             }
 
-        }
+        }*/
 
     }
 }
