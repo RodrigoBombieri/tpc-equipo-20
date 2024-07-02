@@ -106,7 +106,7 @@
                 <asp:Button ID="btnGuardarCrear" Text="Guardar y Crear incidente" CssClass="btn btn-primary" runat="server" OnClick="btnGuardarCrear_Click" />
             </div>
             <div class="col-md-2" style="margin-left: 20px; margin-top: 5px;">
-                <a href="/ListadoClientes.aspx">Volver al listado</a>
+                <a href="Clientes.aspx">Volver al listado</a>
             </div>
             <%  }
                 else
@@ -148,7 +148,7 @@
                 </asp:UpdatePanel>
             </div>
             <div class="col-md-2">
-                <a href="/Clientes.aspx">Volver al listado</a>
+                <a href="Clientes.aspx">Volver al listado</a>
             </div>
             <%    }%>
         </div>

@@ -389,6 +389,7 @@ namespace negocio
                     usuario.Nick = (string)datos.Lector["Nick"];
                     usuario.Telefono = (string)datos.Lector["Telefono"];
                     usuario.Dni = (string)datos.Lector["Dni"];
+                    usuario.Password = pass;
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
                     usuario.Rol = new Rol();

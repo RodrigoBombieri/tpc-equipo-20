@@ -17,7 +17,7 @@ namespace negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("callcenterprogra2024@gmail.com", "ydob oiju oood ynyo");
+            server.Credentials = new NetworkCredential("callcenterprogra2024@gmail.com", "wrwj ybdf yduf teyx");
             server.EnableSsl = true;
             server.Port = 587;
             server.Host = "smtp.gmail.com";
@@ -26,7 +26,7 @@ namespace negocio
         public void armarCorreo(string destinatario, string asunto, string cuerpo)
         {
             email = new MailMessage();
-            email.From = new MailAddress("");
+            email.From = new MailAddress("callcenterprogra2024@gmail.com");
             email.To.Add(destinatario);
             email.Subject = asunto;
             email.IsBodyHtml = true;

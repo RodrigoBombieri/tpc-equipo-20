@@ -77,7 +77,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <asp:Button ID="btnCrear" Text="Crear Nuevo" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
+            <asp:Button ID="btnCrear" Text="Crear Nuevo" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click">
+            </asp:Button>
         </div>
     </div>
 </asp:Content>
