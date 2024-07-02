@@ -19,7 +19,7 @@
                 showModal();
                 return false;
             }
-            return true;       
+            return true;
         }
         // Función para mostrar el modal
         function showModal() {
@@ -27,28 +27,23 @@
             modal.show();
         }
     </script>
-        <!-- Modal -->
-        <div class="modal fade" id="detalleRequerido" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="ModalLabel">Campo requerido</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        Ingrese el detalle para continuar.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="detalleRequerido" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModalLabel">Campo requerido</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    Ingrese el detalle para continuar.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
-   
-
-
-
-
+    </div>
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
             <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
@@ -59,14 +54,16 @@
             <%if (banderaReabrirCaso)
                 {
             %>
-            <asp:Button ID="btnReabrir" Text="Re-abrir" CssClass="btn btn-primary me-2" runat="server" OnClick="btnReabrir_Click" />
+            <asp:Button ID="btnReabrir" Text="Re-abrir" CssClass="btn btn-primary me-2" runat="server" 
+                OnClick="btnReabrir_Click" OnClientClick="return handleClick();" />
             <%}
                 else
                 {%>
 
-            <asp:Button ID="btnCerrar" Text="Cerrar incidente" CssClass="btn btn-primary me-2" runat="server" OnClick="btnCerrar_Click" />
-            <asp:Button ID="btnResolver" Text="Resolver incidente" CssClass="btn btn-primary me-2" runat="server" 
-                OnClick="btnResolver_Click" OnClientClick="return handleClick();"/>
+            <asp:Button ID="btnCerrar" Text="Cerrar incidente" CssClass="btn btn-primary me-2" runat="server" 
+                OnClick="btnCerrar_Click" OnClientClick="return handleClick();" />
+            <asp:Button ID="btnResolver" Text="Resolver incidente" CssClass="btn btn-primary me-2" runat="server"
+                OnClick="btnResolver_Click" OnClientClick="return handleClick();" />
             <%} %>
             <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
         </div>

@@ -29,7 +29,7 @@ Create Table Clientes(
 	Telefono2 varchar(30) null,
 	Email varchar(50) not null unique,
 	FechaNacimiento date not null,
-	FechaCreacion date not null
+	FechaCreacion datetime not null
 )
 Go
 Create Table Roles(
@@ -67,7 +67,8 @@ Create Table TiposIncidentes(
 Go
 Create Table TiposAcciones(
     ID smallint not null primary key identity (1, 1),
-    Nombre varchar(100) not null
+    Nombre varchar(100) not null,
+	Automatico bit not null
 )
 Go
 Create Table Incidentes(
@@ -78,15 +79,15 @@ Create Table Incidentes(
 	IDCliente bigint not null foreign key references Clientes(ID),
 	IDUsuario bigint not null foreign key references Usuarios(ID),
 	Detalle varchar (200) null,
-	FechaCreacion date not null,
-	FechaCierre date null    
+	FechaCreacion datetime not null,
+	FechaCierre datetime null    
 )
 GO
 Create Table Acciones(
     ID bigint not null primary key identity (1, 1),
 	IDIncidente bigint not null foreign key references Incidentes(ID),
 	IDUsuario bigint not null foreign key references Usuarios(ID),
-	Fecha date not null,
+	Fecha datetime not null,
     Detalle varchar(200) null,
 	IDTipo smallint not null foreign key references TiposAcciones(ID),
 )
@@ -163,34 +164,34 @@ insert into DOMICILIOS (IDProvincia, Calle, Numero, Piso, Departamento, Localida
 GO
 
 insert into CLIENTES (IDDomicilio, Nombre, Apellido, Dni, Telefono1, Email, FechaNacimiento, FechaCreacion)
-select 1, 'Franco', 'Cataldo', '37719580', '223-4374184', 'francocataldo7@gmail.com', '1992-10-12', '2024-06-08' UNION
-select 2, 'Florencia', 'Cataldo', '1111111', '223-6332691', 'florenciacataldo@gmail.com', '1994-07-03', '2024-06-08' UNION
-select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com', '1956-07-04', '2024-06-08'
+select 1, 'Franco', 'Cataldo', '37719580', '223-4374184', 'francocataldo7@gmail.com', '1992-10-12', '2024-06-08 21:13:30.007' UNION
+select 2, 'Florencia', 'Cataldo', '1111111', '223-6332691', 'florenciacataldo@gmail.com', '1994-07-03', '2024-06-08 21:13:30.007' UNION
+select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com', '1956-07-04', '2024-06-08 21:13:30.007'
 GO
 
 
-insert into Incidentes (IDTipo, IDPrioridad, IDEstado, IDCliente, IDUsuario, Detalle, FechaCreacion, FechaCierre)
+insert into Incidentes (IDTipo, IDPrioridad, IDEstado, IDCliente, IDUsuario, Detalle, FechaCreacion)
 values
-(1,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(3,1,2,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(4,3,1,3,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(5,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(1,4,4,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007')
+(1,2,3,1,1,'Hola', '2024-07-02 17:07:14.733'),
+(3,1,2,2,1,'Hola', '2024-07-02 17:07:14.733'),
+(4,3,1,3,1,'Hola', '2024-07-02 17:07:14.733'),
+(5,2,3,1,1,'Hola', '2024-07-02 17:07:14.733'),
+(1,4,4,2,1,'Hola', '2024-07-02 17:07:14.733')
 GO
 
-insert into TiposAcciones (Nombre)
+insert into TiposAcciones (Nombre, Automatico)
 values
-(''),
-('Alta de incidente'),
-('Cierre de incidente'),
-('Resolución de incidente'),
-('Reapertura de incidente'),
-('Reasignación de usuario'),
-('Contacto del cliente'),
-('Contacto del telefonista'),
-('Cambio de instrumento de cobro'),
-('Seguimiento'),
-('Visita del servicio técnico'),
-('Cambio de prioridad/tipo'),
-('Otro')
+('',0),
+('Alta de incidente',1),
+('Cierre de incidente',1),
+('Resolución de incidente',1),
+('Reapertura de incidente',1),
+('Reasignación de usuario',0),
+('Contacto del cliente',0),
+('Contacto del telefonista',0),
+('Cambio de instrumento de cobro',0),
+('Seguimiento',0),
+('Visita del servicio técnico',0),
+('Cambio de prioridad/tipo',1),
+('Otro',0)
 GO
