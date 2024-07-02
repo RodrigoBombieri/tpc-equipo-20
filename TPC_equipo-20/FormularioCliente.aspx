@@ -6,6 +6,7 @@
     <div class="container">
         <hr>
         <div class="row">
+            <h3>Datos Personales </h3>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label id="lblNombre" class="form-label">Nombre</label>
@@ -50,6 +51,7 @@
                 </div>
             </div>
         </div>
+        <hr>
         <div class="row">
             <h3>Domicilio </h3>
             <div class="col-md-6">
@@ -96,9 +98,39 @@
                 </div>
             </div>
         </div>
+        <%if (Request.QueryString["id"] != null)
+            {%>
+        <hr>
+        <div class="row">
+            <h3>Incidentes </h3>
+            <div class="col">
+                <asp:GridView runat="server" ID="dgvIncidentes" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
+                    AllowPaging="true" PageSize="5">
+                    <Columns>
+                        <asp:BoundField HeaderText="Id" DataField="Id" />
+                        <asp:BoundField HeaderText="Fecha de Creación" DataField="FechaCreacion" />
+                        <asp:BoundField HeaderText="Tipo" DataField="Tipo.Nombre" />
+                        <asp:BoundField HeaderText="Prioridad" DataField="Prioridad.Nombre" />
+                        <asp:BoundField HeaderText="Estado" DataField="Estado.Nombre" />
+                        <asp:BoundField DataField="UsuarioAsignado.Nombre" />
+                        <asp:BoundField DataField="UsuarioAsignado.Apellido" />
+                        <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver más" />
+                    </Columns>
+                    <EmptyDataTemplate>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td colspan="2" style="text-align: center;">No hay incidentes para mostrar.</td>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </div>
+        </div>
+        <%  }      %>
         <div class="row">
             <%if (Request.QueryString["id"] == null)
                 {%>
+
             <div class="col-md-1">
                 <asp:Button ID="btnGuardar" Text="Guardar" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
             </div>
