@@ -46,6 +46,7 @@ namespace TPC_equipo_20
                     txtEmail.Text = usuario.Email;
                     ddlRoles.SelectedValue = usuario.Rol.Id.ToString();
                     txtPassword.Text = usuario.Password;
+                    
                 }
             }
 			catch (Exception ex)

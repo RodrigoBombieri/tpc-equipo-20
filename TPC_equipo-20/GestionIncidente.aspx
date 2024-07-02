@@ -10,6 +10,44 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script type="text/javascript">
+        // Función para manejar el clic del botón y cancelar el postback
+        function handleClick() {
+            var textBoxValue = document.getElementById('<%= txtDetalleAccion.ClientID %>').value.trim();
+            //alert(textBoxValue);
+            if (textBoxValue === '') {
+                showModal();
+                return false;
+            }
+            return true;       
+        }
+        // Función para mostrar el modal
+        function showModal() {
+            var modal = new bootstrap.Modal(document.getElementById('detalleRequerido'));
+            modal.show();
+        }
+    </script>
+        <!-- Modal -->
+        <div class="modal fade" id="detalleRequerido" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel">Campo requerido</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        Ingrese el detalle para continuar.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+
+
 
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
@@ -18,8 +56,18 @@
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <%--<asp:Button ID="btnCerrar" Text="Cerrar" CssClass="btn btn-primary me-2" runat="server" />
-            <asp:Button ID="btnResolver" Text="Resolver" CssClass="btn btn-primary me-2" runat="server" />--%>
+            <%if (banderaReabrirCaso)
+                {
+            %>
+            <asp:Button ID="btnReabrir" Text="Re-abrir" CssClass="btn btn-primary me-2" runat="server" OnClick="btnReabrir_Click" />
+            <%}
+                else
+                {%>
+
+            <asp:Button ID="btnCerrar" Text="Cerrar incidente" CssClass="btn btn-primary me-2" runat="server" OnClick="btnCerrar_Click" />
+            <asp:Button ID="btnResolver" Text="Resolver incidente" CssClass="btn btn-primary me-2" runat="server" 
+                OnClick="btnResolver_Click" OnClientClick="return handleClick();"/>
+            <%} %>
             <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
@@ -66,7 +114,7 @@
         <div class="col-md-6 border mb-4">
             <div class="mb-3">
                 <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
-                <asp:DropDownList ID="ddlTipoAcciones" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlTipoAccion" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
             </div>
             <div class="mb-3">
                 <label id="lblDetalle" class="form-label">Detalle</label>
@@ -97,5 +145,5 @@
                 </asp:GridView>
             </div>
         </div>
-    </div>    
+    </div>
 </asp:Content>

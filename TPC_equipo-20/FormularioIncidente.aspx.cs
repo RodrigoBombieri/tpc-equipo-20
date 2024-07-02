@@ -82,7 +82,7 @@ namespace TPC_equipo_20
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
-                aux.Estado.Id = 1;
+                aux.Estado.Id = 1;//abierto
                 aux.Cliente = new Cliente();
                 aux.Cliente = (Cliente)Session["Cliente"];
                 aux.Detalle = txtDetalle.Text;
