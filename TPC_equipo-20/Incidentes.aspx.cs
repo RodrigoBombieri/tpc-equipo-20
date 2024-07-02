@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace TPC_equipo_20
 {
-    public partial class Incidencias : System.Web.UI.Page
+    public partial class Incidentes : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,11 +27,10 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvIncidentes.SelectedDataKey.Value.ToString();
-                Response.Redirect("FormularioIncidencia.aspx?id=" + id, false);
+                Response.Redirect("GestionIncidente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {
-
                 Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
@@ -55,7 +54,7 @@ namespace TPC_equipo_20
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FormularioIncidencia.aspx");
+            Response.Redirect("FormularioIncidente.aspx");
         }
         protected void chkFiltroAvanzado_CheckedChanged(object sender, EventArgs e)
         {

@@ -9,7 +9,7 @@ using dominio;
 
 namespace TPC_equipo_20
 {
-    public partial class ListadoClientes : System.Web.UI.Page
+    public partial class Clientes : System.Web.UI.Page
     {
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
@@ -17,7 +17,7 @@ namespace TPC_equipo_20
             if (!IsPostBack)
             {
                 ClienteNegocio cliNeg = new ClienteNegocio();
-                Session.Add("listaClientes", cliNeg.listar());
+                Session.Add("listaClientes", cliNeg.listar(true));
                 dgvClientes.DataSource = Session["listaClientes"];
                 dgvClientes.DataBind();
             }
@@ -28,11 +28,10 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvClientes.SelectedDataKey.Value.ToString();
-                Response.Redirect("DetalleCliente.aspx?id=" + id, false);
+                Response.Redirect("FormularioCliente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {
-
                 Session.Add("Error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
@@ -64,7 +63,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -92,11 +90,9 @@ namespace TPC_equipo_20
                 ddlCriterio.Items.Add("Contiene");
                 ddlCriterio.Items.Add("Empieza con");
                 ddlCriterio.Items.Add("Termina con");
-
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -110,7 +106,7 @@ namespace TPC_equipo_20
 
                 if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
                 {
-                    dgvClientes.DataSource = negocio.listar();
+                    dgvClientes.DataSource = negocio.listar(true);
                 }
                 else
                 {
@@ -130,23 +126,20 @@ namespace TPC_equipo_20
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DetalleCliente.aspx");
+            Response.Redirect("FormularioCliente.aspx");
         }
 
-        protected void dgvClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void dgvClientes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
-                long id = long.Parse(dgvClientes.DataKeys[e.RowIndex].Value.ToString());
-                //long id = long.Parse(dgvClientes.SelectedDataKey.Value.ToString());
-                List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
-                Cliente aux = temp.Find(x => x.Id == id);
-                ClienteNegocio negocio = new ClienteNegocio();
-                negocio.eliminar(aux);
-                Session.Add("listaClientes", negocio.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                if (e.CommandName == "nuevoIncidente")
+                {
+                    int rowNum = int.Parse(e.CommandArgument.ToString());
+                    var id = dgvClientes.DataKeys[rowNum].Value.ToString();
+                    Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+                }
             }
-
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);

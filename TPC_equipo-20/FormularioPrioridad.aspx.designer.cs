@@ -11,7 +11,7 @@ namespace TPC_equipo_20
 {
 
 
-    public partial class FormularioPrioridades
+    public partial class FormularioPrioridad
     {
 
         /// <summary>

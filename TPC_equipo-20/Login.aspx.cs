@@ -32,7 +32,8 @@ namespace TPC_equipo_20
                 usuario.Email = txtEmail.Text;
                 usuario.Password = txtPassword.Text;
 
-                if (negocio.login(usuario))
+                usuario = negocio.login(txtEmail.Text, txtPassword.Text);
+                if (usuario != null)
                 {
                     Session.Add("usuario", usuario);
                     Response.Redirect("MiPerfil.aspx", false);
@@ -42,6 +43,18 @@ namespace TPC_equipo_20
                     Session.Add("error", "Usuario o contraseña incorrectos");
                     Response.Redirect("Error.aspx", false);
                 }
+
+
+                //if (negocio.login(usuario))
+                //{
+                //    Session.Add("usuario", usuario);
+                //    Response.Redirect("MiPerfil.aspx", false);
+                //}
+                //else
+                //{
+                //    Session.Add("error", "Usuario o contraseña incorrectos");
+                //    Response.Redirect("Error.aspx", false);
+                //}
             }
             catch (Exception ex)
             {

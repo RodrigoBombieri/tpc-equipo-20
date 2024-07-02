@@ -9,7 +9,7 @@ using negocio;
 
 namespace TPC_equipo_20
 {
-    public partial class DetalleCliente : System.Web.UI.Page
+    public partial class FormularioCliente : System.Web.UI.Page
     {
         public bool confirmaEliminar { get; set; }
 
@@ -94,8 +94,8 @@ namespace TPC_equipo_20
                     Cliente aux = temp.Find(x => x.Id == id);
                     ClienteNegocio negocio = new ClienteNegocio();
                     negocio.eliminar(aux);
-                    Session.Add("listaClientes", negocio.listar());
-                    Response.Redirect("ListadoClientes.aspx", false);
+                    Session.Add("listaClientes", negocio.listar(true));
+                    Response.Redirect("Clientes.aspx", false);
                 }
             }
             catch (Exception ex)
@@ -140,15 +140,14 @@ namespace TPC_equipo_20
 
                 cliNeg.agregar(aux);
 
-                Session.Add("listaClientes", cliNeg.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                Session.Add("listaClientes", cliNeg.listar(true));
+                Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
-
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
@@ -207,8 +206,8 @@ namespace TPC_equipo_20
                 cliNeg.modificar(aux);
                 domNeg.modificar(dom);
 
-                Session.Add("listaClientes", cliNeg.listar());
-                Response.Redirect("ListadoClientes.aspx", false);
+                Session.Add("listaClientes", cliNeg.listar(true));
+                Response.Redirect("Clientes.aspx", false);
             }
             catch (Exception ex)
             {
@@ -216,6 +215,114 @@ namespace TPC_equipo_20
                 Response.Redirect("Error.aspx", false);
             }
 
+        }
+
+        protected void btnGuardarCrear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+                Domicilio auxDom = new Domicilio();
+                DomicilioNegocio domNeg = new DomicilioNegocio();
+                auxDom.Calle = txtCalle.Text;
+                auxDom.Numero = txtNumero.Text;
+                auxDom.Piso = txtPiso.Text;
+                auxDom.Departamento = txtDepartamento.Text;
+                auxDom.Observaciones = txtObservaciones.Text;
+                auxDom.Localidad = txtLocalidad.Text;
+                auxDom.Provincia = new Provincia();
+                auxDom.Provincia.Id = short.Parse(ddlProvincias.SelectedValue);
+                auxDom.CodigoPostal = txtCodigoPostal.Text;
+                domNeg.agregar(auxDom);
+
+                Cliente aux = new Cliente();
+                ClienteNegocio cliNeg = new ClienteNegocio();
+                aux.Nombre = txtNombre.Text;
+                aux.Apellido = txtApellido.Text;
+                aux.Dni = txtDni.Text;
+                aux.Email = txtEmail.Text;
+                aux.Telefono1 = txtTelefono1.Text;
+                aux.Telefono2 = txtTelefono2.Text;
+                aux.Domicilio = new Domicilio();
+                aux.Domicilio.Id = domNeg.buscarUltimo();
+                aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                aux.FechaCreacion = DateTime.Parse(txtFechaCreacion.Text);
+
+                cliNeg.agregar(aux);
+
+                Session.Add("listaClientes", cliNeg.listar(true));
+                long id = cliNeg.buscarUltimo();
+                Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+
+        }
+
+
+        protected void CrearIncidente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long id = long.Parse(Request.QueryString["id"].ToString());
+                Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+
+        }
+
+        protected void btnGuardarEdicionCrear_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+                long id = long.Parse(Request.QueryString["id"].ToString());
+                List<Cliente> temp = (List<Cliente>)Session["listaClientes"];
+                Cliente aux = temp.Find(x => x.Id == id);
+
+                aux.Nombre = txtNombre.Text;
+                aux.Apellido = txtApellido.Text;
+                aux.Dni = txtDni.Text;
+                aux.Email = txtEmail.Text;
+                aux.Telefono1 = txtTelefono1.Text;
+                aux.Telefono2 = txtTelefono2.Text;
+                aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
+                aux.Domicilio.Calle = txtCalle.Text;
+                aux.Domicilio.Numero = txtNumero.Text;
+                aux.Domicilio.Piso = txtPiso.Text;
+                aux.Domicilio.Departamento = txtDepartamento.Text;
+                aux.Domicilio.Observaciones = txtObservaciones.Text;
+                aux.Domicilio.Localidad = txtLocalidad.Text;
+                aux.Domicilio.CodigoPostal = txtCodigoPostal.Text;
+                aux.Domicilio.Provincia.Id = short.Parse(ddlProvincias.SelectedValue);
+
+                ClienteNegocio cliNeg = new ClienteNegocio();
+                DomicilioNegocio domNeg = new DomicilioNegocio();
+
+                Domicilio dom = aux.Domicilio;
+
+                cliNeg.modificar(aux);
+                domNeg.modificar(dom);
+
+                Session.Add("listaClientes", cliNeg.listar(true));
+                Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

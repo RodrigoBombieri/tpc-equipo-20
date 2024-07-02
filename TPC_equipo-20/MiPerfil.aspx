@@ -1,18 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="TPC_equipo_20.MiPerfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <%--<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
+    <style>
+        .mb-3{
+            margin: -10px;
         }
 
-        .container {
-            height: 81.6vh;
-        }
-    </style>--%>
+        
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -64,12 +59,12 @@
                 </div>
                 <div class="mb-3">
                     <label id="lblPassword" class="form-label">Contraseña</label>
-                    <asp:TextBox ID="txtPassword" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtPassword" TextMode="Password" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una contraseña" ControlToValidate="txtPassword" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <div class="mb-3">
                     <label id="lblConfirmPassword" class="form-label">Confirmar Contraseña</label>
-                    <asp:TextBox ID="txtConfirmPassword" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtConfirmPassword" TextMode="Password" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe confirmar la contraseña" ControlToValidate="txtConfirmPassword" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
                 <asp:Label ID="lblError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
@@ -85,7 +80,7 @@
         <div class="row">
             <div class="col-md-4">
                 <asp:Button ID="btnGuardar" Text="Guardar cambios" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
-                <a href="/">Regresar</a>
+                <a href="/" class="btn btn-danger">Regresar</a>
             </div>
         </div>
     </div>

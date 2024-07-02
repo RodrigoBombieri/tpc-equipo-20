@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accion.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Domicilio.cs" />
     <Compile Include="Estado.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="TipoAccion.cs" />
     <Compile Include="TipoIncidente.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

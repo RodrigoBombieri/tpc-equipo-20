@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="ListadoClientes.aspx.cs" Inherits="TPC_equipo_20.ListadoClientes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Clientes.aspx.cs" Inherits="TPC_equipo_20.Clientes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -48,19 +48,19 @@
                 </div>
             </div>
         </div>
-                <div class="row">
-                    <div class="col-3">
+        <div class="row">
+            <div class="col-3">
                 <div class="mb-3">
                     <asp:Label ID="lblBtnBuscar" runat="server"></asp:Label>
                     <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" Text="Buscar" />
                 </div>
             </div>
-                                </div>
+        </div>
         <% } %>
     </div>
     <div class="row">
         <div class="col">
-            <asp:GridView runat="server" ID="dgvClientes" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged" OnRowDeleting="dgvClientes_RowDeleting" OnPageIndexChanging="dgvClientes_PageIndexChanging"
+            <asp:GridView runat="server" ID="dgvClientes" CssClass="table" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged" OnRowCommand="dgvClientes_RowCommand" OnPageIndexChanging="dgvClientes_PageIndexChanging"
                 AllowPaging="true" PageSize="20">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -70,7 +70,7 @@
                     <asp:BoundField HeaderText="Email" DataField="Email" />
                     <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
                     <asp:CommandField ShowSelectButton="true" SelectText="Ver más" />
-                    <asp:CommandField ShowDeleteButton="true" SelectText="Eliminar" />
+                    <asp:ButtonField CommandName="nuevoIncidente" Text="Nuevo incidente" />
                 </Columns>
             </asp:GridView>
         </div>

@@ -24,7 +24,7 @@ namespace TPC_equipo_20
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FormularioTipos.aspx");
+            Response.Redirect("FormularioTipoIncidente.aspx");
         }
 
         protected void dgvTipos_SelectedIndexChanged(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvTipos.SelectedDataKey.Value.ToString();
-                Response.Redirect("FormularioTipos.aspx?id=" + id, false);
+                Response.Redirect("FormularioTipoIncidente.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {

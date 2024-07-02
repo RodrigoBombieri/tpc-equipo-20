@@ -75,9 +75,9 @@ Create Table Incidentes(
     IDTipo smallint not null foreign key references TiposIncidentes(ID),
     IDPrioridad smallint not null foreign key references Prioridades(ID),
 	IDEstado smallint not null foreign key references Estados(ID),
-	UsuarioAsignado bigint not null foreign key references Usuarios(ID),
-	UsuarioCreador bigint not null foreign key references Usuarios(ID),
-	Detalle varchar (200) not null,
+	IDCliente bigint not null foreign key references Clientes(ID),
+	IDUsuario bigint not null foreign key references Usuarios(ID),
+	Detalle varchar (200) null,
 	FechaCreacion date not null,
 	FechaCierre date null    
 )
@@ -85,9 +85,9 @@ GO
 Create Table Acciones(
     ID bigint not null primary key identity (1, 1),
 	IDIncidente bigint not null foreign key references Incidentes(ID),
-	Usuario bigint not null foreign key references Usuarios(ID),
-	FechaCreacion date not null,   
-    Detalle varchar(200) not null,
+	IDUsuario bigint not null foreign key references Usuarios(ID),
+	Fecha date not null,
+    Detalle varchar(200) null,
 	IDTipo smallint not null foreign key references TiposAcciones(ID),
 )
 GO
@@ -108,6 +108,7 @@ select 'Resuelto'
 GO
 
 insert into PRIORIDADES (Nombre)
+select '' UNION
 select 'Urgente' UNION
 select 'Alta' UNION
 select 'Media' UNION
@@ -115,6 +116,7 @@ select 'Baja'
 GO
 
 insert into TIPOSINCIDENTES (Nombre)
+select '' UNION
 select 'Producto dañado' UNION
 select 'Problema en el cobro' UNION
 select 'Entrega ok' UNION
@@ -167,12 +169,28 @@ select 3, 'Nilda', 'Cataldo', '22222222', '223-5046121', 'nildacataldo@gmail.com
 GO
 
 
-insert into Incidentes (IDTipo, IDPrioridad, IDEstado, UsuarioAsignado, UsuarioCreador, Detalle,	FechaCreacion, FechaCierre)
+insert into Incidentes (IDTipo, IDPrioridad, IDEstado, IDCliente, IDUsuario, Detalle, FechaCreacion, FechaCierre)
 values
 (1,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(3,1,2,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(4,3,1,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(3,1,2,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
+(4,3,1,3,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
 (5,2,3,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007'),
-(1,4,4,1,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007');
+(1,4,4,2,1,'Hola', '2024-06-16 21:13:30.007', '2024-06-16 21:13:30.007')
+GO
 
-
+insert into TiposAcciones (Nombre)
+values
+(''),
+('Alta de incidente'),
+('Cierre de incidente'),
+('Resolución de incidente'),
+('Reapertura de incidente'),
+('Reasignación de usuario'),
+('Contacto del cliente'),
+('Contacto del telefonista'),
+('Cambio de instrumento de cobro'),
+('Seguimiento'),
+('Visita del servicio técnico'),
+('Cambio de prioridad/tipo'),
+('Otro')
+GO

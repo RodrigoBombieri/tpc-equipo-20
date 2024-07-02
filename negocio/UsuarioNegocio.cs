@@ -365,14 +365,18 @@ namespace negocio
             }
         }
 
-        public bool login(Usuario usuario)
+        public Usuario login(string email, string pass)
         {
             AccesoDatos datos = new AccesoDatos();
+            Usuario usuario = new Usuario();
             try
             {
-                datos.setearConsulta("SELECT U.ID, U.Nombre, Apellido, Email, Nick, Telefono, Dni, urlImagenPerfil, IDRol, R.ID AS RolID, R.Nombre AS RolNombre FROM USUARIOS U INNER JOIN ROLES R ON U.IDRol = R.ID Where Email = @Email AND Pass = @Password");
-                datos.setearParametro("@Email", usuario.Email);
-                datos.setearParametro("@Password", usuario.Password);
+                datos.setearConsulta("SELECT U.ID, U.Nombre, Apellido, Email, Nick, Telefono, " + 
+                "Dni, urlImagenPerfil, IDRol, R.ID AS RolID, R.Nombre AS RolNombre " + 
+                "FROM USUARIOS U " +
+                "INNER JOIN ROLES R ON U.IDRol = R.ID Where Email = @Email AND Pass = @Password");
+                datos.setearParametro("@Email", email);
+                datos.setearParametro("@Password", pass);
                 datos.ejecutarLectura();
                 if (datos.Lector.Read())
                 {
@@ -390,11 +394,11 @@ namespace negocio
                     usuario.Rol = new Rol();
                     usuario.Rol.Id = (short)datos.Lector["RolID"];
                     usuario.Rol.Descripcion = (string)datos.Lector["RolNombre"];
-                    return true;
+                    return usuario;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch (Exception ex)

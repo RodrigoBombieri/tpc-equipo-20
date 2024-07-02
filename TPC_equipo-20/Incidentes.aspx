@@ -1,21 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Incidencias.aspx.cs" Inherits="TPC_equipo_20.Incidencias" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Incidentes.aspx.cs" Inherits="TPC_equipo_20.Incidentes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            height: 81.6vh;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Incidencias </h1>
+    <div class="row  mb-3 border-bottom">
+        <div class="col-md-8 d-flex align-items-center">
+            <h1>Incidentes</h1>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-end">
+            <asp:Button ID="btnCrear" Text="Nuevo" CssClass="btn btn-info" runat="server" OnClick="btnCrear_Click"/>
+            <%--<asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />--%>
+        </div>
+    </div>
     <div class="row">
         <div class="col-4">
             <div class="mb-3">
@@ -27,9 +23,6 @@
             <div class="mb-3">
                 <asp:CheckBox ID="chkFiltroAvanzado" Text="Filtro Avanzado" AutoPostBack="true" OnCheckedChanged="chkFiltroAvanzado_CheckedChanged" runat="server" />
             </div>
-        </div>
-        <div class="col-4">
-            <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
         </div>
         <%if (chkFiltroAvanzado.Checked)
             //<%if (filtroAvanzado)
@@ -78,12 +71,12 @@
             CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
             AllowPaging="true" PageSize="5" runat="server">
             <Columns>
+                <asp:BoundField DataField="Id" HeaderText="ID" />
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                 <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
                 <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
                 <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
-                <asp:BoundField DataField="UsuarioAsignado" HeaderText="Usuario asignado" />
-                <asp:BoundField DataField="UsuarioCreador" HeaderText="Usuario creador" />
+                <asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
                 <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
                 <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />

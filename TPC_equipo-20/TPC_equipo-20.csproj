@@ -65,23 +65,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administracion.aspx" />
+    <Content Include="ControlUsuarios.ascx" />
     <Content Include="Default.aspx" />
-    <Content Include="DetalleCliente.aspx" />
+    <Content Include="FormularioCliente.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Estados.aspx" />
     <Content Include="FormularioEstado.aspx" />
-    <Content Include="FormularioIncidencia.aspx" />
-    <Content Include="FormularioPrioridades.aspx" />
-    <Content Include="FormularioTipos.aspx" />
+    <Content Include="FormularioIncidente.aspx" />
+    <Content Include="FormularioPrioridad.aspx" />
+    <Content Include="FormularioTipoIncidente.aspx" />
     <Content Include="FormularioUsuario.aspx" />
+    <Content Include="GestionIncidente.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Images\Estado.jpg" />
     <Content Include="Images\miFoto.jpg" />
     <Content Include="Images\prioridades.jpg" />
     <Content Include="Images\roles.jpg" />
     <Content Include="Images\tiposIncidente.png" />
-    <Content Include="Incidencias.aspx" />
-    <Content Include="ListadoClientes.aspx" />
+    <Content Include="Incidentes.aspx" />
+    <Content Include="Clientes.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="Prioridades.aspx" />
@@ -99,6 +101,13 @@
     <Compile Include="Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ControlUsuarios.ascx.cs">
+      <DependentUpon>ControlUsuarios.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlUsuarios.ascx.designer.cs">
+      <DependentUpon>ControlUsuarios.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -106,12 +115,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DetalleCliente.aspx.cs">
-      <DependentUpon>DetalleCliente.aspx</DependentUpon>
+    <Compile Include="FormularioCliente.aspx.cs">
+      <DependentUpon>FormularioCliente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DetalleCliente.aspx.designer.cs">
-      <DependentUpon>DetalleCliente.aspx</DependentUpon>
+    <Compile Include="FormularioCliente.aspx.designer.cs">
+      <DependentUpon>FormularioCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
@@ -134,26 +143,26 @@
     <Compile Include="FormularioEstado.aspx.designer.cs">
       <DependentUpon>FormularioEstado.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FormularioIncidencia.aspx.cs">
-      <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
+    <Compile Include="FormularioIncidente.aspx.cs">
+      <DependentUpon>FormularioIncidente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioIncidencia.aspx.designer.cs">
-      <DependentUpon>FormularioIncidencia.aspx</DependentUpon>
+    <Compile Include="FormularioIncidente.aspx.designer.cs">
+      <DependentUpon>FormularioIncidente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FormularioPrioridades.aspx.cs">
-      <DependentUpon>FormularioPrioridades.aspx</DependentUpon>
+    <Compile Include="FormularioPrioridad.aspx.cs">
+      <DependentUpon>FormularioPrioridad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioPrioridades.aspx.designer.cs">
-      <DependentUpon>FormularioPrioridades.aspx</DependentUpon>
+    <Compile Include="FormularioPrioridad.aspx.designer.cs">
+      <DependentUpon>FormularioPrioridad.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FormularioTipos.aspx.cs">
-      <DependentUpon>FormularioTipos.aspx</DependentUpon>
+    <Compile Include="FormularioTipoIncidente.aspx.cs">
+      <DependentUpon>FormularioTipoIncidente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioTipos.aspx.designer.cs">
-      <DependentUpon>FormularioTipos.aspx</DependentUpon>
+    <Compile Include="FormularioTipoIncidente.aspx.designer.cs">
+      <DependentUpon>FormularioTipoIncidente.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioUsuario.aspx.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
@@ -162,22 +171,29 @@
     <Compile Include="FormularioUsuario.aspx.designer.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GestionIncidente.aspx.cs">
+      <DependentUpon>GestionIncidente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionIncidente.aspx.designer.cs">
+      <DependentUpon>GestionIncidente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Incidencias.aspx.cs">
-      <DependentUpon>Incidencias.aspx</DependentUpon>
+    <Compile Include="Incidentes.aspx.cs">
+      <DependentUpon>Incidentes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Incidencias.aspx.designer.cs">
-      <DependentUpon>Incidencias.aspx</DependentUpon>
+    <Compile Include="Incidentes.aspx.designer.cs">
+      <DependentUpon>Incidentes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ListadoClientes.aspx.cs">
-      <DependentUpon>ListadoClientes.aspx</DependentUpon>
+    <Compile Include="Clientes.aspx.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ListadoClientes.aspx.designer.cs">
-      <DependentUpon>ListadoClientes.aspx</DependentUpon>
+    <Compile Include="Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

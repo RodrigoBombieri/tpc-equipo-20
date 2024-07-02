@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
+    <Compile Include="AccionNegocio.cs" />
     <Compile Include="ClienteNegocio.cs" />
     <Compile Include="DomicilioNegocio.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="EstadoNegocio.cs" />
     <Compile Include="ImagenNegocio.cs" />
     <Compile Include="IncidenteNegocio.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="ProvinciaNegocio.cs" />
     <Compile Include="RolNegocio.cs" />
     <Compile Include="Seguridad.cs" />
+    <Compile Include="TipoAccionNegocio.cs" />
     <Compile Include="TipoIncidenteNegocio.cs" />
     <Compile Include="UsuarioNegocio.cs" />
   </ItemGroup>
