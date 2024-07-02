@@ -87,9 +87,18 @@ namespace TPC_equipo_20
             try
             {
                 ddlCriterio.Items.Clear();
-                ddlCriterio.Items.Add("Contiene");
-                ddlCriterio.Items.Add("Empieza con");
-                ddlCriterio.Items.Add("Termina con");
+                if (ddlCampo.SelectedItem.ToString() == "Cantidad de incidentes")
+                {
+                    ddlCriterio.Items.Add("Igual a");
+                    ddlCriterio.Items.Add("Mayor o igual a");
+                    ddlCriterio.Items.Add("Menor o igual a");
+                }
+                else
+                {
+                    ddlCriterio.Items.Add("Contiene");
+                    ddlCriterio.Items.Add("Empieza con");
+                    ddlCriterio.Items.Add("Termina con");
+                }
             }
             catch (Exception ex)
             {

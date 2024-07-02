@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+                    <asp:ScriptManager runat="server" />
     <div class="container">
         <hr>
         <div class="row">
@@ -69,10 +70,14 @@
                     <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server" />
                     <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una localidad" ControlToValidate="txtLocalidad" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 </div>
-                <div class="mb-3">
-                    <label id="lblProvincia" class="form-label">Provincia</label>
-                    <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select"></asp:DropDownList>
-                </div>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3">
+                            <label id="lblProvincia" class="form-label">Provincia</label>
+                            <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select"></asp:DropDownList>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
@@ -163,7 +168,6 @@
             </div>
             <%    }%>
             <div class="col-md-1">
-                <asp:ScriptManager runat="server" />
                 <asp:UpdatePanel ID="UpdatePanel" runat="server">
                     <ContentTemplate>
                         <div class="mb-3">

@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <h1>Clientes</h1>
     <div class="row">
         <div class="col-6">
@@ -19,35 +20,40 @@
 
         <%if (chkFiltroAvanzadoCliente.Checked)
             { %>
-        <div class="row">
-            <div class="col-3">
-                <div class="mb-3">
-                    <asp:Label ID="lblCampo" runat="server" Text="Campo"></asp:Label>
-                    <asp:DropDownList ID="ddlCampo" CssClass="form-control" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true" runat="server">
-                        <asp:ListItem Text="Nombre"></asp:ListItem>
-                        <asp:ListItem Text="Apellido"></asp:ListItem>
-                        <asp:ListItem Text="Email"></asp:ListItem>
-                        <asp:ListItem Text="DNI"></asp:ListItem>
-                    </asp:DropDownList>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <asp:Label ID="lblCampo" runat="server" Text="Campo"></asp:Label>
+                            <asp:DropDownList ID="ddlCampo" CssClass="form-control" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                                <asp:ListItem Text="Nombre"></asp:ListItem>
+                                <asp:ListItem Text="Apellido"></asp:ListItem>
+                                <asp:ListItem Text="Email"></asp:ListItem>
+                                <asp:ListItem Text="DNI"></asp:ListItem>
+                                <asp:ListItem Text="Cantidad de incidentes"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <asp:Label ID="lblCriterio" runat="server" Text="Criterio"></asp:Label>
+                            <asp:DropDownList ID="ddlCriterio" CssClass="form-control" runat="server">
+                                <asp:ListItem Text="Contiene"></asp:ListItem>
+                                <asp:ListItem Text="Empieza con"></asp:ListItem>
+                                <asp:ListItem Text="Termina con"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <asp:Label ID="lblFiltroAvanzado" runat="server" Text="Filtro"></asp:Label>
+                            <asp:TextBox ID="txtFiltroAvanzadoCliente" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <asp:Label ID="lblCriterio" runat="server" Text="Criterio"></asp:Label>
-                    <asp:DropDownList ID="ddlCriterio" CssClass="form-control" runat="server">
-                        <asp:ListItem Text="Contiene"></asp:ListItem>
-                        <asp:ListItem Text="Empieza con"></asp:ListItem>
-                        <asp:ListItem Text="Termina con"></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <asp:Label ID="lblFiltroAvanzado" runat="server" Text="Filtro"></asp:Label>
-                    <asp:TextBox ID="txtFiltroAvanzadoCliente" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
-            </div>
-        </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
@@ -56,6 +62,7 @@
                 </div>
             </div>
         </div>
+
         <% } %>
     </div>
     <div class="row">
@@ -73,13 +80,19 @@
                     <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver más" />
                     <asp:ButtonField CommandName="nuevoIncidente" ControlStyle-CssClass="btn btn-primary" Text="Crear incidente" />
                 </Columns>
+                                    <EmptyDataTemplate>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td colspan="2" style="text-align: center;">No hay incidentes para mostrar.</td>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
             </asp:GridView>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <asp:Button ID="btnCrear" Text="Crear Nuevo" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click">
-            </asp:Button>
+            <asp:Button ID="btnCrear" Text="Crear Nuevo" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click"></asp:Button>
         </div>
     </div>
 </asp:Content>
