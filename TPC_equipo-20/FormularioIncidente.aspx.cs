@@ -90,11 +90,11 @@ namespace TPC_equipo_20
                 aux.UsuarioAsignado = (Usuario)Session["usuario"];
 
                 negocio.agregar(aux);
+                /*Acá mandaría el correo con el email del usuario*/
+                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", "otros datos..");
+                emailService.enviarCorreo();
                 Response.Redirect("Incidentes.aspx", false);
 
-                /*Acá mandaría el correo con el email del usuario*/
-                //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
-                //emailService.enviarCorreo();
             }
             catch (Exception ex)
             {

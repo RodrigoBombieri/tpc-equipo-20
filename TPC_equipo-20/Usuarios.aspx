@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="TPC_equipo_20.Usuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Usuarios</h1>
@@ -73,5 +76,7 @@
             <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Editar" HeaderText="Accion" />
         </Columns>
     </asp:GridView>
+    <div>
     <a href="FormularioUsuario.aspx" class="btn btn-primary">Agregar Usuario</a>
+    </div>
 </asp:Content>

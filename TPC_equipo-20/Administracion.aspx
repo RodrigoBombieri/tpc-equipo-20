@@ -24,7 +24,7 @@
                     <img src="../Images/prioridades.jpg" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">ABM Prioridades</h5>
-                        <p class="card-text">Administración de Altas, Bajas y Modificación de Prioridades para los incidentes.</p>
+                        <p class="card-text">Formulario para la Administración de Altas, Bajas y Modificación de Prioridades para los incidentes.</p>
                         <asp:Button ID="btnPrioridades" Text="Prioridades" runat="server" CssClass="btn btn-primary mt-auto" OnClick="btnPrioridades_Click" />
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <img src="../Images/Estado.jpg" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">ABM Estados</h5>
-                        <p class="card-text">Administración de Altas, Bajas y Modificación de Estados para los incidentes.</p>
+                        <p class="card-text">Formulario para la Administración de Altas, Bajas y Modificación de Estados para los incidentes.</p>
                         <asp:Button ID="btnEstados" Text="Estados" runat="server" CssClass="btn btn-primary mt-auto" OnClick="btnEstados_Click" />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <img src="../Images/tiposIncidente.png" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">ABM Tipos de Incidentes</h5>
-                        <p class="card-text">Administración de Altas, Bajas y Modificación de Tipos de incidentes.</p>
+                        <p class="card-text">Formulario para la Administración de Altas, Bajas y Modificación de Tipos de incidentes.</p>
                         <asp:Button ID="btnTipos" Text="Tipos incidentes" runat="server" CssClass="btn btn-primary mt-auto" OnClick="btnTipos_Click" />
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <img src="../Images/roles.jpg" class="card-img-top" alt="...">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">ABM Roles de Usuarios</h5>
-                        <p class="card-text">Administración de Altas, Bajas y Modificación de Roles de Usuarios.</p>
+                        <p class="card-text">Formulario para la Administración de Altas, Bajas y Modificación de Roles de Usuarios.</p>
                         <asp:Button ID="btnRoles" Text="Roles" runat="server" CssClass="btn btn-primary mt-auto" OnClick="btnRoles_Click" />
                     </div>
                 </div>
