@@ -42,6 +42,33 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblVigencia;
 
         /// <summary>
+        /// btnReabrir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReabrir;
+
+        /// <summary>
+        /// btnCerrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
+
+        /// <summary>
+        /// btnResolver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnResolver;
+
+        /// <summary>
         /// btnVolver control.
         /// </summary>
         /// <remarks>
@@ -114,13 +141,13 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblDocumento;
 
         /// <summary>
-        /// ddlTipoAcciones control.
+        /// ddlTipoAccion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAcciones;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAccion;
 
         /// <summary>
         /// txtDetalleAccion control.
