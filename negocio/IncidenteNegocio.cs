@@ -173,7 +173,7 @@ namespace negocio
                 datos.setearParametro("@UsuarioAsignado", aux.UsuarioAsignado.Id);
                 datos.setearParametro("@Detalle", aux.Detalle);
                 datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
-                datos.setearParametro("@FechaCierre", aux.FechaCierre);
+                datos.setearParametro("@FechaCierre", (object)aux.FechaCierre ?? DBNull.Value);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

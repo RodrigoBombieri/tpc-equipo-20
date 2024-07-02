@@ -145,6 +145,7 @@ namespace TPC_equipo_20
                     aux.Estado.Id = 4;//en analisis
                 }
                 modificarIncidente(aux);
+                Session.Add("Incidente", aux);
                 guardarAccion(12);
             }
         }
@@ -153,26 +154,9 @@ namespace TPC_equipo_20
         {
             guardarAccion();
         }
-
-        protected void btnResolver_Click(object sender, EventArgs e)
-        {
-            if (txtDetalleAccion.Text != "")
-            {
-                guardarAccion(4);
-                botonesCasoAbierto(false);
-            }
-        }
-
-        protected void btnCerrar_Click(object sender, EventArgs e)
-        {
-            if (txtDetalleAccion.Text != "")
-            {
-                guardarAccion(3);
-                botonesCasoAbierto(false);
-            }
-        }
         protected void guardarAccion(int id = 0)
         {
+            bool banderaEstado = false;
             Incidente aux = new Incidente();
             aux = (Incidente)Session["Incidente"];
             Usuario user = new Usuario();
@@ -189,12 +173,21 @@ namespace TPC_equipo_20
                     break;
                 case 3://cierre
                     accionAux.Tipo.Id = 3;
+                    aux.Estado.Id = 3;//cerrado
+                    aux.FechaCierre = DateTime.Now;
+                    banderaEstado = true;
                     break;
                 case 4://resolucion
                     accionAux.Tipo.Id = 4;
+                    aux.Estado.Id = 6;//resuelto
+                    aux.FechaCierre = DateTime.Now;
+                    banderaEstado = true;
                     break;
                 case 5://re-apertura
                     accionAux.Tipo.Id = 5;
+                    aux.Estado.Id = 5;//re abierto
+                    aux.FechaCierre = null;
+                    banderaEstado = true;
                     break;
                 case 12://modificacion tipo/prioridad
                     accionAux.Detalle = "Modificación tipo incidente y/o prioridad.";
@@ -203,13 +196,43 @@ namespace TPC_equipo_20
                 default:
                     break;
             }
+
+            //ESTADOS
+            // 1-ABIERTO
+            // 2-ASIGNADO
+            // 3-CERRADO
+            // 4-EN ANALISIS
+            // 5-RE ABIERTO
+            // 6-RESUELTO
+
+            //TIPO ACCIONES
+            // 1- ""
+            // 2- ALTA
+            // 3-CIERRE
+            // 4-RESOLUCION
+            // 5-RE APERTURA
+            // 6-RE ASIGNACION
+            // 7-CONTACTO CLIENTE
+            // 8-CONTACTO TELEFONISTA
+            // 9-CAMBIO PAGO
+            // 10-SEGUIMIENTO
+            // 11-VISITA TECNICA
+            // 12-CAMBIO PRIORIDAD/TIPO
+            // 13-OTRO
+
             AccionNegocio accionNegocio = new AccionNegocio();
             accionNegocio.agregar(accionAux);
             cargarDGVAcciones(aux.Id);
-            if (aux.Estado.Id == 1 || (aux.Estado.Id == 5 && accionAux.Tipo.Id !=5))//abierto-reabierto
+            if (banderaEstado)
+            {
+                modificarIncidente(aux);
+                Session.Add("Incidente", aux);
+            }
+            else if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
             {
                 aux.Estado.Id = 4;//en analisis
                 modificarIncidente(aux);
+                Session.Add("Incidente", aux);
             }
         }
         protected void cargarDGVAcciones(long id)
@@ -227,15 +250,32 @@ namespace TPC_equipo_20
 
         protected void btnReabrir_Click(object sender, EventArgs e)
         {
-            Incidente aux = new Incidente();
-            aux = (Incidente)Session["Incidente"];
-            aux.Estado.Id = 5;//re-apertura
-            modificarIncidente(aux);
-            guardarAccion(5);
-            botonesCasoAbierto(true);
+            if (txtDetalleAccion.Text != "")
+            {
+                guardarAccion(5);
+                botonesCasoAbierto(true);
+            }
+        }
+        protected void btnResolver_Click(object sender, EventArgs e)
+        {
+            if (txtDetalleAccion.Text != "")
+            {
+                guardarAccion(4);
+                botonesCasoAbierto(false);
+            }
+        }
+
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            if (txtDetalleAccion.Text != "")
+            {
+                guardarAccion(3);
+                botonesCasoAbierto(false);
+            }
         }
         protected void botonesCasoAbierto(bool bandera)
         {
+            txtDetalleAccion.Text = "";
             banderaReabrirCaso = !bandera;
             btnModificarIncidente.Enabled = bandera;
             btnGuardarAccion.Enabled = bandera;

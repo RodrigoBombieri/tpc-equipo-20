@@ -18,7 +18,7 @@ namespace negocio
                 datos.setearConsulta("Select A.ID, A.IDIncidente, A.Detalle, A.IDUsuario, A.IDtipo, A.Fecha, TA.Nombre " +
                     "FROM Acciones A " +
                     "inner join TiposAcciones TA on A.IDTipo = TA.ID " +
-                    "where A.IDIncidente = @id");
+                    "where A.IDIncidente = @id order by Fecha desc");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
 
