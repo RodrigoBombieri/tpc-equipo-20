@@ -289,7 +289,7 @@ namespace negocio
                         case "Igual a":
                             consulta += "count(i.Id) = " + filtro + "";
                             break;
-                        case "Mayor o igual a ":
+                        case "Mayor o igual a":
                             consulta += "count(i.Id) >= " + filtro + ""; 
                             break;
                         default:
