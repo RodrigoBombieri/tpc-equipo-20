@@ -83,10 +83,10 @@ Create Table Incidentes(
 )
 GO
 Create Table Acciones(
-    ID smallint not null primary key identity (1, 1),
+    ID bigint not null primary key identity (1, 1),
 	IDIncidente bigint not null foreign key references Incidentes(ID),
-	UsuarioCreador bigint not null foreign key references Usuarios(ID),
-	FechaCreacion date not null,
+	IDUsuario bigint not null foreign key references Usuarios(ID),
+	Fecha date not null,
     Detalle varchar(200) null,
 	IDTipo smallint not null foreign key references TiposAcciones(ID),
 )
@@ -191,6 +191,6 @@ values
 ('Cambio de instrumento de cobro'),
 ('Seguimiento'),
 ('Visita del servicio técnico'),
-('Cambio de prioridad'),
+('Cambio de prioridad/tipo'),
 ('Otro')
 GO

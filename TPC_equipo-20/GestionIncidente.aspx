@@ -16,7 +16,6 @@
             <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
             <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
-            <%--<asp:Label ID="lblTipo" CssClass="badge rounded-pill text-bg-info large-badge" runat="server">Tipo</asp:Label>--%>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
             <%--<asp:Button ID="btnCerrar" Text="Cerrar" CssClass="btn btn-primary me-2" runat="server" />
@@ -27,6 +26,7 @@
     <%--<uc:ControlUsuarios ID="MiControl1" runat="server" />--%>
     <div class="row">
         <div class="col-md-6" style="padding-right: 15px;">
+            <%--Incidente--%>
             <div class="row border mb-4">
                 <div class="mb-3">
                     <label id="lblTipo" class="form-label">Tipo de incidente</label>
@@ -37,8 +37,8 @@
                     <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                 </div>
                 <div class="mb-3 text-end">
-                    <asp:Button ID="Button1" Text="Cancelar" CssClass="btn btn-danger" runat="server" />
-                    <asp:Button ID="Button2" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />
+                    <%--<asp:Button ID="Button1" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
+                    <asp:Button ID="btnModificarIncidente" Text="Modificar" CssClass="btn btn-secondary me-2" runat="server" OnClick="btnModificarIncidente_Click" />
                 </div>
                 <div class="mb-3">
                     <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>
@@ -48,6 +48,7 @@
                     <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" Enabled="false" runat="server" />
                 </div>
             </div>
+            <%--Cliente--%>
             <div class="row border m-6 mb-4">
                 <div class="mb-3">
                     <label id="lblCliente" class="form-label"></label>
@@ -61,7 +62,7 @@
                 </div>
             </div>
         </div>
-
+        <%--Acciones--%>
         <div class="col-md-6 border mb-4">
             <div class="mb-3">
                 <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
@@ -73,8 +74,8 @@
             </div>
             <div class="row" style="margin-top: 10px">
                 <div class="mb-3 text-end">
-                    <asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />
-                    <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" />
+                    <%--<asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
+                    <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-success me-2" runat="server" OnClick="btnGuardarAccion_Click" />
                 </div>
             </div>
             <div class="mb-3">
