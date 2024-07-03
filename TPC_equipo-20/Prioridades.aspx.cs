@@ -32,7 +32,7 @@ namespace TPC_equipo_20
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FormularioPrioridades.aspx", false);
+            Response.Redirect("FormularioPrioridad.aspx", false);
         }
 
         protected void dgvPrioridades_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace TPC_equipo_20
             try
             {
                 var id = dgvPrioridades.SelectedDataKey.Value.ToString();
-                Response.Redirect("FormularioPrioridades.aspx?id=" + id, false);
+                Response.Redirect("FormularioPrioridad.aspx?id=" + id, false);
             }
             catch (Exception ex)
             {

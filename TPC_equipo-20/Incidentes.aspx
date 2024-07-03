@@ -8,7 +8,7 @@
             <h1>Incidentes</h1>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <asp:Button ID="btnCrear" Text="Nuevo" CssClass="btn btn-info" runat="server" OnClick="btnCrear_Click"/>
+            <asp:Button ID="btnCrear" Text="Nuevo Incidente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click"/>
             <%--<asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />--%>
         </div>
     </div>
@@ -59,8 +59,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
-                    <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" />
-                    <asp:Button ID="BtnLimpiarFiltros" Text="Limpiar filtros" runat="server" CssClass="btn btn-primary" OnClick="btnLimpiarFiltro_Click" />
+                    <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" />
+                    <asp:Button ID="BtnLimpiarFiltros" Text="Limpiar filtros" runat="server" CssClass="btn btn-outline-secondary" OnClick="btnLimpiarFiltro_Click" />
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 <asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
                 <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
-                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />
             </Columns>
         </asp:GridView>
     </div>
