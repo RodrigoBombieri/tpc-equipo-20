@@ -51,7 +51,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
-                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" Text="Buscar" />
+                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" Text="Buscar" />
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             <asp:ImageField DataImageUrlField="ImagenPerfil" HeaderText="Foto de Perfil" />
             <asp:BoundField DataField="Nick" HeaderText="Nickname" />
             <asp:BoundField DataField="Password" HeaderText="Contraseña" />
-            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Editar" HeaderText="Accion" />
+            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-outline-primary" SelectText="Editar" HeaderText="Accion" />
         </Columns>
     </asp:GridView>
     <div>

@@ -65,7 +65,7 @@
             <asp:Button ID="btnResolver" Text="Resolver incidente" CssClass="btn btn-primary me-2" runat="server"
                 OnClick="btnResolver_Click" OnClientClick="return handleClick();" />
             <%} %>--%>
-            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
+            <asp:Button ID="btnVolver" Text="Regresar" CssClass="btn btn-warning" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
     <div class="row">

@@ -2,16 +2,54 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .mb-3 {
-            margin: -10px;
+        .form-control {
+            border: 1px solid #ced4da; /* gris claro */
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+            .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .text-danger {
+            color: #dc3545; /* rojo para mensajes de error */
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+            .form-group label {
+                margin-bottom: 0.5rem;
+            }
+
+        .container {
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.5rem;
+        }
+
+        .custom-row {
+            background-color: #f8f9fa; /* Color de fondo */
+            border: 1px solid #dee2e6; /* Borde delgado */
+            border-radius: 0.25rem; /* Bordes redondeados */
+            padding: 10px 20px; /* Espaciado interno */
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Formulario Nuevo Usuario </h1>
-
-
-    <div class="row">
+    <div class="row custom-row border-bottom">
         <div class="col-6">
             <div class="mb-3">
                 <label for="txtID" class="form-label">ID: </label>
@@ -70,23 +108,24 @@
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una contraseña" ControlToValidate="txtPassword" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <asp:ScriptManager runat="server" />
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                    <ContentTemplate>
-                        <div class="mb-3">
-                            <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" OnClick="btnEliminar_Click" Text="Eliminar" />
-                        </div>
-                        <% if (confirmaEliminar)
-                            { %>
-                        <div class="mb-3">
-                            <asp:CheckBox ID="chkConfirmaEliminar" runat="server" Text="Confirmar eliminación" />
-                            <asp:Button ID="btnConfirmaEliminar" runat="server" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" Text="Eliminar" />
-                        </div>
-                        <% } %>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
+    </div>
+    <div class="row custom-row">
+        <div class="col-6">
+            <asp:ScriptManager runat="server" />
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" OnClick="btnEliminar_Click" Text="Eliminar" />
+                    </div>
+                    <% if (confirmaEliminar)
+                        { %>
+                    <div class="mb-3">
+                        <asp:CheckBox ID="chkConfirmaEliminar" runat="server" Text="Confirmar eliminación" />
+                        <asp:Button ID="btnConfirmaEliminar" runat="server" CssClass="btn btn-outline-danger" OnClick="btnConfirmaEliminar_Click" Text="Eliminar" />
+                    </div>
+                    <% } %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
+    </div>
 </asp:Content>

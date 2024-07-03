@@ -9,14 +9,14 @@
             <Columns>
                 <asp:BoundField DataField="id" HeaderText="Id" InsertVisible="false" ReadOnly="true" SortExpression="id" />
                 <asp:BoundField DataField="nombre" HeaderText="Nombre" SortExpression="nombre" />
-                <asp:CommandField ShowSelectButton="True" HeaderText="Acción" SelectText="Ver" />
+                <asp:CommandField ShowSelectButton="True" HeaderText="Acción" ControlStyle-CssClass="btn btn-info" SelectText="Ver" />
             </Columns>
         </asp:GridView>
     </div>
     <div class="row">
         <div class="mb-3">
             <asp:Button ID="btnCrear" runat="server" CssClass="btn btn-primary" OnClick="btnCrear_Click" Text="Crear" />
-            <a href="/Administracion.aspx" class="btn btn-danger">Regresar</a>
+            <a href="/Administracion.aspx" class="btn btn-warning">Regresar</a>
         </div>
     </div>
 </asp:Content>

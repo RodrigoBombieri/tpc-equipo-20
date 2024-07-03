@@ -17,19 +17,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Tipos incidentes</h1>
     <div class="row">
-        <div class="col-4">
-            <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
-        </div>
-    </div>
-    <div class="row">
         <asp:GridView ID="dgvTipos" DataKeyNames="Id" OnSelectedIndexChanged="dgvTipos_SelectedIndexChanged"
             CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvTipos_PageIndexChanging"
             AllowPaging="true" PageSize="5" runat="server">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />
             </Columns>
         </asp:GridView>
     </div>
-    <a href="/Administracion.aspx">Regresar</a>
+    <div class="row">
+        <div class="col-4">
+            <asp:Button ID="btnCrear" Text="Crear" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
+            <a href="/Administracion.aspx" class="btn btn-warning">Regresar</a>
+        </div>
+    </div>
 </asp:Content>

@@ -58,7 +58,7 @@
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Label ID="lblBtnBuscar" runat="server"></asp:Label>
-                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" Text="Buscar" />
+                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" Text="Buscar" />
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
                     <asp:BoundField HeaderText="Email" DataField="Email" />
                     <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
                     <asp:BoundField HeaderText="Cantidad de incidentes" DataField="Incidentes.Count" />
-                    <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver más" />
+                    <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver más" />
                     <asp:ButtonField CommandName="nuevoIncidente" ControlStyle-CssClass="btn btn-primary" Text="Crear incidente" />
                 </Columns>
                                     <EmptyDataTemplate>
@@ -92,7 +92,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <asp:Button ID="btnCrear" Text="Crear Nuevo" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click"></asp:Button>
+            <asp:Button ID="btnCrear" Text="Crear Nuevo Cliente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click"></asp:Button>
         </div>
     </div>
 </asp:Content>
