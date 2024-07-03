@@ -35,7 +35,7 @@ namespace TPC_equipo_20
                 if(id != "" && !IsPostBack)
                 {
                     UsuarioNegocio negocio = new UsuarioNegocio();
-                    Usuario usuario = (negocio.listar(id))[0];
+                    Usuario usuario = (negocio.listar(true,id))[0];
 
                     txtID.Text = usuario.Id.ToString();
                     txtNombre.Text = usuario.Nombre;

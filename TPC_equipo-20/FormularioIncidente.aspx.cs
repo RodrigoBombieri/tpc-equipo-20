@@ -150,10 +150,13 @@ namespace TPC_equipo_20
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
         {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            List<Cliente> clientes = clienteNegocio.listar(false,txtFiltroCliente.Text);
-            dgvClientes.DataSource = clientes;
-            dgvClientes.DataBind();         
+            if (txtFiltroCliente.Text != "")
+            {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                List<Cliente> clientes = clienteNegocio.listar(false, txtFiltroCliente.Text);
+                dgvClientes.DataSource = clientes;
+                dgvClientes.DataBind();
+            }
         }
     }
 }

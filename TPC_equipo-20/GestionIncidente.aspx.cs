@@ -15,12 +15,14 @@ namespace TPC_equipo_20
     public partial class GestionIncidente : System.Web.UI.Page
     {
         public bool banderaReabrirCaso;
+        public bool banderaUsuario;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (!IsPostBack)
                 {
+                    //banderaUsuario = false;
                     PrioridadNegocio PrioridadNegocio = new PrioridadNegocio();
                     List<Prioridad> listaPrioridades = PrioridadNegocio.listar();
                     ddlPrioridad.DataSource = listaPrioridades;
@@ -48,6 +50,9 @@ namespace TPC_equipo_20
                     ddlTipoAccion.DataTextField = "Nombre";
                     ddlTipoAccion.DataBind();
                     ddlTipoAccion.SelectedIndex = -1;
+
+                    dgvUsuarios.DataSource = null;
+                    dgvUsuarios.DataBind();
                 }
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
 
@@ -56,38 +61,22 @@ namespace TPC_equipo_20
                     if (!IsPostBack)
                     {
                         IncidenteNegocio negocio = new IncidenteNegocio();
-                        List<Incidente> listado = negocio.listar(id);
+                        List<Incidente> listado = negocio.listar(false,id);
                         Incidente aux;
                         if (listado.Count > 0)
                         {
                             aux = listado[0];
                             Session["Incidente"] = listado[0];
-                            lblNumIncidente.Text = "Incidente Nº " + aux.Id;
-                            txtDetalle.Text = aux.Detalle;
-                            ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
-                            ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
-                            lblCreado.Text = "Creado el día " + aux.FechaCreacion.ToString("D");
-                            // "D" -> sábado, 8 de junio de 2024
-                            // "d" -> 08/06/2024
-
-                            //cliente
-                            lblNombreApellido.Text = aux.Cliente.Nombre + " " + aux.Cliente.Apellido;
-                            lblDocumento.Text = aux.Cliente.Dni;
-                            //lblDomicilio
+                            mostrarIncidente(aux);
+                            mostrarCliente(aux);
 
                             if (aux.Estado.Id == 3 || aux.Estado.Id == 6)//cerrado-resuelto
                                 botonesCasoAbierto(false);
                             else
                                 botonesCasoAbierto(true);
-                            List<Estado> estados = Session["estados"] as List<Estado>; ;
-                            Estado estado = estados.Find(x => x.Id == aux.Estado.Id);
-                            if (estado != null)
-                                lblEstado.Text = estado.Nombre;
-                            else
-                                lblEstado.Text = "ERROR";
-                            //vigente-vencido-proximo
-                            //lblEstado.CssClass = "badge rounded-pill text-bg-success large-badge";
 
+                            mostrarEstado(aux);
+                            mostrarVigencia(aux);
                             cargarDGVAcciones(aux.Id);
                         }
                         else
@@ -110,6 +99,40 @@ namespace TPC_equipo_20
             }
         }
 
+        protected void mostrarIncidente(Incidente aux)
+        {
+            lblNumIncidente.Text = "Incidente Nº " + aux.Id;
+            ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
+            ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
+            lblCreado.Text = "Creado el día " + aux.FechaCreacion.ToString("D");
+            lblUsuarioAsignado.Text = aux.UsuarioAsignado.Nombre + aux.UsuarioAsignado.Apellido;
+            txtDetalle.Text = aux.Detalle;
+            // "D" -> sábado, 8 de junio de 2024
+            // "d" -> 08/06/2024
+        }
+
+        protected void mostrarEstado(Incidente aux)
+        {
+            List<Estado> estados = Session["estados"] as List<Estado>; ;
+            Estado estado = estados.Find(x => x.Id == aux.Estado.Id);
+            if (estado != null)
+                lblEstado.Text = estado.Nombre;
+            else
+                lblEstado.Text = "ERROR";
+        }
+        protected void mostrarVigencia(Incidente aux)
+        {
+            //vigente-vencido-proximo
+            //lblEstado.CssClass = "badge rounded-pill text-bg-success large-badge";
+        }
+        protected void mostrarCliente(Incidente aux)
+        {
+            //cliente
+            lblNombreApellido.Text = aux.Cliente.Nombre + " " + aux.Cliente.Apellido;
+            lblDocumento.Text = aux.Cliente.Dni;
+            //lblDomicilio
+            //resto de datos de cliente
+        }
         protected void dgvAcciones_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -140,6 +163,7 @@ namespace TPC_equipo_20
                 modificarIncidente(aux);
                 Session.Add("Incidente", aux);
                 guardarAccion(12);
+                mostrarEstado(aux);
             }
         }
 
@@ -182,6 +206,9 @@ namespace TPC_equipo_20
                     aux.FechaCierre = null;
                     banderaEstado = true;
                     break;
+                case 6://re-asignado
+                    accionAux.Tipo.Id = 6;
+                    break;
                 case 12://modificacion tipo/prioridad
                     accionAux.Detalle = "Modificación tipo incidente y/o prioridad.";
                     accionAux.Tipo.Id = 12;
@@ -220,12 +247,14 @@ namespace TPC_equipo_20
             {
                 modificarIncidente(aux);
                 Session.Add("Incidente", aux);
+                mostrarEstado(aux);
             }
-            else if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
+            else if ((aux.Estado.Id == 1 || aux.Estado.Id == 5)&& accionAux.Tipo.Id!=6)//(abierto-reabierto)&&(reasignado)
             {
                 aux.Estado.Id = 4;//en analisis
                 modificarIncidente(aux);
                 Session.Add("Incidente", aux);
+                mostrarEstado(aux);
             }
         }
         protected void cargarDGVAcciones(long id)
@@ -275,6 +304,60 @@ namespace TPC_equipo_20
             ddlPrioridad.Enabled = bandera;
             ddlTipo.Enabled = bandera;
             ddlTipoAccion.Enabled = bandera;
+        }
+
+        protected void btnReasignar_Click(object sender, EventArgs e)
+        {
+            banderaUsuario = true;
+        }
+
+        protected void btnBuscarUsuario_Click(object sender, EventArgs e)
+        {
+            banderaUsuario = true;
+            if (txtFiltroUsuario.Text != "")
+            {
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                List<Usuario> usuarios = usuarioNegocio.listar(false, txtFiltroUsuario.Text);
+                dgvUsuarios.DataSource = usuarios;
+                dgvUsuarios.DataBind();
+            }
+        }
+
+        protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = dgvUsuarios.SelectedDataKey.Value.ToString();
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                List<Usuario> listaAux = usuarioNegocio.listar(true, id); ;
+                if (listaAux.Count > 0)
+                {
+                    Usuario usuarioAux = listaAux[0];
+                    Incidente incidenteAux = (Incidente)Session["Incidente"];
+                    incidenteAux.UsuarioAsignado = usuarioAux;
+                    IncidenteNegocio incidenteNegocio = new IncidenteNegocio();
+                    incidenteNegocio.modificar(incidenteAux);
+                    guardarAccion(6);
+                    Session.Add("Incidente", incidenteAux);
+                    mostrarIncidente(incidenteAux);
+                    banderaUsuario = false;
+                }
+                else
+                {
+                    Session.Add("error", "Error al seleccionar el usuario.");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
         }
     }
 }

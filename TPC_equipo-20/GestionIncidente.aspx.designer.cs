@@ -87,6 +87,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblCreado;
 
         /// <summary>
+        /// lblUsuarioAsignado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUsuarioAsignado;
+
+        /// <summary>
         /// txtDetalle control.
         /// </summary>
         /// <remarks>
@@ -114,15 +123,6 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Label lblDocumento;
 
         /// <summary>
-        /// btnReasignar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReasignar;
-
-        /// <summary>
         /// btnReabrir control.
         /// </summary>
         /// <remarks>
@@ -130,6 +130,15 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReabrir;
+
+        /// <summary>
+        /// btnReasignar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReasignar;
 
         /// <summary>
         /// btnCerrar control.
@@ -148,6 +157,33 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnResolver;
+
+        /// <summary>
+        /// txtFiltroUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFiltroUsuario;
+
+        /// <summary>
+        /// btnBuscarUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscarUsuario;
+
+        /// <summary>
+        /// dgvUsuarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvUsuarios;
 
         /// <summary>
         /// ddlTipoAccion control.

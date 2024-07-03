@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using dominio;
 namespace TPC_equipo_20
 {
     public partial class Incidentes : System.Web.UI.Page
@@ -15,7 +15,15 @@ namespace TPC_equipo_20
             if (!IsPostBack)
             {
                 IncidenteNegocio negocio = new IncidenteNegocio();
-                Session.Add("listadoIncidentes", negocio.listar());
+                if (Seguridad.EsTelefonista(Session["usuario"]))
+                {
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    Session.Add("listadoIncidentes", negocio.listar(true,usuario.Id.ToString()));
+                }
+                else
+                {
+                    Session.Add("listadoIncidentes", negocio.listar(true));
+                }
                 dgvIncidentes.DataSource = Session["listadoIncidentes"];
                 //dgvIncidentes.DataSource = negocio.listar();
                 dgvIncidentes.DataBind();

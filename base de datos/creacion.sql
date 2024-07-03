@@ -57,12 +57,14 @@ Create Table Estados(
 Go
 Create Table Prioridades(
     ID smallint not null primary key identity (1, 1),
-    Nombre varchar(100) not null
+    Nombre varchar(100) not null,
+	Vigencia smallint not null
 )
 Go
 Create Table TiposIncidentes(
     ID smallint not null primary key identity (1, 1),
-    Nombre varchar(100) not null
+    Nombre varchar(100) not null,
+	IDPrioridad smallint not null 
 )
 Go
 Create Table TiposAcciones(
@@ -108,22 +110,22 @@ select 'Asignado' UNION
 select 'Resuelto' 
 GO
 
-insert into PRIORIDADES (Nombre)
-select '' UNION
-select 'Urgente' UNION
-select 'Alta' UNION
-select 'Media' UNION
-select 'Baja' 
+insert into PRIORIDADES (Nombre,Vigencia)
+select '',0 UNION
+select 'Urgente',2 UNION
+select 'Alta',4 UNION
+select 'Media',6 UNION
+select 'Baja',8 
 GO
 
-insert into TIPOSINCIDENTES (Nombre)
-select '' UNION
-select 'Producto dañado' UNION
-select 'Problema en el cobro' UNION
-select 'Entrega ok' UNION
-select 'Garantia' UNION
-select 'Entrega fallida' UNION
-select 'Otro' 
+insert into TIPOSINCIDENTES (Nombre,IDPrioridad)
+select '',1 UNION
+select 'Producto dañado',3 UNION
+select 'Problema en el cobro',4 UNION
+select 'Entrega ok',5 UNION
+select 'Garantia',2 UNION
+select 'Entrega fallida',2 UNION
+select 'Otro',5 
 GO
 
 insert into USUARIOS (IDRol, Nombre, Apellido, Nick, Dni, Telefono, Email, Pass)

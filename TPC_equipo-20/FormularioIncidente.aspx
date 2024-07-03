@@ -65,7 +65,7 @@
             <asp:Label runat="server" Text="Buscar por nombre, apellido o documento (para mas filtros <a href='Clientes.aspx'>aqui</a>)."></asp:Label>
         </div>
         <div class="mb-3 d-flex">
-            <asp:TextBox ID="txtFiltroCliente" CssClass="form-control" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtFiltroCliente" CssClass="form-control me-2" runat="server"></asp:TextBox>
             <asp:Button ID="btnBuscarCliente" Text="Buscar" CssClass="btn btn-secondary" runat="server" OnClick="btnBuscarCliente_Click" />
         </div>
         <asp:GridView ID="dgvClientes" DataKeyNames="Id" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged"
