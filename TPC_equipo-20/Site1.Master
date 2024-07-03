@@ -28,7 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="Default.aspx">Inicio</a>
                         </li>
-                        <%if (negocio.Seguridad.EsAdmin(Session["usuario"]))
+                        <% if (negocio.Seguridad.SesionActiva(Session["usuario"]))
                             { %>
                         <li class="nav-item">
                             <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
@@ -39,7 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Clientes.aspx">Clientes</a>
                         </li>
-                        <% } %>
+                        <%} %>
                         <%if (negocio.Seguridad.EsAdmin(Session["usuario"]))
                             { %>
                         <li class="nav-item">

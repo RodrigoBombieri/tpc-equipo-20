@@ -17,7 +17,7 @@ namespace TPC_equipo_20
             if (!IsPostBack)
             {
                 UsuarioNegocio negocio = new UsuarioNegocio();
-                Session.Add("listaUsuarios", negocio.listar());
+                Session.Add("listaUsuarios", negocio.listar(true));
                 dgvUsuarios.DataSource = Session["listaUsuarios"];
                 dgvUsuarios.DataBind();
             }
@@ -112,7 +112,7 @@ namespace TPC_equipo_20
 
                 if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
                 {
-                    dgvUsuarios.DataSource = negocio.listar();
+                    dgvUsuarios.DataSource = negocio.listar(true);
                 }
                 else
                 {

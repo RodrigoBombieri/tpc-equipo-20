@@ -9,7 +9,7 @@ namespace negocio
 {
     public class IncidenteNegocio
     {
-        public List<Incidente> listar(string id="")
+        public List<Incidente> listar(bool esIdUsuario, string id="")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Incidente> lista = new List<Incidente>();
@@ -37,10 +37,15 @@ namespace negocio
                     "inner join Usuarios U on I.IDUsuario = U.ID " +
                     "inner join Roles R on U.IDRol = R.ID";
                 
-                if (id != "")
+                if (id != "" && !esIdUsuario)
                 {
                     query += " where I.ID = @id";
                     datos.setearParametro("@id", id);
+                }
+                else if (id != "" && esIdUsuario)
+                {
+                    query += " where I.IDUsuario = idUsuario";
+                    datos.setearParametro("@idUsuario", id);
                 }
                 datos.setearConsulta(query);
                 
