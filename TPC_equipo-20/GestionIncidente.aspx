@@ -118,7 +118,7 @@
                         <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
                     </div>
                     <div class="col-md-4 d-flex align-items-center justify-content-end">
-                        <%if (negocio.Seguridad.EsAdmin(Session["usuario"]))
+                        <%if (!negocio.Seguridad.EsTelefonista(Session["usuario"]))
                             {%>
                             <asp:Button ID="btnReasignar" Text="Reasignar" CssClass="btn btn-primary me-2" runat="server" />
                         <%}
@@ -140,7 +140,6 @@
                     </div>
                 </div>
                 <div class="mb-3">
-
                     <asp:DropDownList ID="ddlTipoAccion" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                 </div>
                 <div class="mb-3">

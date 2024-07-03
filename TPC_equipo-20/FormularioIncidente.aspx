@@ -97,12 +97,12 @@
         <div class="col-md-6" style="padding-right: 15px;">
             <div class="row border mb-4">
                 <div class="mb-3">
-                    <label id="lblPrioridad" class="form-label">Prioridad</label>
-                    <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
-                </div>
-                <div class="mb-3">
                     <label id="lblTipo" class="form-label">Tipo de incidente</label>
                     <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                </div>
+                <div class="mb-3">
+                    <label id="lblPrioridad" class="form-label">Prioridad</label>
+                    <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                 </div>
                 <div class="mb-3">
                     <label id="lblDetalle" class="form-label">Detalle</label>

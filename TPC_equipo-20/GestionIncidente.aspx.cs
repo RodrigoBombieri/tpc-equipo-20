@@ -73,19 +73,12 @@ namespace TPC_equipo_20
                             //cliente
                             lblNombreApellido.Text = aux.Cliente.Nombre + " " + aux.Cliente.Apellido;
                             lblDocumento.Text = aux.Cliente.Dni;
+                            //lblDomicilio
 
-                            if (aux.Estado.Id == 3 || aux.Estado.Id == 6)
-                            {
-                                banderaReabrirCaso = true;
-                                btnModificarIncidente.Enabled = false;
-                                btnGuardarAccion.Enabled = false;
-                            }
+                            if (aux.Estado.Id == 3 || aux.Estado.Id == 6)//cerrado-resuelto
+                                botonesCasoAbierto(false);
                             else
-                            {
-                                banderaReabrirCaso = false;
-                                btnModificarIncidente.Enabled = true;
-                                btnGuardarAccion.Enabled = true;
-                            }
+                                botonesCasoAbierto(true);
                             List<Estado> estados = Session["estados"] as List<Estado>; ;
                             Estado estado = estados.Find(x => x.Id == aux.Estado.Id);
                             if (estado != null)
