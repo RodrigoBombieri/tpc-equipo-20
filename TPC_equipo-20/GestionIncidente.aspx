@@ -3,33 +3,127 @@
 <%@ Register Src="~/ControlUsuarios.ascx" TagPrefix="uc" TagName="ControlUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-    .large-badge {
-        font-size: 0.8rem; /* Ajusta el tamaño de fuente según lo necesario */
-        padding: 0.5em 1em; /* Ajusta el relleno según lo necesario */
-    }
-
-    .pagination a {
-        display: inline-block;
-        padding: 8px 12px;
-        margin: 0 4px;
-        border: 1px solid #007bff;
-        border-radius: 4px;
-        color: #007bff;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-
-        .pagination a.active,
-        .pagination a:hover {
-            background-color: #007bff;
-            color: #fff;
-            border-color: #007bff;
+        .large-badge {
+            font-size: 0.8rem; /* Ajusta el tamaño de fuente según lo necesario */
+            padding: 0.5em 1em; /* Ajusta el relleno según lo necesario */
         }
 
-    .estado-color{
+        .pagination a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 4px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            color: #007bff;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-    }
+            .pagination a.active,
+            .pagination a:hover {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
 
+        .estado-color {
+        }
+
+        .form-control {
+            border: 1px solid #ced4da; /* gris claro */
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+            .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .text-danger {
+            color: #dc3545; /* rojo para mensajes de error */
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+            .form-group label {
+                margin-bottom: 0.5rem;
+            }
+
+        .container {
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 0.5rem;
+        }
+
+        .custom-row {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 10px 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+            .card:hover {
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff; /* Color azul */
+            margin-bottom: 0.75rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .card-body div {
+                margin-bottom: 0.5rem;
+            }
+
+            .card-body .form-label {
+                font-weight: bold;
+                color: #495057;
+            }
+
+            .card-body .btn {
+                margin-top: 0.5rem;
+                align-self: center;
+            }
+
+        .info-value {
+            font-weight: normal;
+            color: #6c757d;
+        }
+
+        .btn-outline-primary {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -67,20 +161,20 @@
             </div>
         </div>
     </div>
-    <div class="row  mb-3 border-bottom">
+    <div class="row custom-row mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
-            <asp:Label ID="lblNumIncidente" CssClass="h1" Style="        margin-right: 10px;" runat="server"></asp:Label>
-            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge estado-color" Style="        margin-right: 10px;" runat="server">Estado</asp:Label>
+            <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
+            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge estado-color" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
             <asp:Button ID="btnVolver" Text="Regresar" CssClass="btn btn-warning" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6" style="        padding-right: 15px;">
+    <div class="row custom-row">
+        <div class="col-md-6" style="padding-right: 15px;">
             <%--Incidente--%>
-            <div class="row border mb-4">
+            <div class="row custom-row border mb-4">
                 <div class="mb-3">
                     <label id="lblTipo" class="form-label">Tipo de incidente</label>
                     <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
@@ -106,18 +200,31 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="        padding-right: 15px;">
+        <div class="col-md-6" style="padding-right: 15px;">
             <%--Cliente--%>
-            <div class="row border m-6 mb-4">
-                <div class="mb-3">
-                    <label id="lblCliente" class="form-label"></label>
-                </div>
-                <div class="mb-3">
-                    <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>
-                    <asp:Label ID="lblDocumento" class="form-label" runat="server"></asp:Label>
-                </div>
-                <div class="mb-3">
-                    <label id="lblCliente2" class="form-label">Documento:</label>
+            <div class="col-md-6 mb-4">
+
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Cliente:</h5>
+                        <div>
+                            <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>
+                        </div>
+                        <div>
+                            <span class="info-value">D.N.I:</span>
+                            <asp:Label ID="lblDocumento" class="info-value" runat="server"></asp:Label>
+                        </div>
+                        <div>
+                            <span class="info-value">Tel.:</span>
+                            <asp:Label ID="lblTelefono1" class="info-value" runat="server"></asp:Label>
+                        </div>
+                        <div>
+                            <asp:Label ID="lblEmail" class="info-value" runat="server"></asp:Label>
+                        </div>
+
+                        <asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,7 +233,7 @@
             <%--Acciones--%>
             <div class="col-md-12 border mb-4">
 
-                <div class="row" style="padding-bottom: 10px">
+                <div class="row custom-row" style="padding-bottom: 10px">
                     <div class="col-md-8 d-flex align-items-center">
                         <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
                     </div>
@@ -175,7 +282,7 @@
                             <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
                         </Columns>
                         <EmptyDataTemplate>
-                            <table style="width:100%;">
+                            <table style="width: 100%;">
                                 <tr>
                                     <td colspan="2" style="text-align: center;">No se encontraron usuarios.</td>
                                 </tr>
