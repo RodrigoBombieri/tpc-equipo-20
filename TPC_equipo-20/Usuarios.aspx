@@ -96,9 +96,9 @@
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
                 <asp:BoundField DataField="DNI" HeaderText="DNI" />
-                <asp:ImageField DataImageUrlField="ImagenPerfil" HeaderText="Foto de Perfil" />
+            <%--    <asp:ImageField DataImageUrlField="ImagenPerfil" HeaderText="Foto de Perfil" />--%>
                 <asp:BoundField DataField="Nick" HeaderText="Nickname" />
-                <asp:BoundField DataField="Password" HeaderText="Contraseña" />
+                <%--<asp:BoundField DataField="Password" HeaderText="Contraseña" />--%>
                 <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-outline-primary" SelectText="Editar" HeaderText="Accion" />
             </Columns>
             <EmptyDataTemplate>
