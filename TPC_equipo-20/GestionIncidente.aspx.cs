@@ -108,7 +108,7 @@ namespace TPC_equipo_20
                 ddlTipo.SelectedValue = aux.Tipo.Id.ToString();
                 ddlPrioridad.SelectedValue = aux.Prioridad.Id.ToString();
                 lblCreado.Text = "Creado el día " + aux.FechaCreacion.ToString("D");
-                lblUsuarioAsignado.Text = "Usuario asignado: " + aux.UsuarioAsignado.Nombre + " " + aux.UsuarioAsignado.Apellido;
+                lblUsuarioAsignado.Text = "Usuario asignado: " + aux.UsuarioAsignado.Nick;
                 txtDetalle.Text = aux.Detalle;
                 // "D" -> sábado, 8 de junio de 2024
                 // "d" -> 08/06/2024
