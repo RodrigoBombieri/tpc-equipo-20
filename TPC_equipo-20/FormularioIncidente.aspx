@@ -40,12 +40,63 @@
         }
 
         .custom-row {
-            background-color: #f8f9fa; /* Color de fondo */
-            border: 1px solid #dee2e6; /* Borde delgado */
-            border-radius: 0.25rem; /* Bordes redondeados */
-            padding: 10px 20px; /* Espaciado interno */
+            background-color: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 0.25rem; 
+            padding: 10px 20px; 
         }
 
+        .card {
+            background-color: #fff; 
+            border: 1px solid #dee2e6; 
+            border-radius: 0.25rem; 
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); 
+            padding: 0.5rem; 
+            margin-bottom: 1rem;
+        }
+
+            .card:hover {
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff; /* Color azul */
+            margin-bottom: 0.75rem; 
+        }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .card-body div {
+                margin-bottom: 0.5rem;
+            }
+
+            .card-body .form-label {
+                font-weight: bold;
+                color: #495057; 
+            }
+
+            .card-body .btn {
+                margin-top: 0.5rem;
+                align-self: center;
+            }
+
+        .info-value {
+            font-weight: normal;
+            color: #6c757d;
+        }
+
+        .btn-outline-primary {
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -116,15 +167,34 @@
         </div>
         <%--Datos cliente--%>
         <div class="col-md-6 border mb-4">
-            <div class="mb-3">
+            <%--<div class="mb-3">
                 <label id="lblCliente" class="form-label"></label>
             </div>
             <div class="mb-3">
-                <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>
-                <asp:Label ID="lblDocumento" class="form-label" runat="server"></asp:Label>
             </div>
             <div class="mb-3 text-end">
-                <asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />
+            </div>--%>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Cliente:</h5>
+                    <div>
+                        <asp:Label ID="lblNombreApellido" class="form-label" runat="server"></asp:Label>
+                    </div>
+                    <div>
+                        <span class="info-value">D.N.I:</span>
+                        <asp:Label ID="lblDocumento" class="info-value" runat="server"></asp:Label>
+                    </div>
+                    <div>
+                        <span class="info-value">Tel.:</span>
+                        <asp:Label ID="lblTelefono1" class="info-value" runat="server"></asp:Label>
+                    </div>
+                    <div>
+                        <asp:Label ID="lblEmail" class="info-value" runat="server"></asp:Label>
+                    </div>
+
+                    <asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />
+                </div>
             </div>
         </div>
     </div>

@@ -110,7 +110,8 @@ namespace TPC_equipo_20
         {
             lblNombreApellido.Text = aux.Nombre + " " + aux.Apellido;
             lblDocumento.Text = aux.Dni;
-            //mostrar mas campos.
+            lblTelefono1.Text = aux.Telefono1;
+            lblEmail.Text = aux.Email;
         }
         protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
