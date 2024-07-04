@@ -9,7 +9,7 @@ namespace negocio
 {
     public class IncidenteNegocio
     {
-        public List<Incidente> listar(bool esIdUsuario, string id="")
+        public List<Incidente> listar(bool esIdUsuario, string id = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Incidente> lista = new List<Incidente>();
@@ -21,12 +21,14 @@ namespace negocio
                     "I.IDEstado, E.Nombre as EstadoNombre, " +
                     "c.ID as IDCliente, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2," +
                     "c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, " +
-                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " + 
+                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " +
                     "pr.Nombre as Provincia, " +
                     "U.ID as IDUsuario, U.Nombre as NombreUsuario, U.Apellido as ApellidoUsuario, U.Nick, " +
                     "U.Dni as UsuarioDNI, U.Telefono as TelefonoUsuario, U.Email as EmailUsuario, U.urlImagenPerfil, " +
                     "R.ID as IDRol, R.Nombre as NombreRol, " +
-                    "I.Detalle, I.FechaCreacion, I.FechaCierre " +
+                    "I.Detalle, I.FechaCreacion as CreacionIncidente, I.FechaCierre, " +
+                    "DATEADD(day, P.Vigencia, I.FechaCreacion) AS Vencimiento, " +
+                    "CAST(CASE WHEN DATEADD(day, P.Vigencia, I.FechaCreacion) < GETDATE() THEN 1 ELSE 0  END AS bit) AS Vencido " +
                     "FROM Incidentes I " +
                     "inner join TiposIncidentes TI on I.IDTipo = TI.ID " +
                     "inner join Prioridades P on I.IDPrioridad = P.ID " +
@@ -36,7 +38,8 @@ namespace negocio
                     "inner join Provincias pr ON pr.ID = d.IDProvincia " +
                     "inner join Usuarios U on I.IDUsuario = U.ID " +
                     "inner join Roles R on U.IDRol = R.ID";
-                
+
+
                 if (id != "" && !esIdUsuario)
                 {
                     query += " where I.ID = @id";
@@ -48,7 +51,7 @@ namespace negocio
                     datos.setearParametro("@idUsuario", id);
                 }
                 datos.setearConsulta(query);
-                
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -67,10 +70,12 @@ namespace negocio
                     aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
                     if (!(datos.Lector["Detalle"] is DBNull))
                         aux.Detalle = (string)datos.Lector["Detalle"];
-                    aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
+                    aux.FechaCreacion = (DateTime)datos.Lector["CreacionIncidente"];
+                    aux.FechaVencimiento = (DateTime)datos.Lector["Vencimiento"];
+                    aux.Vencido = (bool)datos.Lector["Vencido"];
                     if (!(datos.Lector["FechaCierre"] is DBNull))
                         aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
-                    
+
                     //usuario
                     aux.UsuarioAsignado = new Usuario();
                     aux.UsuarioAsignado.Id = (long)datos.Lector["IDUsuario"];

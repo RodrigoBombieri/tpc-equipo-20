@@ -16,6 +16,8 @@ namespace dominio
         public string Detalle { get; set; }
         public Usuario UsuarioAsignado { get; set; }
         public DateTime FechaCreacion {  get; set; }
+        public DateTime FechaVencimiento { get; set; }
+        public bool Vencido {  get; set; }
         public DateTime? FechaCierre { get; set; }
     }
 }
