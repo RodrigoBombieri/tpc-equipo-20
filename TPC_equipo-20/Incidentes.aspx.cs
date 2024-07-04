@@ -39,7 +39,7 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-                Session.Add("Error", ex.ToString());
+                Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
@@ -72,8 +72,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
         protected void txtFiltro_TextChanged(object sender, EventArgs e)
@@ -87,8 +87,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,8 +111,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -137,8 +137,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

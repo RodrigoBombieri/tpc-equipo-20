@@ -102,7 +102,7 @@
                     <asp:BoundField HeaderText="Dni" DataField="Dni" />
                     <asp:BoundField HeaderText="Teléfono" DataField="Telefono1" />
                     <asp:BoundField HeaderText="Email" DataField="Email" />
-                    <asp:BoundField HeaderText="Fecha de Alta" DataField="FechaCreacion" />
+                    <asp:BoundField ItemStyle-Wrap="true" HeaderText="Fecha de Alta" DataField="FechaCreacion" />
                     <asp:BoundField HeaderText="Cantidad de incidentes" DataField="Incidentes.Count" />
                     <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver más" />
                     <asp:ButtonField CommandName="nuevoIncidente" ControlStyle-CssClass="btn btn-primary" Text="Crear incidente" />

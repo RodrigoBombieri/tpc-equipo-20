@@ -44,7 +44,7 @@ namespace negocio
                 }
                 else if (id != "" && esIdUsuario)
                 {
-                    query += " where I.IDUsuario = idUsuario";
+                    query += " where I.IDUsuario = @idUsuario";
                     datos.setearParametro("@idUsuario", id);
                 }
                 datos.setearConsulta(query);
