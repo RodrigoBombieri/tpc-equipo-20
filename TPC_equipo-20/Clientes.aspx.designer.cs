@@ -24,6 +24,16 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// btnCrear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrear;
+
+        /// <summary>
+        /// txtFiltroCliente control.
         /// Control txtFiltroCliente.
         /// </summary>
         /// <remarks>
@@ -121,7 +131,6 @@ namespace TPC_equipo_20
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvClientes;
-
         /// <summary>
         /// Control btnCrear.
         /// </summary>
