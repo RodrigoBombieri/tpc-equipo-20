@@ -129,7 +129,8 @@ select 'Otro',5
 GO
 
 insert into USUARIOS (IDRol, Nombre, Apellido, Nick, Dni, Telefono, Email, Pass)
-select 1, 'Admin', 'Admin', 'admin', '12345678', '12345678', 'admin@admin.com', 'admin'
+select 1, 'Admin', 'Admin', 'admin', '12345678', '12345678', 'admin@admin.com', 'admin' UNION
+select 3, 'Lucas', 'Saputo', 'lucasNick', '31146239', '123456789', 'tel@tel.com', 'admin' 
 GO
 
 insert into PROVINCIAS (Nombre)
