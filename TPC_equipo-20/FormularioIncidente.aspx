@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormularioIncidente.aspx.cs" Inherits="TPC_equipo_20.FormularioIncidente" EnableEventValidation="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormularioIncidente.aspx.cs" Inherits="TPC_equipo_20.FormularioIncidente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -148,12 +148,11 @@
         <%--Incidente--%>
         <div class="col-md-6" style="padding-right: 15px;">
             <div class="row border mb-4">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
+                
                         <div class="mb-3">
                             <label id="lblTipo" class="form-label">Tipo de incidente</label>
                             <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" 
-                                runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged"></asp:DropDownList>
+                                runat="server"></asp:DropDownList>
                             <asp:Label ID="lblErrorDdlTipo" runat="server" Text="" ForeColor="Red"></asp:Label>
                         </div>
                         <div class="mb-3">
@@ -161,8 +160,7 @@
                             <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
                             <asp:Label ID="lblErrorDdlPrioridad" runat="server" Text="" ForeColor="Red"></asp:Label>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                  
 
                 <div class="mb-3">
                     <label id="lblDetalle" class="form-label">Detalle</label>
