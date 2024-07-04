@@ -165,7 +165,7 @@
         <div class="col-md-8 d-flex align-items-center">
             <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
             <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge estado-color" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
-            <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
+            <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server"></asp:Label>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
             <asp:Button ID="btnVolver" Text="Regresar" CssClass="btn btn-warning" runat="server" OnClick="btnVolver_Click" />
@@ -225,7 +225,7 @@
                             <asp:Label ID="lblEmail" class="info-value" runat="server"></asp:Label>
                         </div>
 
-                        <asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />
+                        <%--<asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />--%>
                     </div>
                 </div>
             </div>

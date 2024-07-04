@@ -140,8 +140,15 @@ namespace TPC_equipo_20
         }
         protected void mostrarVigencia(Incidente aux)
         {
-            //vigente-vencido-proximo
-            //lblEstado.CssClass = "badge rounded-pill text-bg-success large-badge";
+            if (aux.Vencido)
+            { 
+                lblVigencia.CssClass = "badge rounded-pill text-bg-danger large-badge";
+                lblVigencia.Text = "Vencido";
+            }else
+            {
+                lblVigencia.CssClass = "badge rounded-pill text-bg-success large-badge";
+                lblVigencia.Text = "Vigente";
+            }
         }
         protected void mostrarCliente(Incidente aux)
         {
