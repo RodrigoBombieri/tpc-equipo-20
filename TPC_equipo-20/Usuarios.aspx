@@ -45,8 +45,7 @@
 
             <%if (chkFiltroAvanzado.Checked)
                 { %>
-            <asp:UpdatePanel runat="server">
-                <ContentTemplate>
+
                     <div class="row">
                         <div class="col-3">
                             <div class="mb-3">
@@ -67,15 +66,13 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
-                        <div class="col-3">
+                    </div>
+                                    <div class="col-3">
                             <div class="mb-3">
                                 <asp:Label ID="lblFiltroAvanzado" runat="server" Text="Filtro"></asp:Label>
-                                <asp:TextBox ID="txtFiltroAvanzado" OnTextChanged="txtFiltroAvanzado_TextChanged" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtFiltroAvanzado" OnTextChanged="txtFiltroAvanzado_TextChanged" AutoPostBack="true" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
                         </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
             <% } %>
             <div class="row">
                 <div class="col-3">

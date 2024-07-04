@@ -48,11 +48,8 @@ namespace TPC_equipo_20
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 Session.Clear();
                 Response.Redirect("Login.aspx");
-            }
         }
     }
 }

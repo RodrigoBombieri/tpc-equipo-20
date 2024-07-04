@@ -71,7 +71,7 @@
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Label ID="lblFiltroAvanzado" Text="Filtro" runat="server" />
-                    <asp:TextBox ID="txtFiltroAvanzado" OnTextChanged="txtFiltroAvanzado_TextChanged" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtFiltroAvanzado" OnTextChanged="txtFiltroAvanzado_TextChanged" AutoPostBack="true" CssClass="form-control" runat="server" />
                 </div>
                 <asp:Label ID="lblValidarFiltro" Text="" runat="server" ForeColor="Red" />
             </div>
