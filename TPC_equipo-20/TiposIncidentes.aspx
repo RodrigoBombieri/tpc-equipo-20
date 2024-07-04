@@ -42,7 +42,7 @@
             <h1>Tipos incidentes</h1>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <asp:Button ID="btnCrear" Text="Crear Incidente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
+            <asp:Button ID="btnCrear" Text="Crear Tipo de Incidente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
             <a href="/Administracion.aspx" class="btn btn-warning">Regresar</a>
         </div>
     </div>
