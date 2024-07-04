@@ -64,8 +64,9 @@ namespace negocio
                     aux.Prioridad.Nombre = (string)datos.Lector["PrioridadNombre"];
                     aux.Estado = new Estado();
                     aux.Estado.Id = (short)datos.Lector["IDEstado"];
-                    aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];                    
-                    aux.Detalle = (string)datos.Lector["Detalle"];
+                    aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
+                    if (!(datos.Lector["Detalle"] is DBNull))
+                        aux.Detalle = (string)datos.Lector["Detalle"];
                     aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
                     if (!(datos.Lector["FechaCierre"] is DBNull))
                         aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
@@ -77,7 +78,8 @@ namespace negocio
                     aux.UsuarioAsignado.Apellido = (string)datos.Lector["ApellidoUsuario"];
                     aux.UsuarioAsignado.Nick = (string)datos.Lector["Nick"];
                     aux.UsuarioAsignado.Dni = (string)datos.Lector["UsuarioDNI"];
-                    aux.UsuarioAsignado.Telefono = (string)datos.Lector["TelefonoUsuario"];
+                    if (!(datos.Lector["TelefonoUsuario"] is DBNull))
+                        aux.UsuarioAsignado.Telefono = (string)datos.Lector["TelefonoUsuario"];
                     aux.UsuarioAsignado.Email = (string)datos.Lector["EmailUsuario"];
                     aux.UsuarioAsignado.Rol = new Rol();
                     aux.UsuarioAsignado.Rol.Id = (short)datos.Lector["IDRol"];
