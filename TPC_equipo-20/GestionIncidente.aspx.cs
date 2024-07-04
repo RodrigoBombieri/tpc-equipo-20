@@ -148,8 +148,8 @@ namespace TPC_equipo_20
             //cliente
             lblNombreApellido.Text = aux.Cliente.Nombre + " " + aux.Cliente.Apellido;
             lblDocumento.Text = aux.Cliente.Dni;
-            //lblDomicilio
-            //resto de datos de cliente
+            lblTelefono1.Text = aux.Cliente.Telefono1;
+            lblEmail.Text = aux.Cliente.Email;
         }
         protected void dgvAcciones_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -167,14 +167,6 @@
         </div>
         <%--Datos cliente--%>
         <div class="col-md-6 border mb-4">
-            <%--<div class="mb-3">
-                <label id="lblCliente" class="form-label"></label>
-            </div>
-            <div class="mb-3">
-            </div>
-            <div class="mb-3 text-end">
-            </div>--%>
-
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Cliente:</h5>
@@ -192,7 +184,6 @@
                     <div>
                         <asp:Label ID="lblEmail" class="info-value" runat="server"></asp:Label>
                     </div>
-
                     <asp:Button ID="btnModificarUsuario" Text="Modificar Cliente" CssClass="btn btn-outline-primary me-2" runat="server" />
                 </div>
             </div>
