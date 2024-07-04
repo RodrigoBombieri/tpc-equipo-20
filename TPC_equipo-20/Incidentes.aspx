@@ -52,9 +52,9 @@
                 <div class="mb-3">
                     <asp:Label ID="lblCampo" Text="Campo" runat="server" />
                     <asp:DropDownList ID="ddlCampo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
-                        <asp:ListItem Text="Precio" />
-                        <asp:ListItem Text="Nombre" />
-                        <asp:ListItem Text="Descripcion" />
+                        <asp:ListItem Text="Tipo" />
+                        <asp:ListItem Text="Prioridad" />
+                        <asp:ListItem Text="Estado" />
                     </asp:DropDownList>
                 </div>
             </div>
@@ -62,9 +62,9 @@
                 <div class="mb-3">
                     <asp:Label ID="lblCriterio" Text="Criterio" runat="server" />
                     <asp:DropDownList ID="ddlCriterio" runat="server" CssClass="form-control" AutoPostBack="true">
-                        <asp:ListItem Text="Igual a" />
-                        <asp:ListItem Text="Mayor a" />
-                        <asp:ListItem Text="Menor a" />
+                        <asp:ListItem Text="Contiene" />
+                        <asp:ListItem Text="Empieza con" />
+                        <asp:ListItem Text="Termina con" />
                     </asp:DropDownList>
                 </div>
             </div>
@@ -76,6 +76,7 @@
                 <asp:Label ID="lblValidarFiltro" Text="" runat="server" ForeColor="Red" />
             </div>
         </div>
+        <% } %>
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
@@ -84,7 +85,6 @@
                 </div>
             </div>
         </div>
-        <% } %>
     </div>
     <div class="row">
         <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
