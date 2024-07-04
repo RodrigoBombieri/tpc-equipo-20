@@ -59,7 +59,7 @@
                         else
                         { %>
 
-                    <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" Text="Salir" />
+                    <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" AutoPostBack="false" Text="Salir" />
                     <asp:Label ID="lblSalir" CssClass="text-light m-auto me-2" runat="server" Text="User"></asp:Label>
                     <% }%>
                     <asp:Image ID="imgAvatar" Style="width: 40px; height: 40px; border-radius: 50%" runat="server" />

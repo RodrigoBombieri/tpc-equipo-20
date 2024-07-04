@@ -74,22 +74,24 @@
                     <div class="col-3">
                         <div class="mb-3">
                             <asp:Label ID="lblFiltroAvanzado" runat="server" Text="Filtro"></asp:Label>
-                            <asp:TextBox ID="txtFiltroAvanzadoCliente" CssClass="form-control" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtFiltroAvanzadoCliente" OnTextChanged="txtFiltroAvanzadoCliente_TextChanged" CssClass="form-control" runat="server"></asp:TextBox>
                         </div>
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <div class="row">
+
+        <% } %>
+
+                <div class="row">
             <div class="col-3">
                 <div class="mb-3">
-                    <asp:Label ID="lblBtnBuscar" runat="server"></asp:Label>
                     <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" Text="Buscar" />
+                    <asp:Button ID="BtnLimpiarFiltros" Text="Limpiar filtros" runat="server" CssClass="btn btn-outline-secondary" OnClick="BtnLimpiarFiltros_Click" />
                 </div>
             </div>
         </div>
 
-        <% } %>
     </div>
     <div class="row">
         <div class="col">
