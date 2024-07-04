@@ -4,6 +4,7 @@
     <style>
         .custom-card {
             height: 100%;
+            margin: 1rem;
         }
 
             .custom-card .card-img-top {
