@@ -113,18 +113,27 @@ namespace TPC_equipo_20
             {
                 ClienteNegocio negocio = new ClienteNegocio();
 
-                if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
+                if (chkFiltroAvanzadoCliente.Checked)
                 {
-                    dgvClientes.DataSource = negocio.listar(true);
+                    if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
+                    {
+                        dgvClientes.DataSource = negocio.listar(true);
+                    }
+                    else
+                    {
+                        dgvClientes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                        ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzadoCliente.Text);
+                    }
                 }
                 else
                 {
-                    dgvClientes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
-                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzadoCliente.Text);
+                    List<Cliente> lista = (List<Cliente>)Session["listaClientes"];
+                    List<Cliente> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltroCliente.Text.ToLower()));
+                    dgvClientes.DataSource = listaFiltrada;
                 }
-
                 dgvClientes.DataBind();
             }
+
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
@@ -147,6 +156,45 @@ namespace TPC_equipo_20
                     var id = dgvClientes.DataKeys[rowNum].Value.ToString();
                     Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
                 }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void BtnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFiltroCliente.Text = "";
+                txtFiltroAvanzadoCliente.Text = "";
+                dgvClientes.DataSource = Session["listaClientes"];
+                dgvClientes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void txtFiltroAvanzadoCliente_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ClienteNegocio negocio = new ClienteNegocio();
+                if (string.IsNullOrEmpty(txtFiltroAvanzadoCliente.Text))
+                {
+                    dgvClientes.DataSource = negocio.listar(true);
+                }
+                else
+                {
+                    dgvClientes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzadoCliente.Text);
+                }
+                dgvClientes.DataBind();
             }
             catch (Exception ex)
             {

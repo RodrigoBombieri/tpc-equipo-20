@@ -10,6 +10,7 @@ namespace TPC_equipo_20
 {
     public partial class Incidentes : System.Web.UI.Page
     {
+        public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -129,18 +130,69 @@ namespace TPC_equipo_20
         }
         protected void btnLimpiarFiltro_Click(object sender, EventArgs e)
         {
-            txtFiltro.Text = "";
-            txtFiltro.Enabled = true;
-            lblValidarFiltro.Text = "";
-            chkFiltroAvanzado.Checked = false;
-            //recargar grilla
+            try
+            {
+                txtFiltro.Text = "";
+                txtFiltroAvanzado.Text = "";
+                dgvIncidentes.DataSource = Session["listadoIncidentes"];
+                dgvIncidentes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
+                /*IncidenteNegocio negocio = new IncidenteNegocio();
 
+                if (chkFiltroAvanzado.Checked)
+                {
+                    if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                    {
+                        dgvIncidentes.DataSource = negocio.listar(true);
+                    }
+                    else
+                    {
+                        dgvIncidentes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                        ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                    }
+                }
+                else
+                {
+                    List<Incidente> lista = (List<Incidente>)Session["listadoIncidentes"];
+                    List<Incidente> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltroCliente.Text.ToLower()));
+                    dgvIncidentes.DataSource = listaFiltrada;
+                }
+                dgvIncidentes.DataBind();*/
+            }
+
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void txtFiltroAvanzado_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               /* IncidenteNegocio negocio = new IncidenteNegocio();
+                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                {
+                    dgvIncidentes.DataSource = negocio.listar(true);
+                }
+                else
+                {
+                    dgvIncidentes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                }
+                dgvIncidentes.DataBind();*/
             }
             catch (Exception ex)
             {

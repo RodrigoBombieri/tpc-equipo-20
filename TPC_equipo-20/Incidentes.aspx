@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-4">
             <div class="mb-3">
-                <asp:Label Text="Filtrar" runat="server" />
+                <asp:Label Text="Filtrar: " runat="server" />
                 <asp:TextBox ID="txtFiltro" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" />
             </div>
         </div>
@@ -71,12 +71,13 @@
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Label ID="lblFiltroAvanzado" Text="Filtro" runat="server" />
-                    <asp:TextBox ID="txtFiltroAvanzado" CssClass="form-control" runat="server" />
+                    <asp:TextBox ID="txtFiltroAvanzado" OnTextChanged="txtFiltroAvanzado_TextChanged" CssClass="form-control" runat="server" />
                 </div>
                 <asp:Label ID="lblValidarFiltro" Text="" runat="server" ForeColor="Red" />
             </div>
         </div>
-        <div class="row">
+        <% } %>
+                <div class="row">
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" />
@@ -84,7 +85,6 @@
                 </div>
             </div>
         </div>
-        <% } %>
     </div>
     <div class="row">
         <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
