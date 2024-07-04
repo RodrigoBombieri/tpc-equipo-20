@@ -66,7 +66,17 @@ namespace TPC_equipo_20
                         ddlProvincias.SelectedValue = aux.Domicilio.Provincia.Id.ToString();
                         txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
 
-                        Session.Add("listaIncidentesCliente", aux.Incidentes);
+                        List<Incidente> listaInc = aux.Incidentes;
+                        if (Seguridad.EsTelefonista(Session["usuario"]))
+                        {
+                            Usuario usuario = (Usuario)Session["usuario"];
+                            List<Incidente> lista = listaInc.FindAll(k => k.UsuarioAsignado.Id == usuario.Id);
+                            Session.Add("listaIncidentesCliente", lista);
+                        }
+                        else
+                        {
+                            Session.Add("listaIncidentesCliente", aux.Incidentes);
+                        }
                         dgvIncidentes.DataSource = Session["listaIncidentesCliente"];
                         dgvIncidentes.DataBind();
                     }

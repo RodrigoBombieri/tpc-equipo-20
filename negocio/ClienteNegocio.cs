@@ -72,7 +72,7 @@ namespace negocio
                 }
                 datos.cerrarConexion();
                 datos = new AccesoDatos();
-                datos.setearConsulta("select i.ID, i.IDCliente, i.IdTipo, ti.Nombre as 'Tipo', i.IdEstado, e.Nombre as 'Estado', i.IdPrioridad, p.Nombre as 'Prioridad', i.IdUsuario, u.Nombre as 'NombreUsuario', u.Apellido as 'ApellidoUsuario'" +
+                datos.setearConsulta("select i.ID, i.IDCliente, i.IdTipo, ti.Nombre as 'Tipo', i.IdEstado, i.FechaCreacion, e.Nombre as 'Estado', i.IdPrioridad, p.Nombre as 'Prioridad', i.IdUsuario, u.Nombre as 'NombreUsuario', u.Apellido as 'ApellidoUsuario'" +
                     "from Incidentes i  join Estados e on e.id=i.IDEstado  join Prioridades p on p.id=i.idprioridad  join Usuarios u on u.id=i.IDUsuario join TiposIncidentes ti on ti.id=i.IDTipo");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -92,6 +92,7 @@ namespace negocio
                             inc.Prioridad = new Prioridad();
                             inc.Prioridad.Id = (short)datos.Lector["IdPrioridad"];
                             inc.Prioridad.Nombre = (string)datos.Lector["Prioridad"];
+                            inc.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                             inc.UsuarioAsignado = new Usuario();
                             inc.UsuarioAsignado.Id = (long)datos.Lector["IdUsuario"];
                             inc.UsuarioAsignado.Nombre = (string)datos.Lector["NombreUsuario"];
