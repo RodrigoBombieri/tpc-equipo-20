@@ -19,10 +19,7 @@ namespace negocio
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool EsAdmin(Object obj)
@@ -32,10 +29,7 @@ namespace negocio
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool EsSupervisor(Object obj)
