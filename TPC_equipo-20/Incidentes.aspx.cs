@@ -88,10 +88,10 @@ namespace TPC_equipo_20
         {
             try
             {
-                //List<Articulo> lista = (List<Articulo>)Session["listaArticulos"];
-                //List<Articulo> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Codigo.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Descripcion.ToLower().Contains(txtFiltro.Text.ToLower()));
-                //repRepeater.DataSource = listaFiltrada;
-                //repRepeater.DataBind();
+                List<Incidente> lista = (List<Incidente>)Session["listadoIncidentes"];
+                List<Incidente> listaFiltrada = lista.FindAll(k => k.Tipo.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Prioridad.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Estado.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()));
+                dgvIncidentes.DataSource = listaFiltrada;
+                dgvIncidentes.DataBind();
             }
             catch (Exception ex)
             {
@@ -148,7 +148,7 @@ namespace TPC_equipo_20
         {
             try
             {
-                /*IncidenteNegocio negocio = new IncidenteNegocio();
+                IncidenteNegocio negocio = new IncidenteNegocio();
 
                 if (chkFiltroAvanzado.Checked)
                 {
@@ -165,10 +165,10 @@ namespace TPC_equipo_20
                 else
                 {
                     List<Incidente> lista = (List<Incidente>)Session["listadoIncidentes"];
-                    List<Incidente> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltroCliente.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltroCliente.Text.ToLower()));
+                    List<Incidente> listaFiltrada = lista.FindAll(k => k.Tipo.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Prioridad.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Estado.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()));
                     dgvIncidentes.DataSource = listaFiltrada;
                 }
-                dgvIncidentes.DataBind();*/
+                dgvIncidentes.DataBind();
             }
 
             catch (Exception ex)
