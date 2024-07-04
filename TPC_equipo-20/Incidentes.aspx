@@ -22,6 +22,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--<asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>--%>
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
             <h1>Incidentes</h1>

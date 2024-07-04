@@ -40,18 +40,18 @@
         }
 
         .custom-row {
-            background-color: #f8f9fa; 
-            border: 1px solid #dee2e6; 
-            border-radius: 0.25rem; 
-            padding: 10px 20px; 
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 10px 20px;
         }
 
         .card {
-            background-color: #fff; 
-            border: 1px solid #dee2e6; 
-            border-radius: 0.25rem; 
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); 
-            padding: 0.5rem; 
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            padding: 0.5rem;
             margin-bottom: 1rem;
         }
 
@@ -63,7 +63,7 @@
             font-size: 1.25rem;
             font-weight: bold;
             color: #007bff; /* Color azul */
-            margin-bottom: 0.75rem; 
+            margin-bottom: 0.75rem;
         }
 
         .card-body {
@@ -79,7 +79,7 @@
 
             .card-body .form-label {
                 font-weight: bold;
-                color: #495057; 
+                color: #495057;
             }
 
             .card-body .btn {
@@ -100,6 +100,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
     <div class="row custom-row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
             <h1>Creando incidente</h1>
@@ -147,16 +148,22 @@
         <%--Incidente--%>
         <div class="col-md-6" style="padding-right: 15px;">
             <div class="row border mb-4">
-                <div class="mb-3">
-                    <label id="lblTipo" class="form-label">Tipo de incidente</label>
-                    <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
-                    <asp:Label ID="lblErrorDdlTipo" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </div>
-                <div class="mb-3">
-                    <label id="lblPrioridad" class="form-label">Prioridad</label>
-                    <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
-                    <asp:Label ID="lblErrorDdlPrioridad" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </div>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3">
+                            <label id="lblTipo" class="form-label">Tipo de incidente</label>
+                            <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" 
+                                runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged"></asp:DropDownList>
+                            <asp:Label ID="lblErrorDdlTipo" runat="server" Text="" ForeColor="Red"></asp:Label>
+                        </div>
+                        <div class="mb-3">
+                            <label id="lblPrioridad" class="form-label">Prioridad</label>
+                            <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                            <asp:Label ID="lblErrorDdlPrioridad" runat="server" Text="" ForeColor="Red"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
                 <div class="mb-3">
                     <label id="lblDetalle" class="form-label">Detalle</label>
                     <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" runat="server" />
