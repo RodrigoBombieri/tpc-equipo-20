@@ -155,6 +155,7 @@ namespace TPC_equipo_20
             if (aux.Tipo.Id != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
             {
                 aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
+                aux.Tipo.Nombre = ddlTipo.DataTextField;//chequear esto si va bien
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
                 {

@@ -138,7 +138,7 @@
                         <asp:Label runat="server" Text="Buscar por nombre, apellido o documento."></asp:Label>
                     </div>
                     <div class="mb-3 d-flex">
-                        <asp:TextBox ID="txtFiltroUsuario" CssClass="form-control me-2" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtFiltroUsuario" AutoPostBack="false" CssClass="form-control me-2" runat="server"></asp:TextBox>
                         <asp:Button ID="btnBuscarUsuario" Text="Buscar" CssClass="btn btn-secondary" runat="server" OnClick="btnBuscarUsuario_Click" />
                     </div>
                     <asp:GridView ID="dgvUsuarios" DataKeyNames="Id" OnSelectedIndexChanged="dgvUsuarios_SelectedIndexChanged"

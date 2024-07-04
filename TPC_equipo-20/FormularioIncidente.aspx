@@ -83,7 +83,7 @@
             <EmptyDataTemplate>
                 <table style="width: 100%;">
                     <tr>
-                        <td colspan="2" style="text-align: center;">No hay datos disponibles, <a href="FormularioCliente.aspx">crear cliente</a>.</td>
+                        <td colspan="2" style="text-align: center;">No hay datos disponibles, <a href="FormularioCliente.aspx?form=1">crear cliente</a>.</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
