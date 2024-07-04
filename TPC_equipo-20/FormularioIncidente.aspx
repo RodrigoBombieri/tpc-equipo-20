@@ -150,18 +150,20 @@
                 <div class="mb-3">
                     <label id="lblTipo" class="form-label">Tipo de incidente</label>
                     <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblErrorDdlTipo" runat="server" Text="" ForeColor="Red"></asp:Label>
                 </div>
                 <div class="mb-3">
                     <label id="lblPrioridad" class="form-label">Prioridad</label>
                     <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblErrorDdlPrioridad" runat="server" Text="" ForeColor="Red"></asp:Label>
                 </div>
                 <div class="mb-3">
                     <label id="lblDetalle" class="form-label">Detalle</label>
                     <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" runat="server" />
                 </div>
                 <div class="mb-3 text-end">
-                    <asp:Button ID="btnGuardarIncidente" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" OnClick="btnGuardarIncidente_Click" />
                     <asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" OnClick="btnCancelar_Click" />
+                    <asp:Button ID="btnGuardarIncidente" Text="Guardar" CssClass="btn btn-primary me-2" runat="server" OnClick="btnGuardarIncidente_Click" />
                 </div>
             </div>
         </div>

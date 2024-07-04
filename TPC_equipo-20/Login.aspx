@@ -55,8 +55,8 @@
                     <asp:Label ID="lblPassword" CssClass="form-imput" runat="server" Text="Contraseña"></asp:Label>
                     <asp:TextBox ID="txtPassword" required TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
-                <asp:Button ID="btnLogin" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Ingresar" runat="server" />
                 <a href="Default.aspx" class="btn btn-danger">Cancelar </a>
+                <asp:Button ID="btnLogin" CssClass="btn btn-primary" OnClick="btnLogin_Click" Text="Ingresar" runat="server" />
             </div>
         </div>
     </div>

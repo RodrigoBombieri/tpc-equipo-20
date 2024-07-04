@@ -91,15 +91,16 @@
             AllowPaging="true" PageSize="5" runat="server">
             <PagerStyle CssClass="pagination" />
             <Columns>
-                <asp:BoundField DataField="Id" HeaderText="ID" />
+                <%--<asp:BoundField DataField="Id" HeaderText="ID" />--%>
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                 <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
-                <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
-                <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
-                <asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />
+                <%--<asp:BoundField DataField="Detalle" HeaderText="Detalle" />--%>
                 <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
-                <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
-                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />
+                <%--agregar vigencia/vencimiento--%>
+                <%--<asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />--%>
+                <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
+                <%--<asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />--%>
+                <%--<asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />--%>
             </Columns>
             <EmptyDataTemplate>
                 <table style="width: 100%;">

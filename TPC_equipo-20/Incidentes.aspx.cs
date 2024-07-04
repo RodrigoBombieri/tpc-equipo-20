@@ -18,11 +18,18 @@ namespace TPC_equipo_20
                 if (Seguridad.EsTelefonista(Session["usuario"]))
                 {
                     Usuario usuario = (Usuario)Session["usuario"];
-                    Session.Add("listadoIncidentes", negocio.listar(true,usuario.Id.ToString()));
+                    Session.Add("listadoIncidentes", negocio.listar(true, usuario.Id.ToString()));
+                    dgvIncidentes.Columns.Add(new CommandField { ShowSelectButton = true, ControlStyle = { CssClass = "btn btn-info" }, SelectText = "Ver", HeaderText = "Ver" });
                 }
                 else
                 {
                     Session.Add("listadoIncidentes", negocio.listar(true));
+                    BoundField usuarioAsignadoField = new BoundField();
+                    usuarioAsignadoField.DataField = "UsuarioAsignado.Nombre";
+                    usuarioAsignadoField.HeaderText = "Usuario asignado";
+                    dgvIncidentes.Columns.Add(usuarioAsignadoField);
+                    dgvIncidentes.Columns.Add(new CommandField { ShowSelectButton = true, ControlStyle = { CssClass = "btn btn-info" }, SelectText = "Ver", HeaderText = "Ver" });
+
                 }
                 dgvIncidentes.DataSource = Session["listadoIncidentes"];
                 //dgvIncidentes.DataSource = negocio.listar();
@@ -45,7 +52,7 @@ namespace TPC_equipo_20
         }
 
         protected void dgvIncidentes_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {          
+        {
             try
             {
                 dgvIncidentes.DataSource = Session["listadoIncidentes"];
