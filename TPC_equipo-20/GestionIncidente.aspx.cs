@@ -45,6 +45,7 @@ namespace TPC_equipo_20
 
                     TipoAccionNegocio TipoAccionNegocio = new TipoAccionNegocio();
                     List<TipoAccion> listaTiposAcciones = TipoAccionNegocio.listar();
+                    Session.Add("TiposAcciones", listaTiposAcciones);
                     ddlTipoAccion.DataSource = listaTiposAcciones;
                     ddlTipoAccion.DataValueField = "Id";
                     ddlTipoAccion.DataTextField = "Nombre";
@@ -157,7 +158,17 @@ namespace TPC_equipo_20
 
         protected void dgvAcciones_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            try
+            {
+                dgvAcciones.DataSource = Session["listadoAcciones"];
+                dgvAcciones.PageIndex = e.NewPageIndex;
+                dgvAcciones.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -167,24 +178,33 @@ namespace TPC_equipo_20
 
         protected void btnModificarIncidente_Click(object sender, EventArgs e)
         {
-            try
+
+      try{
+            Incidente aux = new Incidente();
+            aux = (Incidente)Session["Incidente"];
+            List<Estado> estados = Session["estados"] as List<Estado>;
+            Estado estadoAux = new Estado();
+            if (aux.Tipo.Id != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
             {
-                Incidente aux = new Incidente();
-                aux = (Incidente)Session["Incidente"];
-                if (aux.Tipo.Id != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
+                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
+                aux.Tipo.Nombre = ddlTipo.SelectedItem.Text;
+                aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
+                aux.Prioridad.Nombre = ddlPrioridad.SelectedItem.Text;
+                if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
                 {
-                    aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
-                    aux.Tipo.Nombre = ddlTipo.DataTextField;//chequear esto si va bien
-                    aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
-                    if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
-                    {
-                        aux.Estado.Id = 4;//en analisis
+                    aux.Estado.Id = 4;//en analisis
+                    estadoAux = estados.Find(x => x.Id == aux.Estado.Id);
+                    if (estadoAux != null)
+                        aux.Estado.Nombre = estadoAux.Nombre;
+                    else
+                        aux.Estado.Nombre = "ERROR";
+
+                   
                     }
                     modificarIncidente(aux);
                     Session.Add("Incidente", aux);
                     guardarAccion(12);
                     mostrarEstado(aux);
-                }
             }
             catch (Exception ex)
             {
@@ -200,51 +220,54 @@ namespace TPC_equipo_20
         }
         protected void guardarAccion(int id = 0)
         {
-            try
+try{
+            bool banderaEstado = false;
+            Incidente aux = new Incidente();
+            aux = (Incidente)Session["Incidente"];
+            List<Estado> estados = Session["estados"] as List<Estado>;
+            Estado estadoAux = new Estado();
+            Usuario user = new Usuario();
+            user = (Usuario)Session["usuario"];
+            Accion accionAux = new Accion();
+            accionAux.IDIncidente = aux.Id;
+            accionAux.IDUsuario = user.Id;
+            accionAux.Tipo = new TipoAccion();
+            accionAux.Detalle = txtDetalleAccion.Text;
+            switch (id)
             {
-                bool banderaEstado = false;
-                Incidente aux = new Incidente();
-                aux = (Incidente)Session["Incidente"];
-                Usuario user = new Usuario();
-                user = (Usuario)Session["usuario"];
-                Accion accionAux = new Accion();
-                accionAux.IDIncidente = aux.Id;
-                accionAux.IDUsuario = user.Id;
-                accionAux.Tipo = new TipoAccion();
-                accionAux.Detalle = txtDetalleAccion.Text;
-                switch (id)
-                {
-                    case 0:
-                        accionAux.Tipo.Id = short.Parse(ddlTipoAccion.SelectedValue);
-                        break;
-                    case 3://cierre
-                        accionAux.Tipo.Id = 3;
-                        aux.Estado.Id = 3;//cerrado
-                        aux.FechaCierre = DateTime.Now;
-                        banderaEstado = true;
-                        break;
-                    case 4://resolucion
-                        accionAux.Tipo.Id = 4;
-                        aux.Estado.Id = 6;//resuelto
-                        aux.FechaCierre = DateTime.Now;
-                        banderaEstado = true;
-                        break;
-                    case 5://re-apertura
-                        accionAux.Tipo.Id = 5;
-                        aux.Estado.Id = 5;//re abierto
-                        aux.FechaCierre = null;
-                        banderaEstado = true;
-                        break;
-                    case 6://re-asignado
-                        accionAux.Tipo.Id = 6;
-                        break;
-                    case 12://modificacion tipo/prioridad
-                        accionAux.Detalle = "Modificación tipo incidente y/o prioridad.";
-                        accionAux.Tipo.Id = 12;
-                        break;
-                    default:
-                        break;
-                }
+                case 0:
+                    accionAux.Tipo.Id = short.Parse(ddlTipoAccion.SelectedValue);
+                    //accionAux.Tipo.Nombre = ddlTipoAccion.SelectedItem.Text;
+                    break;
+                case 3://cierre
+                    accionAux.Tipo.Id = 3;
+                    aux.Estado.Id = 3;//cerrado
+                    aux.FechaCierre = DateTime.Now;
+                    banderaEstado = true;
+                    break;
+                case 4://resolucion
+                    accionAux.Tipo.Id = 4;
+                    aux.Estado.Id = 6;//resuelto
+                    aux.FechaCierre = DateTime.Now;
+                    banderaEstado = true;
+                    break;
+                case 5://re-apertura
+                    accionAux.Tipo.Id = 5;
+                    aux.Estado.Id = 5;//re abierto
+                    aux.FechaCierre = null;
+                    banderaEstado = true;
+                    break;
+                case 6://re-asignado
+                    accionAux.Tipo.Id = 6;
+                    break;
+                case 12://modificacion tipo/prioridad
+                    accionAux.Detalle = "Modificación tipo incidente y/o prioridad.";
+                    accionAux.Tipo.Id = 12;
+                    break;
+                default:
+                    break;
+            }
+
 
                 //ESTADOS
                 // 1-ABIERTO
@@ -268,44 +291,61 @@ namespace TPC_equipo_20
                 // 11-VISITA TECNICA
                 // 12-CAMBIO PRIORIDAD/TIPO
                 // 13-OTRO
+            AccionNegocio accionNegocio = new AccionNegocio();
+            accionNegocio.agregar(accionAux);
+            cargarDGVAcciones(aux.Id);
+            if (banderaEstado)
+            {
+                estadoAux = estados.Find(x => x.Id == aux.Estado.Id);
+                if (estadoAux != null)
+                    aux.Estado.Nombre = estadoAux.Nombre;
+                else
+                    aux.Estado.Nombre = "ERROR";
 
-                AccionNegocio accionNegocio = new AccionNegocio();
-                accionNegocio.agregar(accionAux);
-                cargarDGVAcciones(aux.Id);
-                if (banderaEstado)
-                {
-                    modificarIncidente(aux);
-                    Session.Add("Incidente", aux);
-                    mostrarEstado(aux);
-                }
-                else if ((aux.Estado.Id == 1 || aux.Estado.Id == 5) && accionAux.Tipo.Id != 6)//(abierto-reabierto)&&(reasignado)
-                {
-                    aux.Estado.Id = 4;//en analisis
-                    modificarIncidente(aux);
-                    Session.Add("Incidente", aux);
-                    mostrarEstado(aux);
+                modificarIncidente(aux);
+                Session.Add("Incidente", aux);
+                mostrarEstado(aux);
+            }
+            else if ((aux.Estado.Id == 1 || aux.Estado.Id == 5) && accionAux.Tipo.Id != 6)//(abierto-reabierto)&&(reasignado)
+            {
+                aux.Estado.Id = 4;//en analisis
+                estadoAux = estados.Find(x => x.Id == aux.Estado.Id);
+                if (estadoAux != null)
+                    aux.Estado.Nombre = estadoAux.Nombre;
+                else
+                    aux.Estado.Nombre = "ERROR";
+
+                modificarIncidente(aux);
+                Session.Add("Incidente", aux);
+                mostrarEstado(aux);
+
                 }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
+
             }
 
         }
         protected void cargarDGVAcciones(long id)
         {
-            try
+try
             {
-                AccionNegocio accionNegocio = new AccionNegocio();
-                dgvAcciones.DataSource = accionNegocio.listar(id.ToString());
-                dgvAcciones.DataBind();
-            }
+            AccionNegocio accionNegocio = new AccionNegocio();
+            List<Accion> acciones = accionNegocio.listar(id.ToString());
+            Session.Add("listadoAcciones", acciones);
+            dgvAcciones.DataSource = acciones;
+            dgvAcciones.DataBind();
+
+            
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
+
         }
 
         protected void modificarIncidente(Incidente aux)
@@ -363,9 +403,10 @@ namespace TPC_equipo_20
                 if (txtFiltroUsuario.Text != "")
                 {
                     UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                    List<Usuario> usuarios = usuarioNegocio.listar(false, txtFiltroUsuario.Text);
-                    dgvUsuarios.DataSource = usuarios;
-                    dgvUsuarios.DataBind();
+                List<Usuario> usuarios = usuarioNegocio.listar(false, txtFiltroUsuario.Text);
+                Session.Add("usuariosGestion", usuarios);
+                dgvUsuarios.DataSource = usuarios;
+                dgvUsuarios.DataBind();
                 }
             }
             catch (Exception ex)
@@ -410,7 +451,17 @@ namespace TPC_equipo_20
 
         protected void dgvUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            try
+            {
+                dgvUsuarios.DataSource = Session["usuariosGestion"];
+                dgvUsuarios.PageIndex = e.NewPageIndex;
+                dgvUsuarios.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
