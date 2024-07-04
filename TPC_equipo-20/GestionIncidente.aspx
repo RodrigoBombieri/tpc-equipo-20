@@ -175,9 +175,9 @@
                             <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
                         </Columns>
                         <EmptyDataTemplate>
-                            <table style="        width: 100%;">
+                            <table style="width:100%;">
                                 <tr>
-                                    <td colspan="2" style="        text-align: center;">No se encontraron usuarios.</td>
+                                    <td colspan="2" style="text-align: center;">No se encontraron usuarios.</td>
                                 </tr>
                             </table>
                         </EmptyDataTemplate>

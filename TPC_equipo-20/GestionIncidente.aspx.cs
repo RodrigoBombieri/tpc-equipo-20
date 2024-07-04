@@ -179,32 +179,34 @@ namespace TPC_equipo_20
         protected void btnModificarIncidente_Click(object sender, EventArgs e)
         {
 
-      try{
-            Incidente aux = new Incidente();
-            aux = (Incidente)Session["Incidente"];
-            List<Estado> estados = Session["estados"] as List<Estado>;
-            Estado estadoAux = new Estado();
-            if (aux.Tipo.Id != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
+            try
             {
-                aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
-                aux.Tipo.Nombre = ddlTipo.SelectedItem.Text;
-                aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
-                aux.Prioridad.Nombre = ddlPrioridad.SelectedItem.Text;
-                if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
+                Incidente aux = new Incidente();
+                aux = (Incidente)Session["Incidente"];
+                List<Estado> estados = Session["estados"] as List<Estado>;
+                Estado estadoAux = new Estado();
+                if (aux.Tipo.Id != short.Parse(ddlTipo.SelectedValue) || aux.Prioridad.Id != short.Parse(ddlPrioridad.SelectedValue))
                 {
-                    aux.Estado.Id = 4;//en analisis
-                    estadoAux = estados.Find(x => x.Id == aux.Estado.Id);
-                    if (estadoAux != null)
-                        aux.Estado.Nombre = estadoAux.Nombre;
-                    else
-                        aux.Estado.Nombre = "ERROR";
+                    aux.Tipo.Id = short.Parse(ddlTipo.SelectedValue);
+                    aux.Tipo.Nombre = ddlTipo.SelectedItem.Text;
+                    aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
+                    aux.Prioridad.Nombre = ddlPrioridad.SelectedItem.Text;
+                    if (aux.Estado.Id == 1 || aux.Estado.Id == 5)//abierto-reabierto
+                    {
+                        aux.Estado.Id = 4;//en analisis
+                        estadoAux = estados.Find(x => x.Id == aux.Estado.Id);
+                        if (estadoAux != null)
+                            aux.Estado.Nombre = estadoAux.Nombre;
+                        else
+                            aux.Estado.Nombre = "ERROR";
 
-                   
+
                     }
                     modificarIncidente(aux);
                     Session.Add("Incidente", aux);
                     guardarAccion(12);
                     mostrarEstado(aux);
+                }
             }
             catch (Exception ex)
             {
@@ -331,15 +333,15 @@ try{
         }
         protected void cargarDGVAcciones(long id)
         {
-try
+            try
             {
-            AccionNegocio accionNegocio = new AccionNegocio();
-            List<Accion> acciones = accionNegocio.listar(id.ToString());
-            Session.Add("listadoAcciones", acciones);
-            dgvAcciones.DataSource = acciones;
-            dgvAcciones.DataBind();
+                AccionNegocio accionNegocio = new AccionNegocio();
+                List<Accion> acciones = accionNegocio.listar(id.ToString());
+                Session.Add("listadoAcciones", acciones);
+                dgvAcciones.DataSource = acciones;
+                dgvAcciones.DataBind();
 
-            
+            }
             catch (Exception ex)
             {
                 Session.Add("error", ex.Message);
