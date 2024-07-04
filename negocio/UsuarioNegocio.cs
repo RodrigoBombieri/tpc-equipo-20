@@ -45,7 +45,8 @@ namespace negocio
                     aux.Apellido = (string)datos.Lector["Apellido"];
                     aux.Nick = (string)datos.Lector["Nick"];
                     aux.Dni = (string)datos.Lector["Dni"];
-                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    if (!(datos.Lector["Telefono"] is DBNull))
+                        aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Password = (string)datos.Lector["Pass"];
                     aux.Rol = new Rol();

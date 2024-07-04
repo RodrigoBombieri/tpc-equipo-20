@@ -46,6 +46,22 @@
             padding: 10px 20px; /* Espaciado interno */
         }
     </style>
+    <script>
+        function previewImage(input) {
+            // Verifica si los archivos son del tipo file
+            if (input.files && input.files[0]) {
+                // Crea un objeto de JS del tipo FileReader para leer archivos
+                var reader = new FileReader();
+                // Se ejecuta cuando la lectura del archivo es completada
+                reader.onload = function (e) {
+                    // Asigna la imagen seleccionada al ASP.NET Image control
+                    document.getElementById('<%= imgNuevoPerfil.ClientID %>').src = e.target.result;
+                }
+                // Inicia la lectura del archivo
+                reader.readAsDataURL(input.files[0]); // Lee el archivo como una URL
+            }
+        }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Perfil </h1>
@@ -109,7 +125,7 @@
         <div class="col-md-4">
             <div class="mb-3">
                 <label id="lblImgPerfil" class="form-label">Imágen de Perfil</label>
-                <input id="txtImgPerfil" class="form-control" type="file" runat="server" />
+                <input id="txtImgPerfil" class="form-control" type="file" runat="server" onchange="previewImage(this);" />
             </div>
             <asp:Image ID="imgNuevoPerfil" ImageUrl="https://img.freepik.com/vector-premium/no-hay-foto-disponible-icono-vector-simbolo-imagen-predeterminado-imagen-proximamente-sitio-web-o-aplicacion-movil_87543-10615.jpg" CssClass="img-fluid mb-3" runat="server" />
         </div>
