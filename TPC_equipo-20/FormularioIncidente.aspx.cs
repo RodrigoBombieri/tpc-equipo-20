@@ -71,8 +71,29 @@ namespace TPC_equipo_20
         }
         protected void btnGuardarIncidente_Click(object sender, EventArgs e)
         {
+            bool valida = true;
             try
             {
+                if (ddlPrioridad.SelectedValue == "1")
+                {
+                    lblErrorDdlPrioridad.Text = "Seleccione una prioridad.";
+                    valida = false;
+                }
+                else
+                    lblErrorDdlPrioridad.Text = "";
+                if (ddlTipo.SelectedValue == "1")
+                {
+                    lblErrorDdlTipo.Text = "Seleccione un tipo.";
+                    valida = false;
+                }
+                else
+                    lblErrorDdlTipo.Text = "";
+                if (!valida)
+                {
+                    banderaCliente = true;
+                    return;
+                }
+
                 IncidenteNegocio negocio = new IncidenteNegocio();
                 Incidente aux = new Incidente();
                 EmailService emailService = new EmailService();

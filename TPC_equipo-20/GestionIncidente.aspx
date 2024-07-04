@@ -178,10 +178,12 @@
                 <div class="mb-3">
                     <label id="lblTipo" class="form-label">Tipo de incidente</label>
                     <asp:DropDownList ID="ddlTipo" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblErrorDdlTipo" runat="server" Text="" ForeColor="Red"></asp:Label>
                 </div>
                 <div class="mb-3">
                     <label id="lblPrioridad" class="form-label">Prioridad</label>
                     <asp:DropDownList ID="ddlPrioridad" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    <asp:Label ID="lblErrorDdlPrioridad" runat="server" Text="" ForeColor="Red"></asp:Label>
                 </div>
                 <div class="mb-3 text-end">
                     <%--<asp:Button ID="Button1" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
@@ -278,7 +280,9 @@
                         <Columns>
                             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
+                            <asp:BoundField HeaderText="Email" DataField="Email" />
                             <asp:BoundField HeaderText="Dni" DataField="Dni" />
+                            <asp:BoundField HeaderText="Rol" DataField="Rol.Descripcion" />
                             <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
                         </Columns>
                         <EmptyDataTemplate>
@@ -296,6 +300,7 @@
                 <div class="row custom-row" style="padding: 20px">
                     <div class="mb-3">
                         <asp:DropDownList ID="ddlTipoAccion" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                        <asp:Label ID="lblErrorDdlTipoAccion" runat="server" Text="" ForeColor="Red"></asp:Label>
                     </div>
                     <div class="mb-3">
                         <label id="lblDetalle" class="form-label">Detalle</label>
@@ -314,7 +319,7 @@
                             <PagerStyle CssClass="pagination" />
                             <Columns>
                                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
-                                <asp:BoundField DataField="Fecha" HeaderText="Creado" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                 <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
                             </Columns>
                             <EmptyDataTemplate>
