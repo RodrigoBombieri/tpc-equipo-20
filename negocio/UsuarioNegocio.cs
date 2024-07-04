@@ -13,14 +13,27 @@ namespace negocio
 {
     public class UsuarioNegocio
     {
-        public List<Usuario> listar()
+        public List<Usuario> listar(bool band, string cadena = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Usuario> lista = new List<Usuario>();
 
             try
             {
-                datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID");
+                string query = "Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, " +
+                    "urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U" +
+                    " inner join ROLES AS R on U.IDRol = R.ID";
+                if (cadena != "" && band)
+                {
+                    query += " where U.ID = @id";
+                    datos.setearParametro("@id", cadena);
+                }
+                else if (cadena != "" && !band)
+                {
+                    query += " where U.Apellido like '%" + cadena + "%' or U.Nombre like '%" + cadena + "%' or U.Dni like '%" + cadena + "%'";
+                    //datos.setearParametro("@cadena", cadena);
+                }
+                datos.setearConsulta(query);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -57,48 +70,48 @@ namespace negocio
             }
         }
 
-        public List<Usuario> listar(string id = "")
-        {
-            List<Usuario> lista = new List<Usuario>();
-            AccesoDatos datos = new AccesoDatos();
+        //public List<Usuario> listar(string id = "")
+        //{
+        //    List<Usuario> lista = new List<Usuario>();
+        //    AccesoDatos datos = new AccesoDatos();
 
-            try
-            {
-                datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID ");
-                if(id != "")
-                {
-                    datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID AND U.ID = @id");
-                    datos.setearParametro("@id", id);
-                    datos.ejecutarLectura();
-                }
+        //    try
+        //    {
+        //        datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID ");
+        //        if(id != "")
+        //        {
+        //            datos.setearConsulta("Select U.ID, U.Nombre, U.Apellido, Nick, Dni, Telefono, Email, Pass, IDRol, urlImagenPerfil, R.ID as RolID, R.Nombre as RolDescripcion FROM USUARIOS AS U, ROLES AS R Where U.IDRol = R.ID AND U.ID = @id");
+        //            datos.setearParametro("@id", id);
+        //            datos.ejecutarLectura();
+        //        }
 
-                while (datos.Lector.Read())
-                {
-                    Usuario aux = new Usuario();
-                    if (!(datos.Lector["ID"] is DBNull))
-                        aux.Id = (long)datos.Lector["ID"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Apellido = (string)datos.Lector["Apellido"];
-                    aux.Nick = (string)datos.Lector["Nick"];
-                    aux.Dni = (string)datos.Lector["Dni"];
-                    aux.Telefono = (string)datos.Lector["Telefono"];
-                    aux.Email = (string)datos.Lector["Email"];
-                    aux.Password = (string)datos.Lector["Pass"];
-                    aux.Rol = new Rol();
-                    aux.Rol.Id = (short)datos.Lector["RolID"];
-                    aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
+        //        while (datos.Lector.Read())
+        //        {
+        //            Usuario aux = new Usuario();
+        //            if (!(datos.Lector["ID"] is DBNull))
+        //                aux.Id = (long)datos.Lector["ID"];
+        //            aux.Nombre = (string)datos.Lector["Nombre"];
+        //            aux.Apellido = (string)datos.Lector["Apellido"];
+        //            aux.Nick = (string)datos.Lector["Nick"];
+        //            aux.Dni = (string)datos.Lector["Dni"];
+        //            aux.Telefono = (string)datos.Lector["Telefono"];
+        //            aux.Email = (string)datos.Lector["Email"];
+        //            aux.Password = (string)datos.Lector["Pass"];
+        //            aux.Rol = new Rol();
+        //            aux.Rol.Id = (short)datos.Lector["RolID"];
+        //            aux.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
 
-                    lista.Add(aux);
-                }
+        //            lista.Add(aux);
+        //        }
 
-                datos.cerrarConexion();
-                return lista;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        datos.cerrarConexion();
+        //        return lista;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         public List<Usuario> listarConImagenes()
         {
@@ -389,6 +402,7 @@ namespace negocio
                     usuario.Nick = (string)datos.Lector["Nick"];
                     usuario.Telefono = (string)datos.Lector["Telefono"];
                     usuario.Dni = (string)datos.Lector["Dni"];
+                    usuario.Password = pass;
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
                     usuario.Rol = new Rol();

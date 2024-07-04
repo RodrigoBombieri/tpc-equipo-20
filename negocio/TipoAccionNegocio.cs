@@ -15,7 +15,7 @@ namespace negocio
             AccesoDatos acceso = new AccesoDatos();
             try
             {
-                acceso.setearConsulta("select ID, Nombre from TiposAcciones");
+                acceso.setearConsulta("select ID, Nombre from TiposAcciones where Automatico = 0");
                 acceso.ejecutarLectura();
                 while (acceso.Lector.Read())
                 {

@@ -82,7 +82,7 @@ namespace TPC_equipo_20
                 aux.Prioridad = new Prioridad();
                 aux.Prioridad.Id = short.Parse(ddlPrioridad.SelectedValue);
                 aux.Estado = new Estado();
-                aux.Estado.Id = 1;
+                aux.Estado.Id = 1;//abierto
                 aux.Cliente = new Cliente();
                 aux.Cliente = (Cliente)Session["Cliente"];
                 aux.Detalle = txtDetalle.Text;
@@ -90,11 +90,11 @@ namespace TPC_equipo_20
                 aux.UsuarioAsignado = (Usuario)Session["usuario"];
 
                 negocio.agregar(aux);
+                /*Acá mandaría el correo con el email del usuario*/
+                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", "otros datos..");
+                emailService.enviarCorreo();
                 Response.Redirect("Incidentes.aspx", false);
 
-                /*Acá mandaría el correo con el email del usuario*/
-                //emailService.armarCorreo(usuario.Email, "Incidente cargado con éxito", "otros datos..");
-                //emailService.enviarCorreo();
             }
             catch (Exception ex)
             {
@@ -150,10 +150,13 @@ namespace TPC_equipo_20
 
         protected void btnBuscarCliente_Click(object sender, EventArgs e)
         {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            List<Cliente> clientes = clienteNegocio.listar(false,txtFiltroCliente.Text);
-            dgvClientes.DataSource = clientes;
-            dgvClientes.DataBind();         
+            if (txtFiltroCliente.Text != "")
+            {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                List<Cliente> clientes = clienteNegocio.listar(false, txtFiltroCliente.Text);
+                dgvClientes.DataSource = clientes;
+                dgvClientes.DataBind();
+            }
         }
     }
 }

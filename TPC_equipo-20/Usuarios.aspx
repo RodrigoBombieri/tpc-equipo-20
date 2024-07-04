@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Usuarios.aspx.cs" Inherits="TPC_equipo_20.Usuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Usuarios</h1>
@@ -48,7 +51,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="mb-3">
-                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click" Text="Buscar" />
+                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" Text="Buscar" />
                 </div>
             </div>
         </div>
@@ -70,8 +73,10 @@
             <asp:ImageField DataImageUrlField="ImagenPerfil" HeaderText="Foto de Perfil" />
             <asp:BoundField DataField="Nick" HeaderText="Nickname" />
             <asp:BoundField DataField="Password" HeaderText="Contraseña" />
-            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Editar" HeaderText="Accion" />
+            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-outline-primary" SelectText="Editar" HeaderText="Accion" />
         </Columns>
     </asp:GridView>
+    <div>
     <a href="FormularioUsuario.aspx" class="btn btn-primary">Agregar Usuario</a>
+    </div>
 </asp:Content>

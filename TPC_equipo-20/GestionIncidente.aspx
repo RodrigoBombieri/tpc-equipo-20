@@ -10,7 +10,40 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <script type="text/javascript">
+        // Función para manejar el clic del botón y cancelar el postback
+        function handleClick() {
+            var textBoxValue = document.getElementById('<%= txtDetalleAccion.ClientID %>').value.trim();
+            //alert(textBoxValue);
+            if (textBoxValue === '') {
+                showModal();
+                return false;
+            }
+            return true;
+        }
+        // Función para mostrar el modal
+        function showModal() {
+            var modal = new bootstrap.Modal(document.getElementById('detalleRequerido'));
+            modal.show();
+        }
+    </script>
+    <!-- Modal -->
+    <div class="modal fade" id="detalleRequerido" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ModalLabel">Campo requerido</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    Ingrese el detalle para continuar.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
             <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
@@ -18,12 +51,9 @@
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <%--<asp:Button ID="btnCerrar" Text="Cerrar" CssClass="btn btn-primary me-2" runat="server" />
-            <asp:Button ID="btnResolver" Text="Resolver" CssClass="btn btn-primary me-2" runat="server" />--%>
-            <asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />
+            <asp:Button ID="btnVolver" Text="Regresar" CssClass="btn btn-warning" runat="server" OnClick="btnVolver_Click" />
         </div>
     </div>
-    <%--<uc:ControlUsuarios ID="MiControl1" runat="server" />--%>
     <div class="row">
         <div class="col-md-6" style="padding-right: 15px;">
             <%--Incidente--%>
@@ -44,10 +74,16 @@
                     <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>
                 </div>
                 <div class="mb-3">
+                    <asp:Label ID="lblUsuarioAsignado" class="form-label" runat="server"></asp:Label>
+                </div>
+                <div class="mb-3">
                     <label id="lblDetalle1" class="form-label">Detalle</label>
                     <asp:TextBox ID="txtDetalle" TextMode="MultiLine" CssClass="form-control" Enabled="false" runat="server" />
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-6" style="padding-right: 15px;">
             <%--Cliente--%>
             <div class="row border m-6 mb-4">
                 <div class="mb-3">
@@ -62,40 +98,105 @@
                 </div>
             </div>
         </div>
-        <%--Acciones--%>
-        <div class="col-md-6 border mb-4">
-            <div class="mb-3">
-                <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
-                <asp:DropDownList ID="ddlTipoAcciones" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
-            </div>
-            <div class="mb-3">
-                <label id="lblDetalle" class="form-label">Detalle</label>
-                <asp:TextBox ID="txtDetalleAccion" TextMode="MultiLine" CssClass="form-control" runat="server" />
-            </div>
-            <div class="row" style="margin-top: 10px">
-                <div class="mb-3 text-end">
-                    <%--<asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
-                    <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-success me-2" runat="server" OnClick="btnGuardarAccion_Click" />
+
+        <div class="row">
+            <%--Acciones--%>
+            <div class="col-md-12 border mb-4">
+
+                <div class="row" style="padding-bottom: 10px">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <label id="lblTipoAccion" class="form-label">Seguimiento:</label>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-end">
+
+                        <% if (banderaReabrirCaso)
+                            {
+                        %>
+                        <asp:Button ID="btnReabrir" Text="Re-abrir" CssClass="btn btn-primary me-2" runat="server"
+                            OnClick="btnReabrir_Click" OnClientClick="return handleClick();" />
+                        <%}
+                            else
+                            {
+                                if (!negocio.Seguridad.EsTelefonista(Session["usuario"]))
+                                {%>
+                        <asp:Button ID="btnReasignar" Text="Reasignar" CssClass="btn btn-primary me-2" runat="server" OnClick="btnReasignar_Click" />
+                        <%}%>
+                        <asp:Button ID="btnCerrar" Text="Cerrar incidente" CssClass="btn btn-primary me-2" runat="server"
+                            OnClick="btnCerrar_Click" OnClientClick="return handleClick();" />
+                        <asp:Button ID="btnResolver" Text="Resolver incidente" CssClass="btn btn-primary me-2" runat="server"
+                            OnClick="btnResolver_Click" OnClientClick="return handleClick();" />
+                        <%} %>
+                        <%--<asp:Button ID="Button4" Text="Volver" CssClass="btn btn-primary" runat="server" OnClick="btnVolver_Click" />--%>
+                    </div>
                 </div>
-            </div>
-            <div class="mb-3">
-                <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
-                    CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
-                    AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
-                    <Columns>
-                        <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
-                        <asp:BoundField DataField="Fecha" HeaderText="Creado" />
-                        <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
-                    </Columns>
-                    <EmptyDataTemplate>
-                        <table style="width: 100%;">
-                            <tr>
-                                <td colspan="2" style="text-align: center;">No hay datos disponibles.</td>
-                            </tr>
-                        </table>
-                    </EmptyDataTemplate>
-                </asp:GridView>
+
+                <%--Usuario--%>
+                <% if (banderaUsuario)
+                    { %>
+                <div class="row custom-row" style="padding: 20px">
+                    <div class="mb-3">
+                        <asp:Label runat="server" Text="Buscar por nombre, apellido o documento."></asp:Label>
+                    </div>
+                    <div class="mb-3 d-flex">
+                        <asp:TextBox ID="txtFiltroUsuario" AutoPostBack="false" CssClass="form-control me-2" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnBuscarUsuario" Text="Buscar" CssClass="btn btn-secondary" runat="server" OnClick="btnBuscarUsuario_Click" />
+                    </div>
+                    <asp:GridView ID="dgvUsuarios" DataKeyNames="Id" OnSelectedIndexChanged="dgvUsuarios_SelectedIndexChanged"
+                        CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvUsuarios_PageIndexChanging"
+                        AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
+                        <Columns>
+                            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                            <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
+                            <asp:BoundField HeaderText="Dni" DataField="Dni" />
+                            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
+                        </Columns>
+                        <EmptyDataTemplate>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">No se encontraron usuarios.</td>
+                                </tr>
+                            </table>
+                        </EmptyDataTemplate>
+                    </asp:GridView>
+                </div>
+                <%}
+                    else
+                    { %>
+                <div class="row custom-row" style="padding: 20px">
+                    <div class="mb-3">
+                        <asp:DropDownList ID="ddlTipoAccion" CssClass="btn btn-secondary dropdown-toggle form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="mb-3">
+                        <label id="lblDetalle" class="form-label">Detalle</label>
+                        <asp:TextBox ID="txtDetalleAccion" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="mb-3 text-end">
+                            <%--<asp:Button ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
+                            <asp:Button ID="btnGuardarAccion" Text="Guardar" CssClass="btn btn-success me-2" runat="server" OnClick="btnGuardarAccion_Click" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
+                            CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
+                            AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
+                            <Columns>
+                                <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Creado" />
+                                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+                            </Columns>
+                            <EmptyDataTemplate>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td colspan="2" style="text-align: center;">No hay datos disponibles.</td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                        </asp:GridView>
+                    </div>
+                </div>
+                <%}%>
             </div>
         </div>
-    </div>    
+    </div>
 </asp:Content>

@@ -32,7 +32,7 @@ namespace TPC_equipo_20
                         txtTelefono.Text = usuario.Telefono;
                         txtDni.Text = usuario.Dni;
                         txtPassword.Text = usuario.Password;
-                        
+                        txtConfirmPassword.Text = usuario.Password;
 
                         if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
                         {

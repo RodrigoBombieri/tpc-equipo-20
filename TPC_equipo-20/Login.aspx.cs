@@ -36,7 +36,7 @@ namespace TPC_equipo_20
                 if (usuario != null)
                 {
                     Session.Add("usuario", usuario);
-                    Response.Redirect("MiPerfil.aspx", false);
+                    Response.Redirect("Default.aspx", false);
                 }
                 else
                 {
