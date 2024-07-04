@@ -89,19 +89,19 @@
     <div class="row">
         <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
             CssClass="table table-hover" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
-            AllowPaging="true" PageSize="5" runat="server">
+            AllowPaging="true" PageSize="5" runat="server" OnRowDataBound="dgvIncidentes_RowDataBound">
             <PagerStyle CssClass="pagination" />
             <Columns>
-                <%--<asp:BoundField DataField="Id" HeaderText="ID" />--%>
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                 <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
-                <%--<asp:BoundField DataField="Detalle" HeaderText="Detalle" />--%>
-                <asp:BoundField DataField="FechaCreacion" HeaderText="Creado" />
-                <%--agregar vigencia/vencimiento--%>
-                <%--<asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />--%>
+                <asp:BoundField DataField="FechaCreacion"  DataFormatString="{0:yyyy-MM-dd HH:mm}" HeaderText="Creado" />
+                <asp:TemplateField HeaderText="Vencimiento">
+                    <ItemTemplate>
+                        <asp:Label ID="lblVencimiento" runat="server" Text='<%# Eval("FechaVencimiento", "{0:dd-MM-yyyy HH:mm}") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
-                <%--<asp:BoundField DataField="UsuarioAsignado.Nombre" HeaderText="Usuario asignado" />--%>
-                <%--<asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />--%>
+                
             </Columns>
             <EmptyDataTemplate>
                 <table style="width: 100%;">

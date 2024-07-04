@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
+using System.Runtime.InteropServices.ComTypes;
 namespace TPC_equipo_20
 {
     public partial class Incidentes : System.Web.UI.Page
@@ -33,7 +34,6 @@ namespace TPC_equipo_20
 
                 }
                 dgvIncidentes.DataSource = Session["listadoIncidentes"];
-                //dgvIncidentes.DataSource = negocio.listar();
                 dgvIncidentes.DataBind();
             }
         }
@@ -198,6 +198,25 @@ namespace TPC_equipo_20
             {
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void dgvIncidentes_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // Obtener el objeto asociado a la fila actual
+                Incidente aux = (Incidente)e.Row.DataItem;
+                DateTime ahora = DateTime.Now;
+                TimeSpan dateDifference = aux.FechaVencimiento - ahora;
+                // Obtener la diferencia en días
+                int differenceInDays = dateDifference.Days;
+                if(differenceInDays > 1) {
+                    e.Row.Cells[3].BackColor = System.Drawing.Color.LightGreen;                 
+                }else if(differenceInDays < 2 && differenceInDays >=0)
+                    e.Row.Cells[3].BackColor = System.Drawing.Color.Yellow;
+                else
+                    e.Row.Cells[3].BackColor = System.Drawing.Color.Red;  
             }
         }
     }
