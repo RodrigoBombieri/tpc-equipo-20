@@ -47,8 +47,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -93,12 +93,12 @@ namespace TPC_equipo_20
                     img.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?v=" + DateTime.Now.Ticks.ToString();
                 }
 
-                Response.Redirect("Default.aspx");
+                Response.Redirect("Default.aspx", false);
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
 
         }

@@ -36,8 +36,7 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex.ToString());
+                Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }

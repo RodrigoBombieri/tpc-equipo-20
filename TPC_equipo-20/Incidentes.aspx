@@ -1,6 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Incidentes.aspx.cs" Inherits="TPC_equipo_20.Incidentes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .pagination a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 4px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            color: #007bff;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+            .pagination a.active,
+            .pagination a:hover {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row  mb-3 border-bottom">
@@ -8,7 +27,7 @@
             <h1>Incidentes</h1>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
-            <asp:Button ID="btnCrear" Text="Nuevo Incidente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click"/>
+            <asp:Button ID="btnCrear" Text="Nuevo Incidente" CssClass="btn btn-primary" runat="server" OnClick="btnCrear_Click" />
             <%--<asp:Button ID="btnVolver" Text="Volver" CssClass="btn btn-primary m-2" runat="server" />--%>
         </div>
     </div>
@@ -68,8 +87,9 @@
     </div>
     <div class="row">
         <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
-            CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
+            CssClass="table table-hover" AutoGenerateColumns="false" OnPageIndexChanging="dgvIncidentes_PageIndexChanging"
             AllowPaging="true" PageSize="5" runat="server">
+            <PagerStyle CssClass="pagination" />
             <Columns>
                 <asp:BoundField DataField="Id" HeaderText="ID" />
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
@@ -81,6 +101,13 @@
                 <asp:BoundField DataField="FechaCierre" HeaderText="Cierre" />
                 <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-info" SelectText="Ver" HeaderText="Accion" />
             </Columns>
+            <EmptyDataTemplate>
+                <table style="width: 100%;">
+                    <tr>
+                        <td colspan="2" style="text-align: center;">No hay datos disponibles.</td>
+                    </tr>
+                </table>
+            </EmptyDataTemplate>
         </asp:GridView>
     </div>
 </asp:Content>

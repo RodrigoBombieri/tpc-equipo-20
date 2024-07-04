@@ -15,7 +15,7 @@ namespace TPC_equipo_20
         {
             try
             {
-                if (!IsPostBack) {}
+                if (!IsPostBack) { }
 
                 // En caso de que se haya pasado un id por querystring, se cargan los datos del incidente
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
@@ -33,7 +33,7 @@ namespace TPC_equipo_20
                     {
                         Session.Add("error", "Tipo no encontrado");
                         Response.Redirect("Error.aspx", false);
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -54,7 +54,8 @@ namespace TPC_equipo_20
                 TipoIncidente tipoOriginal = (TipoIncidente)Session["tipo"];
                 if (tipoOriginal != null && tipoOriginal.Id != 0)
                 {
-                    if (tipoOriginal.Nombre == txtNombre.Text){
+                    if (tipoOriginal.Nombre == txtNombre.Text)
+                    {
                         Response.Redirect("TiposIncidentes.aspx", false);
                         return;
                     }
@@ -107,7 +108,7 @@ namespace TPC_equipo_20
                 }
                 return false;
             }
-            catch
+            catch (Exception)
             {
                 return false;
             }

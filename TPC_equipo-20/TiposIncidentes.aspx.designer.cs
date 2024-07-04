@@ -15,15 +15,6 @@ namespace TPC_equipo_20
     {
 
         /// <summary>
-        /// dgvTipos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvTipos;
-
-        /// <summary>
         /// btnCrear control.
         /// </summary>
         /// <remarks>
@@ -31,5 +22,14 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCrear;
+
+        /// <summary>
+        /// dgvTipos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvTipos;
     }
 }

@@ -21,6 +21,7 @@ namespace negocio
         public AccesoDatos()
         {
             //conexion = new SqlConnection("server=192.168.1.2,1433\\sql-server-express; database=Ticketera; integrated security = false; user=SA; password=Cor12345!; "); //Franco
+            conexion = new SqlConnection("server=192.168.0.163,1433\\sql-server-express; database=Ticketera; integrated security = false; user=SA; password=Cor12345!; "); //Franco Mardel
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=Ticketera; integrated security = true; "); //Bomba - Lucas
             comando = new SqlCommand();
         }
