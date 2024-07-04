@@ -145,7 +145,15 @@ namespace TPC_equipo_20
                 cliNeg.agregar(aux);
 
                 Session.Add("listaClientes", cliNeg.listar(true));
-                Response.Redirect("Clientes.aspx", false);
+                long id = cliNeg.buscarUltimo();
+                if (Request.QueryString["form"] != null)
+                {
+                    Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+                }
+                else
+                {
+                    Response.Redirect("Clientes.aspx", false);
+                }
             }
             catch (Exception ex)
             {
