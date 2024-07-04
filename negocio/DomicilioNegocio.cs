@@ -25,12 +25,12 @@ namespace negocio
 
             }
         }
-        public void agregar(Domicilio dom)
+        public long agregar(Domicilio dom)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO DOMICILIOS (IDProvincia, Calle, Numero, Piso, Departamento, Observaciones, Localidad, CodigoPostal) VALUES (@idprovincia, @calle, @numero, @piso, @departamento, @observaciones, @localidad, @codigopostal)");
+                datos.setearConsulta("INSERT INTO DOMICILIOS (IDProvincia, Calle, Numero, Piso, Departamento, Observaciones, Localidad, CodigoPostal) output inserted.id VALUES (@idprovincia, @calle, @numero, @piso, @departamento, @observaciones, @localidad, @codigopostal)");
                 datos.setearParametro("@idprovincia", dom.Provincia.Id);
                 datos.setearParametro("@calle", dom.Calle);
                 datos.setearParametro("@numero", dom.Numero);
@@ -39,7 +39,7 @@ namespace negocio
                 datos.setearParametro("@observaciones", dom.Observaciones);
                 datos.setearParametro("@localidad", dom.Localidad);
                 datos.setearParametro("@codigopostal", dom.CodigoPostal);
-                datos.ejecutarAccion();
+                return datos.ejecutarAccionScalar();
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace negocio
             }
         }
 
-        public long buscarUltimo()
+        /*public long buscarUltimo()
         {
             AccesoDatos datos = new AccesoDatos();
             long id = -1;
@@ -102,7 +102,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
 
     }
 
