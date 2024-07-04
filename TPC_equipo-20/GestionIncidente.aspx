@@ -3,10 +3,33 @@
 <%@ Register Src="~/ControlUsuarios.ascx" TagPrefix="uc" TagName="ControlUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .large-badge {
-            font-size: 0.8rem; /* Ajusta el tamaño de fuente según lo necesario */
-            padding: 0.5em 1em; /* Ajusta el relleno según lo necesario */
+    .large-badge {
+        font-size: 0.8rem; /* Ajusta el tamaño de fuente según lo necesario */
+        padding: 0.5em 1em; /* Ajusta el relleno según lo necesario */
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 4px;
+        border: 1px solid #007bff;
+        border-radius: 4px;
+        color: #007bff;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
         }
+
+    .estado-color{
+
+    }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -46,8 +69,8 @@
     </div>
     <div class="row  mb-3 border-bottom">
         <div class="col-md-8 d-flex align-items-center">
-            <asp:Label ID="lblNumIncidente" CssClass="h1" Style="margin-right: 10px;" runat="server"></asp:Label>
-            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge" Style="margin-right: 10px;" runat="server">Estado</asp:Label>
+            <asp:Label ID="lblNumIncidente" CssClass="h1" Style="        margin-right: 10px;" runat="server"></asp:Label>
+            <asp:Label ID="lblEstado" CssClass="badge rounded-pill text-bg-info large-badge estado-color" Style="        margin-right: 10px;" runat="server">Estado</asp:Label>
             <asp:Label ID="lblVigencia" CssClass="badge rounded-pill text-bg-warning large-badge" runat="server">Vigencia</asp:Label>
         </div>
         <div class="col-md-4 d-flex align-items-center justify-content-end">
@@ -55,7 +78,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6" style="padding-right: 15px;">
+        <div class="col-md-6" style="        padding-right: 15px;">
             <%--Incidente--%>
             <div class="row border mb-4">
                 <div class="mb-3">
@@ -83,7 +106,7 @@
             </div>
         </div>
 
-        <div class="col-md-6" style="padding-right: 15px;">
+        <div class="col-md-6" style="        padding-right: 15px;">
             <%--Cliente--%>
             <div class="row border m-6 mb-4">
                 <div class="mb-3">
@@ -142,8 +165,9 @@
                         <asp:Button ID="btnBuscarUsuario" Text="Buscar" CssClass="btn btn-secondary" runat="server" OnClick="btnBuscarUsuario_Click" />
                     </div>
                     <asp:GridView ID="dgvUsuarios" DataKeyNames="Id" OnSelectedIndexChanged="dgvUsuarios_SelectedIndexChanged"
-                        CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvUsuarios_PageIndexChanging"
+                        CssClass="table table-hover" AutoGenerateColumns="false" OnPageIndexChanging="dgvUsuarios_PageIndexChanging"
                         AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
+                        <PagerStyle CssClass="pagination" />
                         <Columns>
                             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
@@ -151,9 +175,9 @@
                             <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
                         </Columns>
                         <EmptyDataTemplate>
-                            <table style="width: 100%;">
+                            <table style="        width: 100%;">
                                 <tr>
-                                    <td colspan="2" style="text-align: center;">No se encontraron usuarios.</td>
+                                    <td colspan="2" style="        text-align: center;">No se encontraron usuarios.</td>
                                 </tr>
                             </table>
                         </EmptyDataTemplate>
@@ -178,8 +202,9 @@
                     </div>
                     <div class="mb-3">
                         <asp:GridView ID="dgvAcciones" DataKeyNames="Id" OnSelectedIndexChanged="dgvAcciones_SelectedIndexChanged"
-                            CssClass="table" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
+                            CssClass="table table-hover" AutoGenerateColumns="false" OnPageIndexChanging="dgvAcciones_PageIndexChanging"
                             AllowPaging="true" PageSize="5" runat="server" ShowHeaderWhenEmpty="True">
+                            <PagerStyle CssClass="pagination" />
                             <Columns>
                                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Creado" />
