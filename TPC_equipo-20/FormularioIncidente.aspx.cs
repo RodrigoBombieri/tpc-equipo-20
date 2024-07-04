@@ -140,7 +140,17 @@ namespace TPC_equipo_20
 
         protected void dgvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            try
+            {
+                dgvClientes.DataSource = Session["listadoClientes"];
+                dgvClientes.PageIndex = e.NewPageIndex;
+                dgvClientes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -154,6 +164,7 @@ namespace TPC_equipo_20
             {
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
                 List<Cliente> clientes = clienteNegocio.listar(false, txtFiltroCliente.Text);
+                Session.Add("listadoClientes", clientes);
                 dgvClientes.DataSource = clientes;
                 dgvClientes.DataBind();
             }

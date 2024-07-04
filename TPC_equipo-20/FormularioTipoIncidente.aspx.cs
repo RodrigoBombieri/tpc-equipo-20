@@ -94,16 +94,23 @@ namespace TPC_equipo_20
         }
         protected bool chequearRepetido()
         {
-            TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
-            TipoIncidente aux = negocio.buscar(txtNombre.Text);
-            if (aux != null)
-                return true;
-            else
+            try
             {
-                Session.Add("error", "Tipo no encontrado");
-                Response.Redirect("Error.aspx", false);
+                TipoIncidenteNegocio negocio = new TipoIncidenteNegocio();
+                TipoIncidente aux = negocio.buscar(txtNombre.Text);
+                if (aux != null)
+                    return true;
+                else
+                {
+                    Session.Add("error", "Tipo no encontrado");
+                    Response.Redirect("Error.aspx", false);
+                }
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
     }
 }
