@@ -2,6 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -192,22 +193,29 @@ namespace TPC_equipo_20
             }
         }
 
-        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        /*protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            short id = short.Parse(ddlTipo.SelectedValue);
-            string seleccionar;
-            List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>; ;
-            TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
-            if (tipo != null)
-                seleccionar = tipo.IDPrioridad.ToString();
-            else
-                seleccionar="1";
+            //short id = short.Parse(ddlTipo.SelectedValue);
+            //string seleccionar;
+            //List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>; ;
+            //TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
+            //if (tipo != null)
+            //    seleccionar = tipo.IDPrioridad.ToString();
+            //else
+            //    seleccionar = "1";
 
-            ddlPrioridad.DataSource = Session["listaPrioridades"];
-            ddlPrioridad.DataValueField = "Id";
-            ddlPrioridad.DataTextField = "Nombre";
-            ddlPrioridad.DataBind();
-            ddlPrioridad.SelectedValue = seleccionar;
+            //ddlPrioridad.SelectedIndex = -1;
+            //ddlPrioridad.Items.FindByValue(seleccionar).Selected = true;
+
+
+
+
+        
+            //ddlPrioridad.DataSource = Session["listaPrioridades"];
+            //ddlPrioridad.DataValueField = "Id";
+            //ddlPrioridad.DataTextField = "Nombre";
+            //ddlPrioridad.DataBind();
+            //ddlPrioridad.SelectedValue = seleccionar;
 
 
             //// Deselecciona el elemento seleccionado actual
@@ -222,10 +230,43 @@ namespace TPC_equipo_20
 
             //ddlPrioridad.SelectedValue = seleccionar;
 
-            //ddlPrioridad.SelectedIndex = -1;
-            //ddlPrioridad.Items.FindByValue(seleccionar).Selected = true;
 
             //ddlPrioridad.SelectedIndex = ddlPrioridad.Items.IndexOf(ddlPrioridad.Items.FindByValue(seleccionar));
+        }*/
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            short id = short.Parse(ddlTipo.SelectedValue);
+            string seleccionar;
+            List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>;
+            
+            if (tiposIncidente != null)
+            {
+                TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
+                seleccionar = tipo != null ? tipo.IDPrioridad.ToString() : "1";
+
+                // Depuración
+                Debug.WriteLine("Seleccionar: " + seleccionar);
+
+                // Desmarcar cualquier selección previa
+                ddlPrioridad.ClearSelection();
+
+                // Encontrar y seleccionar el ítem deseado
+                ListItem item = ddlPrioridad.Items.FindByValue(seleccionar);
+                if (item != null)
+                {
+                    item.Selected = true;
+                    Debug.WriteLine("Item encontrado y seleccionado: " + item.Text);
+                }
+                else
+                {
+                    Debug.WriteLine("Item no encontrado");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Tipos de incidente no encontrados en la sesión");
+            }
         }
+
     }
 }

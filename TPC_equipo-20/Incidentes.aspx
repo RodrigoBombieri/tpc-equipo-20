@@ -76,8 +76,7 @@
                 <asp:Label ID="lblValidarFiltro" Text="" runat="server" ForeColor="Red" />
             </div>
         </div>
-        <% } %>
-                <div class="row">
+        <div class="row">
             <div class="col-3">
                 <div class="mb-3">
                     <asp:Button ID="btnBuscar" Text="Buscar" runat="server" CssClass="btn btn-secondary" OnClick="btnBuscar_Click" />
@@ -85,6 +84,7 @@
                 </div>
             </div>
         </div>
+        <% } %>
     </div>
     <div class="row">
         <asp:GridView ID="dgvIncidentes" DataKeyNames="Id" OnSelectedIndexChanged="dgvIncidentes_SelectedIndexChanged"
@@ -94,14 +94,14 @@
             <Columns>
                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                 <asp:BoundField DataField="Prioridad.Nombre" HeaderText="Prioridad" />
-                <asp:BoundField DataField="FechaCreacion"  DataFormatString="{0:yyyy-MM-dd HH:mm}" HeaderText="Creado" />
+                <asp:BoundField DataField="FechaCreacion" DataFormatString="{0:yyyy-MM-dd HH:mm}" HeaderText="Creado" />
                 <asp:TemplateField HeaderText="Vencimiento">
                     <ItemTemplate>
                         <asp:Label ID="lblVencimiento" runat="server" Text='<%# Eval("FechaVencimiento", "{0:dd-MM-yyyy HH:mm}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Estado.Nombre" HeaderText="Estado" />
-                
+
             </Columns>
             <EmptyDataTemplate>
                 <table style="width: 100%;">
