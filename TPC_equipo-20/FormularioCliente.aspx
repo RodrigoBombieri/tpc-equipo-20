@@ -55,7 +55,7 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" CssClass="form-control"  TabIndex="1" runat="server" />
+                <asp:TextBox ID="txtNombre" CssClass="form-control" TabIndex="1" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un nombre" ControlToValidate="txtNombre" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
@@ -77,7 +77,7 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblApellido" class="form-label">Apellido</label>
-                <asp:TextBox ID="txtApellido"  TabIndex="2" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtApellido" TabIndex="2" CssClass="form-control" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un apellido" ControlToValidate="txtApellido" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
@@ -179,13 +179,15 @@
     <div class="row custom-row">
         <%if (Request.QueryString["id"] == null)
             {%>
-
         <div class="col-md-2">
             <asp:Button ID="btnGuardar" Text="Guardar Cliente" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
         </div>
+        <%if (Request.QueryString["form"] == null)
+            {%>
         <div class="col-md-2">
             <asp:Button ID="btnGuardarCrear" Text="Guardar y Crear incidente" CssClass="btn btn-info" runat="server" OnClick="btnGuardarCrear_Click" />
         </div>
+                <%  }    %>
         <div class="col-md-2" style="margin-left: 20px; margin-bottom: 5px;">
             <a href="Clientes.aspx" class="btn btn-warning">Volver al listado</a>
         </div>
