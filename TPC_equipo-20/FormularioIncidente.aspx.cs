@@ -113,7 +113,11 @@ namespace TPC_equipo_20
 
                 negocio.agregar(aux);
                 /*Acá mandaría el correo con el email del usuario*/
-                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", "otros datos..");
+                // En la descripcion ponemos el numero de incidente, el usuario asignado, y la fecha de creacion
+                aux = negocio.obtenerUltimo();
+                //string descripcionCorreo = "Número de incidente: " + aux.Id + "\nUsuario asignado: " + aux.UsuarioAsignado.Nombre + " " + aux.UsuarioAsignado.Apellido + "\nFecha de creación: " + aux.FechaCreacion.ToString() + "Detalle: " + aux.Detalle ;
+                string descripcionCorreo = aplicarEstilos(aux);
+                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", descripcionCorreo);
                 emailService.enviarCorreo();
                 Response.Redirect("Incidentes.aspx", false);
 
@@ -238,7 +242,7 @@ namespace TPC_equipo_20
             short id = short.Parse(ddlTipo.SelectedValue);
             string seleccionar;
             List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>;
-            
+
             if (tiposIncidente != null)
             {
                 TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
@@ -267,6 +271,45 @@ namespace TPC_equipo_20
                 Debug.WriteLine("Tipos de incidente no encontrados en la sesión");
             }
         }
+
+        protected string aplicarEstilos(Incidente aux)
+        {
+            string cuerpoCorreo = @"
+            <html>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        line-height: 1.6;
+                    }
+                    .titulo {
+                        font-weight: bold;
+                        color: #336699;
+                    }
+                    .detalle {
+                        margin-left: 20px;
+                        font-style: italic;
+                    }
+                </style>
+            </head>
+            <body>
+                <p class='titulo'>Número de incidente:</p>
+                <p>" + aux.Id + @"</p>
+                <p class='titulo'>Usuario asignado:</p>
+                <p>" + aux.UsuarioAsignado.Nombre + " " + aux.UsuarioAsignado.Apellido + @"</p>
+                <p class='titulo'>Fecha de creación:</p>
+                <p>" + aux.FechaCreacion.ToString() + @"</p>
+                <p class='titulo'>Detalle:</p>
+                <p class='detalle'>" + aux.Detalle + @"</p>
+            </body>
+            </html>";
+
+            return cuerpoCorreo;
+        }
+
+
+
 
     }
 }

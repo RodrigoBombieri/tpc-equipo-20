@@ -319,5 +319,37 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Incidente obtenerUltimo()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Incidente aux = new Incidente();
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1 I.ID, U.Nombre, U.Apellido, I.Detalle, I.FechaCreacion, C.ID \"IDCliente\", C.Email \"EmailCliente\" FROM Incidentes I INNER JOIN USUARIOS U ON I.IDUsuario = U.ID INNER JOIN Clientes C ON I.IDCliente = C.ID ORDER BY i.ID DESC");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    aux.Id = (long)datos.Lector["ID"];                  
+                    aux.UsuarioAsignado = new Usuario();
+                    aux.UsuarioAsignado.Nombre = (string)datos.Lector["Nombre"];
+                    aux.UsuarioAsignado.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Detalle = (string)datos.Lector["Detalle"];
+                    aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
+                    aux.Cliente = new Cliente();
+                    aux.Cliente.Email = (string)datos.Lector["EmailCliente"];
+                }
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
