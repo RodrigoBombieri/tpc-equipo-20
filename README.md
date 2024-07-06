@@ -6,3 +6,9 @@ Un incidente no debería ser eliminado nunca.
 Con respecto a la visibilidad, los telefonistas podrán ver y administrar clientes e incidencias, pero
 sólo ver las incidencias asignadas a ellos. El administrador podrá ver y manipular todo, inclusive usuarios y accesos y el Supervisor es quien puede ver todo y reasignar incidencias.
 Cuando se da de alta una incidencia, la misma debe ser enviada por mail al cliente en cuestión con el detalle del alta y el número de reclamo para su posterior seguimiento, lo mismo cuando fue cerrada o resuelta.
+
+Capturas de la aplicación:
+
+Formato del email que recibe el cliente:
+
+![FormatoEmail](https://github.com/RodrigoBombieri/tpc-equipo-20/assets/105921352/64343a4c-bbad-40f6-aab6-d9a1ea3abadc)

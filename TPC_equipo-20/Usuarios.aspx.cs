@@ -32,8 +32,7 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
-                Session.Add("Error", ex.ToString());
+                Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }
@@ -48,7 +47,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -65,7 +63,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -80,7 +77,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -110,6 +106,55 @@ namespace TPC_equipo_20
             {
                 UsuarioNegocio negocio = new UsuarioNegocio();
 
+                if (chkFiltroAvanzado.Checked)
+                {
+                    if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                {
+                    dgvUsuarios.DataSource = negocio.listar(true);
+                }
+                else
+                {
+                    dgvUsuarios.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                }
+                }
+                else
+                {
+                        List<Usuario> lista = (List<Usuario>)Session["listaUsuarios"];
+                        List<Usuario> listaFiltrada = lista.FindAll(k => k.Nombre.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Apellido.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Nick.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Dni.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Telefono.ToLower().Contains(txtFiltro.Text.ToLower()) || k.Email.ToLower().Contains(txtFiltro.Text.ToLower()));
+                        dgvUsuarios.DataSource = listaFiltrada;
+                }
+                dgvUsuarios.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void BtnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFiltro.Text = "";
+                txtFiltroAvanzado.Text = "";
+                dgvUsuarios.DataSource = Session["listaUsuarios"];
+                dgvUsuarios.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void txtFiltroAvanzado_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                UsuarioNegocio negocio = new UsuarioNegocio();
                 if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
                 {
                     dgvUsuarios.DataSource = negocio.listar(true);
@@ -119,12 +164,10 @@ namespace TPC_equipo_20
                     dgvUsuarios.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
                     ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
                 }
-
                 dgvUsuarios.DataBind();
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }

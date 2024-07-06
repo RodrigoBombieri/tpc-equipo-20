@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>CALL CENTER </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -59,7 +61,7 @@
                         else
                         { %>
 
-                    <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" Text="Salir" />
+                    <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" AutoPostBack="false" Text="Salir" />
                     <asp:Label ID="lblSalir" CssClass="text-light m-auto me-2" runat="server" Text="User"></asp:Label>
                     <% }%>
                     <asp:Image ID="imgAvatar" Style="width: 40px; height: 40px; border-radius: 50%" runat="server" />

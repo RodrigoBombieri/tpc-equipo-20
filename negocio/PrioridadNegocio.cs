@@ -22,7 +22,7 @@ namespace negocio
                     Prioridad aux = new Prioridad();
                     aux.Id = (short)acceso.Lector["ID"];
                     aux.Nombre = (string)acceso.Lector["Nombre"];
-
+                    
                     lista.Add(aux);
                 }
 

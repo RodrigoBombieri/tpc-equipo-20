@@ -2,6 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,7 +14,7 @@ namespace TPC_equipo_20
     {
         public bool banderaCliente;
         protected void Page_Load(object sender, EventArgs e)
-        {   
+        {
             try
             {
                 if (!IsPostBack)
@@ -27,7 +28,7 @@ namespace TPC_equipo_20
                     ddlPrioridad.DataValueField = "Id";
                     ddlPrioridad.DataTextField = "Nombre";
                     ddlPrioridad.DataBind();
-                    //ddlPrioridad.SelectedValue = "1";
+                    Session.Add("listaPrioridades", listaPrioridades);
 
                     TipoIncidenteNegocio TipoNegocio = new TipoIncidenteNegocio();
                     List<TipoIncidente> listaTipos = TipoNegocio.listar();
@@ -36,7 +37,7 @@ namespace TPC_equipo_20
                     ddlTipo.DataValueField = "Id";
                     ddlTipo.DataTextField = "Nombre";
                     ddlTipo.DataBind();
-                    //ddlTipo.SelectedValue = "1";
+                    Session.Add("tiposIncidente", listaTipos);
 
                     dgvClientes.DataSource = null;
                     dgvClientes.DataBind();
@@ -49,10 +50,10 @@ namespace TPC_equipo_20
                 {
                     //buscar y mostrar
                     ClienteNegocio clienteNegocio = new ClienteNegocio();
-                    List<Cliente> listaAux = clienteNegocio.listar(true,id);
+                    List<Cliente> listaAux = clienteNegocio.listar(true, id);
                     if (listaAux.Count > 0)
                     {
-                        cargarInfoCliente(listaAux[0]);                        
+                        cargarInfoCliente(listaAux[0]);
                         Session["Cliente"] = listaAux[0];
                         banderaCliente = true;
                     }
@@ -71,8 +72,29 @@ namespace TPC_equipo_20
         }
         protected void btnGuardarIncidente_Click(object sender, EventArgs e)
         {
+            bool valida = true;
             try
             {
+                if (ddlPrioridad.SelectedValue == "1")
+                {
+                    lblErrorDdlPrioridad.Text = "Seleccione una prioridad.";
+                    valida = false;
+                }
+                else
+                    lblErrorDdlPrioridad.Text = "";
+                if (ddlTipo.SelectedValue == "1")
+                {
+                    lblErrorDdlTipo.Text = "Seleccione un tipo.";
+                    valida = false;
+                }
+                else
+                    lblErrorDdlTipo.Text = "";
+                if (!valida)
+                {
+                    banderaCliente = true;
+                    return;
+                }
+
                 IncidenteNegocio negocio = new IncidenteNegocio();
                 Incidente aux = new Incidente();
                 EmailService emailService = new EmailService();
@@ -91,7 +113,11 @@ namespace TPC_equipo_20
 
                 negocio.agregar(aux);
                 /*Acá mandaría el correo con el email del usuario*/
-                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", "otros datos..");
+                // En la descripcion ponemos el numero de incidente, el usuario asignado, y la fecha de creacion
+                aux = negocio.obtenerUltimo();
+                //string descripcionCorreo = "Número de incidente: " + aux.Id + "\nUsuario asignado: " + aux.UsuarioAsignado.Nombre + " " + aux.UsuarioAsignado.Apellido + "\nFecha de creación: " + aux.FechaCreacion.ToString() + "Detalle: " + aux.Detalle ;
+                string descripcionCorreo = aplicarEstilos(aux);
+                emailService.armarCorreo(aux.Cliente.Email, "Incidente cargado con éxito", descripcionCorreo);
                 emailService.enviarCorreo();
                 Response.Redirect("Incidentes.aspx", false);
 
@@ -110,7 +136,8 @@ namespace TPC_equipo_20
         {
             lblNombreApellido.Text = aux.Nombre + " " + aux.Apellido;
             lblDocumento.Text = aux.Dni;
-            //mostrar mas campos.
+            lblTelefono1.Text = aux.Telefono1;
+            lblEmail.Text = aux.Email;
         }
         protected void dgvClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -140,7 +167,17 @@ namespace TPC_equipo_20
 
         protected void dgvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            try
+            {
+                dgvClientes.DataSource = Session["listadoClientes"];
+                dgvClientes.PageIndex = e.NewPageIndex;
+                dgvClientes.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
@@ -154,9 +191,125 @@ namespace TPC_equipo_20
             {
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
                 List<Cliente> clientes = clienteNegocio.listar(false, txtFiltroCliente.Text);
+                Session.Add("listadoClientes", clientes);
                 dgvClientes.DataSource = clientes;
                 dgvClientes.DataBind();
             }
         }
+
+        /*protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //short id = short.Parse(ddlTipo.SelectedValue);
+            //string seleccionar;
+            //List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>; ;
+            //TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
+            //if (tipo != null)
+            //    seleccionar = tipo.IDPrioridad.ToString();
+            //else
+            //    seleccionar = "1";
+
+            //ddlPrioridad.SelectedIndex = -1;
+            //ddlPrioridad.Items.FindByValue(seleccionar).Selected = true;
+
+
+
+
+        
+            //ddlPrioridad.DataSource = Session["listaPrioridades"];
+            //ddlPrioridad.DataValueField = "Id";
+            //ddlPrioridad.DataTextField = "Nombre";
+            //ddlPrioridad.DataBind();
+            //ddlPrioridad.SelectedValue = seleccionar;
+
+
+            //// Deselecciona el elemento seleccionado actual
+            //ddlPrioridad.ClearSelection();
+
+            //// Encuentra y selecciona el nuevo elemento
+            //ListItem itemToSelect = ddlPrioridad.Items.FindByValue(seleccionar);
+            //if (itemToSelect != null)
+            //{
+            //    itemToSelect.Selected = true;
+            //}
+
+            //ddlPrioridad.SelectedValue = seleccionar;
+
+
+            //ddlPrioridad.SelectedIndex = ddlPrioridad.Items.IndexOf(ddlPrioridad.Items.FindByValue(seleccionar));
+        }*/
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            short id = short.Parse(ddlTipo.SelectedValue);
+            string seleccionar;
+            List<TipoIncidente> tiposIncidente = Session["tiposIncidente"] as List<TipoIncidente>;
+
+            if (tiposIncidente != null)
+            {
+                TipoIncidente tipo = tiposIncidente.Find(x => x.Id == id);
+                seleccionar = tipo != null ? tipo.IDPrioridad.ToString() : "1";
+
+                // Depuración
+                Debug.WriteLine("Seleccionar: " + seleccionar);
+
+                // Desmarcar cualquier selección previa
+                ddlPrioridad.ClearSelection();
+
+                // Encontrar y seleccionar el ítem deseado
+                ListItem item = ddlPrioridad.Items.FindByValue(seleccionar);
+                if (item != null)
+                {
+                    item.Selected = true;
+                    Debug.WriteLine("Item encontrado y seleccionado: " + item.Text);
+                }
+                else
+                {
+                    Debug.WriteLine("Item no encontrado");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Tipos de incidente no encontrados en la sesión");
+            }
+        }
+
+        protected string aplicarEstilos(Incidente aux)
+        {
+            string cuerpoCorreo = @"
+            <html>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        line-height: 1.6;
+                    }
+                    .titulo {
+                        font-weight: bold;
+                        color: #336699;
+                    }
+                    .detalle {
+                        margin-left: 20px;
+                        font-style: italic;
+                    }
+                </style>
+            </head>
+            <body>
+                <p class='titulo'>Número de incidente:</p>
+                <p>" + aux.Id + @"</p>
+                <p class='titulo'>Usuario asignado:</p>
+                <p>" + aux.UsuarioAsignado.Nombre + " " + aux.UsuarioAsignado.Apellido + @"</p>
+                <p class='titulo'>Fecha de creación:</p>
+                <p>" + aux.FechaCreacion.ToString() + @"</p>
+                <p class='titulo'>Detalle:</p>
+                <p class='detalle'>" + aux.Detalle + @"</p>
+            </body>
+            </html>";
+
+            return cuerpoCorreo;
+        }
+
+
+
+
     }
 }

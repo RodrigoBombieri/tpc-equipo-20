@@ -24,6 +24,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// btnCrear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCrear;
+
+        /// <summary>
         /// txtFiltroCliente control.
         /// </summary>
         /// <remarks>
@@ -96,15 +105,6 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzadoCliente;
 
         /// <summary>
-        /// lblBtnBuscar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBtnBuscar;
-
-        /// <summary>
         /// btnBuscar control.
         /// </summary>
         /// <remarks>
@@ -114,6 +114,15 @@ namespace TPC_equipo_20
         protected global::System.Web.UI.WebControls.Button btnBuscar;
 
         /// <summary>
+        /// BtnLimpiarFiltros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnLimpiarFiltros;
+
+        /// <summary>
         /// dgvClientes control.
         /// </summary>
         /// <remarks>
@@ -121,14 +130,5 @@ namespace TPC_equipo_20
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvClientes;
-
-        /// <summary>
-        /// btnCrear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrear;
     }
 }

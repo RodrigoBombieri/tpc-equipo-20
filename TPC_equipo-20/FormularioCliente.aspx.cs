@@ -66,7 +66,17 @@ namespace TPC_equipo_20
                         ddlProvincias.SelectedValue = aux.Domicilio.Provincia.Id.ToString();
                         txtCodigoPostal.Text = aux.Domicilio.CodigoPostal;
 
-                        Session.Add("listaIncidentesCliente", aux.Incidentes);
+                        List<Incidente> listaInc = aux.Incidentes;
+                        if (Seguridad.EsTelefonista(Session["usuario"]))
+                        {
+                            Usuario usuario = (Usuario)Session["usuario"];
+                            List<Incidente> lista = listaInc.FindAll(k => k.UsuarioAsignado.Id == usuario.Id);
+                            Session.Add("listaIncidentesCliente", lista);
+                        }
+                        else
+                        {
+                            Session.Add("listaIncidentesCliente", aux.Incidentes);
+                        }
                         dgvIncidentes.DataSource = Session["listaIncidentesCliente"];
                         dgvIncidentes.DataBind();
                     }
@@ -78,7 +88,8 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-                throw ex;
+                Session.Add("error", ex.Message);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -104,7 +115,6 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
@@ -116,8 +126,10 @@ namespace TPC_equipo_20
                 Page.Validate();
                 if (!Page.IsValid)
                     return;
+
                 Domicilio auxDom = new Domicilio();
                 DomicilioNegocio domNeg = new DomicilioNegocio();
+
                 auxDom.Calle = txtCalle.Text;
                 auxDom.Numero = txtNumero.Text;
                 auxDom.Piso = txtPiso.Text;
@@ -127,25 +139,32 @@ namespace TPC_equipo_20
                 auxDom.Provincia = new Provincia();
                 auxDom.Provincia.Id = short.Parse(ddlProvincias.SelectedValue);
                 auxDom.CodigoPostal = txtCodigoPostal.Text;
-                domNeg.agregar(auxDom);
+                auxDom.Id = domNeg.agregar(auxDom);
 
                 Cliente aux = new Cliente();
                 ClienteNegocio cliNeg = new ClienteNegocio();
+
                 aux.Nombre = txtNombre.Text;
                 aux.Apellido = txtApellido.Text;
                 aux.Dni = txtDni.Text;
                 aux.Email = txtEmail.Text;
                 aux.Telefono1 = txtTelefono1.Text;
                 aux.Telefono2 = txtTelefono2.Text;
-                aux.Domicilio = new Domicilio();
-                aux.Domicilio.Id = domNeg.buscarUltimo();
+                aux.Domicilio = auxDom;
                 aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 aux.FechaCreacion = DateTime.Parse(txtFechaCreacion.Text);
-
-                cliNeg.agregar(aux);
+                aux.Id = cliNeg.agregar(aux);
 
                 Session.Add("listaClientes", cliNeg.listar(true));
-                Response.Redirect("Clientes.aspx", false);
+
+                if (Request.QueryString["form"] != null)
+                {
+                    Response.Redirect("FormularioIncidente.aspx?id=" + aux.Id, false);
+                }
+                else
+                {
+                    Response.Redirect("Clientes.aspx", false);
+                }
             }
             catch (Exception ex)
             {
@@ -228,8 +247,10 @@ namespace TPC_equipo_20
                 Page.Validate();
                 if (!Page.IsValid)
                     return;
+
                 Domicilio auxDom = new Domicilio();
                 DomicilioNegocio domNeg = new DomicilioNegocio();
+
                 auxDom.Calle = txtCalle.Text;
                 auxDom.Numero = txtNumero.Text;
                 auxDom.Piso = txtPiso.Text;
@@ -239,26 +260,26 @@ namespace TPC_equipo_20
                 auxDom.Provincia = new Provincia();
                 auxDom.Provincia.Id = short.Parse(ddlProvincias.SelectedValue);
                 auxDom.CodigoPostal = txtCodigoPostal.Text;
-                domNeg.agregar(auxDom);
+                auxDom.Id = domNeg.agregar(auxDom);
 
                 Cliente aux = new Cliente();
                 ClienteNegocio cliNeg = new ClienteNegocio();
+
                 aux.Nombre = txtNombre.Text;
                 aux.Apellido = txtApellido.Text;
                 aux.Dni = txtDni.Text;
                 aux.Email = txtEmail.Text;
                 aux.Telefono1 = txtTelefono1.Text;
                 aux.Telefono2 = txtTelefono2.Text;
-                aux.Domicilio = new Domicilio();
-                aux.Domicilio.Id = domNeg.buscarUltimo();
+                aux.Domicilio = auxDom;
                 aux.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 aux.FechaCreacion = DateTime.Parse(txtFechaCreacion.Text);
 
-                cliNeg.agregar(aux);
+                aux.Id = cliNeg.agregar(aux);
 
                 Session.Add("listaClientes", cliNeg.listar(true));
-                long id = cliNeg.buscarUltimo();
-                Response.Redirect("FormularioIncidente.aspx?id=" + id, false);
+
+                Response.Redirect("FormularioIncidente.aspx?id=" + aux.Id, false);
             }
             catch (Exception ex)
             {
@@ -338,7 +359,7 @@ namespace TPC_equipo_20
             }
             catch (Exception ex)
             {
-                Session.Add("Error", ex.ToString());
+                Session.Add("error", ex.Message);
                 Response.Redirect("Error.aspx", false);
             }
         }

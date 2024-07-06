@@ -10,5 +10,6 @@ namespace dominio
     {
         public short Id { get; set; }
         public string Nombre { get; set; }
+        public short IDPrioridad { get; set; }
     }
 }

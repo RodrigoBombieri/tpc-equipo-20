@@ -72,7 +72,7 @@ namespace negocio
                 }
                 datos.cerrarConexion();
                 datos = new AccesoDatos();
-                datos.setearConsulta("select i.ID, i.IDCliente, i.IdTipo, ti.Nombre as 'Tipo', i.IdEstado, e.Nombre as 'Estado', i.IdPrioridad, p.Nombre as 'Prioridad', i.IdUsuario, u.Nombre as 'NombreUsuario', u.Apellido as 'ApellidoUsuario'" +
+                datos.setearConsulta("select i.ID, i.IDCliente, i.IdTipo, ti.Nombre as 'Tipo', i.IdEstado, i.FechaCreacion, e.Nombre as 'Estado', i.IdPrioridad, p.Nombre as 'Prioridad', i.IdUsuario, u.Nombre as 'NombreUsuario', u.Apellido as 'ApellidoUsuario'" +
                     "from Incidentes i  join Estados e on e.id=i.IDEstado  join Prioridades p on p.id=i.idprioridad  join Usuarios u on u.id=i.IDUsuario join TiposIncidentes ti on ti.id=i.IDTipo");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -92,6 +92,7 @@ namespace negocio
                             inc.Prioridad = new Prioridad();
                             inc.Prioridad.Id = (short)datos.Lector["IdPrioridad"];
                             inc.Prioridad.Nombre = (string)datos.Lector["Prioridad"];
+                            inc.FechaCreacion = DateTime.Parse(datos.Lector["FechaCreacion"].ToString());
                             inc.UsuarioAsignado = new Usuario();
                             inc.UsuarioAsignado.Id = (long)datos.Lector["IdUsuario"];
                             inc.UsuarioAsignado.Nombre = (string)datos.Lector["NombreUsuario"];
@@ -116,13 +117,13 @@ namespace negocio
             }
         }
 
-        public void agregar(Cliente nuevo)
+        public long agregar(Cliente nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("INSERT INTO CLIENTES (Nombre, Apellido, Dni, Telefono1, Telefono2, Email, FechaNacimiento, FechaCreacion, IDDomicilio) VALUES (@nombre, @apellido, @dni, @telefono1, @telefono2, @email, @fechanac, @fechacreac, @iddom)");
+                datos.setearConsulta("INSERT INTO CLIENTES (Nombre, Apellido, Dni, Telefono1, Telefono2, Email, FechaNacimiento, FechaCreacion, IDDomicilio) output inserted.id  VALUES (@nombre, @apellido, @dni, @telefono1, @telefono2, @email, @fechanac, @fechacreac, @iddom)");
                 datos.setearParametro("@nombre", nuevo.Nombre);
                 datos.setearParametro("@apellido", nuevo.Apellido);
                 datos.setearParametro("@dni", nuevo.Dni);
@@ -132,8 +133,7 @@ namespace negocio
                 datos.setearParametro("@fechanac", nuevo.FechaNacimiento);
                 datos.setearParametro("@fechacreac", nuevo.FechaCreacion);
                 datos.setearParametro("@iddom", nuevo.Domicilio.Id);
-                datos.ejecutarAccion();
-
+                return datos.ejecutarAccionScalar();
             }
             catch (Exception ex)
             {
@@ -145,7 +145,7 @@ namespace negocio
             }
         }
 
-        public long buscarUltimo()
+        /*public long buscarUltimo()
         {
             AccesoDatos datos = new AccesoDatos();
             long id = -1;
@@ -168,7 +168,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
 
         public void modificar(Cliente nuevo)
         {

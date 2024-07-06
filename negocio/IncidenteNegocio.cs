@@ -9,7 +9,7 @@ namespace negocio
 {
     public class IncidenteNegocio
     {
-        public List<Incidente> listar(bool esIdUsuario, string id="")
+        public List<Incidente> listar(bool esIdUsuario, string id = "")
         {
             AccesoDatos datos = new AccesoDatos();
             List<Incidente> lista = new List<Incidente>();
@@ -21,12 +21,14 @@ namespace negocio
                     "I.IDEstado, E.Nombre as EstadoNombre, " +
                     "c.ID as IDCliente, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2," +
                     "c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, " +
-                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " + 
+                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " +
                     "pr.Nombre as Provincia, " +
                     "U.ID as IDUsuario, U.Nombre as NombreUsuario, U.Apellido as ApellidoUsuario, U.Nick, " +
                     "U.Dni as UsuarioDNI, U.Telefono as TelefonoUsuario, U.Email as EmailUsuario, U.urlImagenPerfil, " +
                     "R.ID as IDRol, R.Nombre as NombreRol, " +
-                    "I.Detalle, I.FechaCreacion, I.FechaCierre " +
+                    "I.Detalle, I.FechaCreacion as CreacionIncidente, I.FechaCierre, " +
+                    "DATEADD(day, P.Vigencia, I.FechaCreacion) AS Vencimiento, " +
+                    "CAST(CASE WHEN DATEADD(day, P.Vigencia, I.FechaCreacion) < GETDATE() THEN 1 ELSE 0  END AS bit) AS Vencido " +
                     "FROM Incidentes I " +
                     "inner join TiposIncidentes TI on I.IDTipo = TI.ID " +
                     "inner join Prioridades P on I.IDPrioridad = P.ID " +
@@ -36,7 +38,8 @@ namespace negocio
                     "inner join Provincias pr ON pr.ID = d.IDProvincia " +
                     "inner join Usuarios U on I.IDUsuario = U.ID " +
                     "inner join Roles R on U.IDRol = R.ID";
-                
+
+
                 if (id != "" && !esIdUsuario)
                 {
                     query += " where I.ID = @id";
@@ -48,7 +51,7 @@ namespace negocio
                     datos.setearParametro("@idUsuario", id);
                 }
                 datos.setearConsulta(query);
-                
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -64,12 +67,15 @@ namespace negocio
                     aux.Prioridad.Nombre = (string)datos.Lector["PrioridadNombre"];
                     aux.Estado = new Estado();
                     aux.Estado.Id = (short)datos.Lector["IDEstado"];
-                    aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];                    
-                    aux.Detalle = (string)datos.Lector["Detalle"];
-                    aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
+                    aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
+                    if (!(datos.Lector["Detalle"] is DBNull))
+                        aux.Detalle = (string)datos.Lector["Detalle"];
+                    aux.FechaCreacion = (DateTime)datos.Lector["CreacionIncidente"];
+                    aux.FechaVencimiento = (DateTime)datos.Lector["Vencimiento"];
+                    aux.Vencido = (bool)datos.Lector["Vencido"];
                     if (!(datos.Lector["FechaCierre"] is DBNull))
                         aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
-                    
+
                     //usuario
                     aux.UsuarioAsignado = new Usuario();
                     aux.UsuarioAsignado.Id = (long)datos.Lector["IDUsuario"];
@@ -77,7 +83,8 @@ namespace negocio
                     aux.UsuarioAsignado.Apellido = (string)datos.Lector["ApellidoUsuario"];
                     aux.UsuarioAsignado.Nick = (string)datos.Lector["Nick"];
                     aux.UsuarioAsignado.Dni = (string)datos.Lector["UsuarioDNI"];
-                    aux.UsuarioAsignado.Telefono = (string)datos.Lector["TelefonoUsuario"];
+                    if (!(datos.Lector["TelefonoUsuario"] is DBNull))
+                        aux.UsuarioAsignado.Telefono = (string)datos.Lector["TelefonoUsuario"];
                     aux.UsuarioAsignado.Email = (string)datos.Lector["EmailUsuario"];
                     aux.UsuarioAsignado.Rol = new Rol();
                     aux.UsuarioAsignado.Rol.Id = (short)datos.Lector["IDRol"];
@@ -180,6 +187,160 @@ namespace negocio
                 datos.setearParametro("@FechaCreacion", aux.FechaCreacion);
                 datos.setearParametro("@FechaCierre", (object)aux.FechaCierre ?? DBNull.Value);
                 datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Incidente> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Incidente> lista = new List<Incidente>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "Select I.ID as IDIncidente, I.IDtipo, " +
+                    "TI.Nombre as TipoNombre, I.IDPrioridad, P.Nombre as PrioridadNombre, " +
+                    "I.IDEstado, E.Nombre as EstadoNombre, " +
+                    "c.ID as IDCliente, c.Nombre, c.Apellido, c.Dni, c.Telefono1, c.Telefono2," +
+                    "c.Email, c.FechaNacimiento, c.FechaCreacion, c.IDDomicilio, d.Calle, d.Numero, " +
+                    "d.Piso, d.Departamento, d.Observaciones, d.Localidad, d.CodigoPostal, d.IDProvincia, " +
+                    "pr.Nombre as Provincia, " +
+                    "U.ID as IDUsuario, U.Nombre as NombreUsuario, U.Apellido as ApellidoUsuario, U.Nick, " +
+                    "U.Dni as UsuarioDNI, U.Telefono as TelefonoUsuario, U.Email as EmailUsuario, U.urlImagenPerfil, " +
+                    "R.ID as IDRol, R.Nombre as NombreRol, " +
+                    "I.Detalle, I.FechaCreacion as CreacionIncidente, I.FechaCierre, " +
+                    "DATEADD(day, P.Vigencia, I.FechaCreacion) AS Vencimiento, " +
+                    "CAST(CASE WHEN DATEADD(day, P.Vigencia, I.FechaCreacion) < GETDATE() THEN 1 ELSE 0  END AS bit) AS Vencido " +
+                    "FROM Incidentes I " +
+                    "inner join TiposIncidentes TI on I.IDTipo = TI.ID " +
+                    "inner join Prioridades P on I.IDPrioridad = P.ID " +
+                    "inner join Estados E on I.IDEstado = E.ID " +
+                    "inner join Clientes c on I.IDCliente = C.ID " +
+                    "inner join Domicilios d ON d.Id = c.IDDomicilio " +
+                    "inner join Provincias pr ON pr.ID = d.IDProvincia " +
+                    "inner join Usuarios U on I.IDUsuario = U.ID " +
+                    "inner join Roles R on U.IDRol = R.ID ";
+
+                if(campo == "Tipo")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "TI.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "TI.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene":
+                            consulta += "TI.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " ORDER BY TI.Nombre";
+                }
+                else if(campo == "Prioridad")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "P.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "P.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene":
+                            consulta += "P.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " ORDER BY P.Nombre";
+                }
+                else if(campo == "Estado")
+                {
+                    consulta += "WHERE ";
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "E.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "E.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene":
+                            consulta += "E.Nombre LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                    consulta += " ORDER BY E.Nombre";
+                }
+                
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Incidente aux = new Incidente();
+                    if (!(datos.Lector["IDIncidente"] is DBNull))
+                        aux.Id = (long)datos.Lector["IDIncidente"];
+                    aux.Tipo = new TipoIncidente();
+                    aux.Tipo.Id = (short)datos.Lector["IDTipo"];
+                    aux.Tipo.Nombre = (string)datos.Lector["TipoNombre"];
+                    aux.Prioridad = new Prioridad();
+                    aux.Prioridad.Id = (short)datos.Lector["IDPrioridad"];
+                    aux.Prioridad.Nombre = (string)datos.Lector["PrioridadNombre"];
+                    aux.Estado = new Estado();
+                    aux.Estado.Id = (short)datos.Lector["IDEstado"];
+                    aux.Estado.Nombre = (string)datos.Lector["EstadoNombre"];
+                    if (!(datos.Lector["Detalle"] is DBNull))
+                        aux.Detalle = (string)datos.Lector["Detalle"];
+                    aux.FechaCreacion = (DateTime)datos.Lector["CreacionIncidente"];
+                    aux.FechaVencimiento = (DateTime)datos.Lector["Vencimiento"];
+                    aux.Vencido = (bool)datos.Lector["Vencido"];
+                    if (!(datos.Lector["FechaCierre"] is DBNull))
+                        aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Incidente obtenerUltimo()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Incidente aux = new Incidente();
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1 I.ID, U.Nombre, U.Apellido, I.Detalle, I.FechaCreacion, C.ID \"IDCliente\", C.Email \"EmailCliente\" FROM Incidentes I INNER JOIN USUARIOS U ON I.IDUsuario = U.ID INNER JOIN Clientes C ON I.IDCliente = C.ID ORDER BY i.ID DESC");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    aux.Id = (long)datos.Lector["ID"];                  
+                    aux.UsuarioAsignado = new Usuario();
+                    aux.UsuarioAsignado.Nombre = (string)datos.Lector["Nombre"];
+                    aux.UsuarioAsignado.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Detalle = (string)datos.Lector["Detalle"];
+                    aux.FechaCreacion = (DateTime)datos.Lector["FechaCreacion"];
+                    aux.Cliente = new Cliente();
+                    aux.Cliente.Email = (string)datos.Lector["EmailCliente"];
+                }
+                return aux;
             }
             catch (Exception ex)
             {

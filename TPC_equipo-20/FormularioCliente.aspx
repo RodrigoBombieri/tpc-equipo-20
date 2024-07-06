@@ -55,40 +55,40 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" CssClass="form-control"  TabIndex="1" runat="server" />
+                <asp:TextBox ID="txtNombre" CssClass="form-control" TabIndex="1" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un nombre" ControlToValidate="txtNombre" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label id="lblDni" class="form-label">DNI</label>
-                <asp:TextBox ID="txtDni" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtDni" CssClass="form-control" TabIndex="3" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un DNI" ControlToValidate="txtDni" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ErrorMessage="Ingrese sólo números" ControlToValidate="txtDni" runat="server" CssClass="text-danger" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
             </div>
             <div class="mb-3">
                 <label id="lblTelefono1" class="form-label">Telefono 1</label>
-                <asp:TextBox ID="txtTelefono1" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtTelefono1" CssClass="form-control" TabIndex="5" runat="server" />
             </div>
             <div class="mb-3">
                 <label id="lblFechaNac" class="form-label">Fecha de Nacimiento</label>
-                <asp:TextBox ID="txtFechaNac" CssClass="form-control" runat="server" TextMode="Date" />
+                <asp:TextBox ID="txtFechaNac" CssClass="form-control" TabIndex="7" runat="server" TextMode="Date" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una fecha de nacimiento" ControlToValidate="txtFechaNac" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblApellido" class="form-label">Apellido</label>
-                <asp:TextBox ID="txtApellido"  TabIndex="2" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtApellido" TabIndex="2" CssClass="form-control" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un apellido" ControlToValidate="txtApellido" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label id="lblEmail" class="form-label">Email</label>
-                <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtEmail" CssClass="form-control" TabIndex="4" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un email" ControlToValidate="txtEmail" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ErrorMessage="Email inválido" ControlToValidate="txtEmail" runat="server" CssClass="text-danger" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"></asp:RegularExpressionValidator>
             </div>
             <div class="mb-3">
                 <label id="lblTelefono2" class="form-label">Telefono 2</label>
-                <asp:TextBox ID="txtTelefono2" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtTelefono2" CssClass="form-control" TabIndex="6" runat="server" />
             </div>
             <div class="mb-3">
                 <label id="lblFechaCreacion" class="form-label">Fecha de Alta</label>
@@ -102,23 +102,23 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblCalle" class="form-label">Calle</label>
-                <asp:TextBox ID="txtCalle" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtCalle" CssClass="form-control" TabIndex="8" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una calle" ControlToValidate="txtCalle" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label id="lblPiso" class="form-label">Piso</label>
-                <asp:TextBox ID="txtPiso" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtPiso" CssClass="form-control" TabIndex="10" runat="server" />
             </div>
             <div class="mb-3">
                 <label id="lblLocalidad" class="form-label">Localidad</label>
-                <asp:TextBox ID="txtLocalidad" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtLocalidad" CssClass="form-control" TabIndex="12" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar una localidad" ControlToValidate="txtLocalidad" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
                         <label id="lblProvincia" class="form-label">Provincia</label>
-                        <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select" TabIndex="14"></asp:DropDownList>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -126,16 +126,16 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label id="lblNumero" class="form-label">Número</label>
-                <asp:TextBox ID="txtNumero" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtNumero" CssClass="form-control" TabIndex="9" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un número" ControlToValidate="txtNumero" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
             </div>
             <div class="mb-3">
                 <label id="lblDepartamento" class="form-label">Departamento</label>
-                <asp:TextBox ID="txtDepartamento" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtDepartamento" CssClass="form-control" TabIndex="11" runat="server" />
             </div>
             <div class="mb-3">
                 <label id="lblCodigoPostal" class="form-label">Código Postal</label>
-                <asp:TextBox ID="txtCodigoPostal" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtCodigoPostal" CssClass="form-control" TabIndex="13" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="Debe ingresar un código postal" ControlToValidate="txtCodigoPostal" runat="server" CssClass="text-danger"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ErrorMessage="Ingrese sólo números" ControlToValidate="txtCodigoPostal" runat="server" CssClass="text-danger" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
             </div>
@@ -143,7 +143,7 @@
         <div class="row custom-row">
             <div class="mb-3">
                 <label id="lblObservaciones" class="form-label">Observaciones</label>
-                <asp:TextBox ID="txtObservaciones" TextMode="MultiLine" CssClass="form-control" runat="server" />
+                <asp:TextBox ID="txtObservaciones" TextMode="MultiLine" TabIndex="15" CssClass="form-control" runat="server" />
             </div>
         </div>
     </div>
@@ -179,13 +179,15 @@
     <div class="row custom-row">
         <%if (Request.QueryString["id"] == null)
             {%>
-
         <div class="col-md-2">
             <asp:Button ID="btnGuardar" Text="Guardar Cliente" CssClass="btn btn-primary" runat="server" OnClick="btnGuardar_Click" />
         </div>
+        <%if (Request.QueryString["form"] == null)
+            {%>
         <div class="col-md-2">
             <asp:Button ID="btnGuardarCrear" Text="Guardar y Crear incidente" CssClass="btn btn-info" runat="server" OnClick="btnGuardarCrear_Click" />
         </div>
+                <%  }    %>
         <div class="col-md-2" style="margin-left: 20px; margin-bottom: 5px;">
             <a href="Clientes.aspx" class="btn btn-warning">Volver al listado</a>
         </div>

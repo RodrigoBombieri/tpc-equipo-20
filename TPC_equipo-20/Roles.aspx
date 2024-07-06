@@ -3,5 +3,5 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Roles</h1>
-    <a href="/Administracion.aspx">Regresar</a>
+    <a href="/Administracion.aspx" class="btn btn-warning">Regresar</a>
 </asp:Content>
