@@ -125,8 +125,15 @@
             align-items: center;
         }
     </style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS (popper.js y bootstrap.js pueden ser opcionales dependiendo de la versión de Bootstrap que estés usando) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.3/umd/popper.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <script type="text/javascript">
         // Función para manejar el clic del botón y cancelar el postback
         function handleClick() {
@@ -143,6 +150,7 @@
             var modal = new bootstrap.Modal(document.getElementById('detalleRequerido'));
             modal.show();
         }
+        
     </script>
     <!-- Modal -->
     <div class="modal fade" id="detalleRequerido" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -320,7 +328,8 @@
                             <Columns>
                                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Ver" HeaderText="Accion" />
+                                <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
+                                <asp:CommandField ShowSelectButton="true" SelectText="Ver" ControlStyle-CssClass="btn btn-info" HeaderText="Accion" />
                             </Columns>
                             <EmptyDataTemplate>
                                 <table style="width: 100%;">
@@ -333,6 +342,22 @@
                     </div>
                 </div>
                 <%}%>
+            </div>
+            <div class="modal fade" id="modalDetalleAccion" tabindex="-1" role="dialog" aria-labelledby="modalDetalleAccionLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDetalleAccionLabel">Detalle de Acción</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="lblDetalleAccion" runat="server"></asp:Label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
