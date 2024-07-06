@@ -14,5 +14,7 @@ namespace dominio
         public DateTime Fecha { get; set; }
         public string Detalle { get; set; }
         public TipoAccion Tipo { get; set; }
+
+        public Usuario Usuario { get; set; }
     }
 }

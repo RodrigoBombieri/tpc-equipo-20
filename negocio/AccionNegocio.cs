@@ -15,9 +15,9 @@ namespace negocio
             List<Accion> lista = new List<Accion>();
             try
             {
-                datos.setearConsulta("Select A.ID, A.IDIncidente, A.Detalle, A.IDUsuario, A.IDtipo, A.Fecha, TA.Nombre " +
+                datos.setearConsulta("Select A.ID, A.IDIncidente, A.Detalle, A.IDUsuario, A.IDtipo, A.Fecha, TA.Nombre, U.Nombre as \"NombreUsuario\", U.ID " +
                     "FROM Acciones A " +
-                    "inner join TiposAcciones TA on A.IDTipo = TA.ID " +
+                    "inner join TiposAcciones TA on A.IDTipo = TA.ID INNER JOIN Usuarios U ON A.IDUsuario = U.ID INNER JOIN Incidentes I ON U.ID = I.ID " +
                     "where A.IDIncidente = @id order by Fecha desc");
                 datos.setearParametro("@id", id);
                 datos.ejecutarLectura();
@@ -25,6 +25,7 @@ namespace negocio
                 while (datos.Lector.Read())
                 {
                     Accion aux = new Accion();
+                    Incidente incidente = new Incidente();
                     if (!(datos.Lector["ID"] is DBNull))
                         aux.Id = (long)datos.Lector["ID"];
                     aux.IDIncidente = (long)datos.Lector["IDIncidente"];
@@ -34,6 +35,9 @@ namespace negocio
                     aux.Tipo.Id = (short)datos.Lector["IDTipo"];
                     aux.Tipo.Nombre = (string)datos.Lector["Nombre"];
                     aux.Fecha = (DateTime)datos.Lector["Fecha"];
+                    aux.Usuario = new Usuario();
+                    aux.Usuario.Id = (long)datos.Lector["IDUsuario"];
+                    aux.Usuario.Nombre = (string)datos.Lector["NombreUsuario"];
 
                     lista.Add(aux);
                 }

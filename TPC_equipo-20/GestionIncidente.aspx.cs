@@ -162,20 +162,19 @@ namespace TPC_equipo_20
         }
         protected void dgvAcciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Obtener el índice de la fila seleccionada
+            // Obtiene el índice de la fila seleccionada
             int rowIndex = dgvAcciones.SelectedIndex;
 
-            // Verificar si hay una fila seleccionada
+            // Verifica si hay una fila seleccionada
             if (rowIndex >= 0)
             {
-                // Ejemplo: Obtener el valor de una celda específica (en este caso, la tercera celda)
                 string tipo = dgvAcciones.Rows[rowIndex].Cells[0].Text;
                 string fecha = dgvAcciones.Rows[rowIndex].Cells[1].Text;
                 string detalle = dgvAcciones.Rows[rowIndex].Cells[2].Text;
-
-                // Puedes realizar otras acciones aquí, como mostrar el detalle en un control o realizar alguna operación basada en la selección.
+                string nombreUsuario = dgvAcciones.Rows[rowIndex].Cells[3].Text;
+      
                 // Actualizar el contenido del modal con los datos obtenidos
-                lblDetalleAccion.Text = $"<strong>Tipo:</strong> {tipo}<br /><strong>Fecha:</strong> {fecha}<br /><strong>Detalle:</strong> {detalle}";
+                lblDetalleAccion.Text = $"<strong>Tipo:</strong> {tipo}<br /><strong>Fecha:</strong> {fecha}<br /><strong>Detalle:</strong> {detalle} <br /><strong>Usuario Ejecutor:</strong> {nombreUsuario}";
 
                 // Mostrar el modal
                 // Si el usuario presiona el boton ver, se muestra el modal con el detalle de la acción
@@ -399,6 +398,9 @@ namespace TPC_equipo_20
             try
             {
                 AccionNegocio accionNegocio = new AccionNegocio();
+                // En caso de que haya una reasignacion, se debe mostrar el nombre del usuario al que se reasigno
+
+
                 List<Accion> acciones = accionNegocio.listar(id.ToString());
                 Session.Add("listadoAcciones", acciones);
                 dgvAcciones.DataSource = acciones;
