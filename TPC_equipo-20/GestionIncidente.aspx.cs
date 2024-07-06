@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace TPC_equipo_20
 {
@@ -141,10 +142,11 @@ namespace TPC_equipo_20
         protected void mostrarVigencia(Incidente aux)
         {
             if (aux.Vencido)
-            { 
+            {
                 lblVigencia.CssClass = "badge rounded-pill text-bg-danger large-badge";
                 lblVigencia.Text = "Vencido";
-            }else
+            }
+            else
             {
                 lblVigencia.CssClass = "badge rounded-pill text-bg-success large-badge";
                 lblVigencia.Text = "Vigente";
@@ -160,7 +162,33 @@ namespace TPC_equipo_20
         }
         protected void dgvAcciones_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Obtiene el índice de la fila seleccionada
+            int rowIndex = dgvAcciones.SelectedIndex;
 
+            // Verifica si hay una fila seleccionada
+            if (rowIndex >= 0)
+            {
+                string tipo = dgvAcciones.Rows[rowIndex].Cells[0].Text;
+                string fecha = dgvAcciones.Rows[rowIndex].Cells[1].Text;
+                string detalle = dgvAcciones.Rows[rowIndex].Cells[2].Text;
+                string nombreUsuario = dgvAcciones.Rows[rowIndex].Cells[3].Text;
+      
+                // Actualizar el contenido del modal con los datos obtenidos
+                lblDetalleAccion.Text = $"<strong>Tipo:</strong> {tipo}<br /><strong>Fecha:</strong> {fecha}<br /><strong>Detalle:</strong> {detalle} <br /><strong>Usuario Ejecutor:</strong> {nombreUsuario}";
+
+                // Mostrar el modal
+                // Si el usuario presiona el boton ver, se muestra el modal con el detalle de la acción
+                // Si el usuario presiona el boton cerrar, se cierra el modal
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "modalScripts", @"
+                    $(document).ready(function() {
+                    $('#modalDetalleAccion').modal('show');
+
+                    $('#modalDetalleAccion').on('hidden.bs.modal', function (e) {
+                    $('#modalDetalleAccion').modal('hide');
+                        });
+                    });
+                    ", true);
+            }
         }
 
         protected void dgvAcciones_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -370,6 +398,9 @@ namespace TPC_equipo_20
             try
             {
                 AccionNegocio accionNegocio = new AccionNegocio();
+                // En caso de que haya una reasignacion, se debe mostrar el nombre del usuario al que se reasigno
+
+
                 List<Accion> acciones = accionNegocio.listar(id.ToString());
                 Session.Add("listadoAcciones", acciones);
                 dgvAcciones.DataSource = acciones;
