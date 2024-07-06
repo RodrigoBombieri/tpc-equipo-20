@@ -91,7 +91,7 @@
     <div class="row">
         <div class="col">
             <asp:GridView runat="server" ID="dgvClientes" CssClass="table table-hover" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvClientes_SelectedIndexChanged" OnRowCommand="dgvClientes_RowCommand" OnPageIndexChanging="dgvClientes_PageIndexChanging"
-                AllowPaging="true" PageSize="20">
+                AllowPaging="true" PageSize="5">
                 <PagerStyle CssClass="pagination" />
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
