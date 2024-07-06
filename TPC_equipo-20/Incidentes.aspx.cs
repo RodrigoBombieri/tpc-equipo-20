@@ -211,7 +211,8 @@ namespace TPC_equipo_20
                 TimeSpan dateDifference = aux.FechaVencimiento - ahora;
                 Label lblVencimiento = (Label)e.Row.FindControl("lblVencimiento");
                 lblVencimiento.Text = string.Format("{0:dd-MM-yyyy HH:mm}", aux.FechaVencimiento);
-                aux.Estado.Nombre = (string)e.Row.Cells[4].Text;
+                string nombreEstado = HttpUtility.HtmlDecode(e.Row.Cells[4].Text);
+                aux.Estado.Nombre = nombreEstado;
                 // Obtener la diferencia en días
                 int differenceInDays = dateDifference.Days;
                 if (differenceInDays <= 2 && differenceInDays >= 0 && aux.Estado.Nombre != "Cerrado")
