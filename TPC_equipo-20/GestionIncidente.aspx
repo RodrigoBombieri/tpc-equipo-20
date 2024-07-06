@@ -329,6 +329,7 @@
                                 <asp:BoundField DataField="Tipo.Nombre" HeaderText="Tipo" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                 <asp:BoundField DataField="Detalle" HeaderText="Detalle" />
+                                <asp:BoundField DataField="Usuario.Nombre" HeaderText="Usuario" />
                                 <asp:CommandField ShowSelectButton="true" SelectText="Ver" ControlStyle-CssClass="btn btn-info" HeaderText="Accion" />
                             </Columns>
                             <EmptyDataTemplate>
