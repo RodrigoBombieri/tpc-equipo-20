@@ -19,6 +19,22 @@
                 color: #fff;
                 border-color: #007bff;
             }
+
+        .icon-warning {
+            color: yellow;
+            background-color: black;
+            border: 1px solid black;
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        .icon-danger {
+            color: red;
+            background-color: black;
+            border: 1px solid black;
+            padding: 2px;
+            border-radius: 5px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

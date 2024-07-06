@@ -182,17 +182,17 @@ namespace TPC_equipo_20
         {
             try
             {
-               /* IncidenteNegocio negocio = new IncidenteNegocio();
-                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
-                {
-                    dgvIncidentes.DataSource = negocio.listar(true);
-                }
-                else
-                {
-                    dgvIncidentes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
-                    ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
-                }
-                dgvIncidentes.DataBind();*/
+                /* IncidenteNegocio negocio = new IncidenteNegocio();
+                 if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                 {
+                     dgvIncidentes.DataSource = negocio.listar(true);
+                 }
+                 else
+                 {
+                     dgvIncidentes.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                     ddlCriterio.SelectedItem.ToString(), txtFiltroAvanzado.Text);
+                 }
+                 dgvIncidentes.DataBind();*/
             }
             catch (Exception ex)
             {
@@ -209,14 +209,33 @@ namespace TPC_equipo_20
                 Incidente aux = (Incidente)e.Row.DataItem;
                 DateTime ahora = DateTime.Now;
                 TimeSpan dateDifference = aux.FechaVencimiento - ahora;
+                Label lblVencimiento = (Label)e.Row.FindControl("lblVencimiento");
+                lblVencimiento.Text = string.Format("{0:dd-MM-yyyy HH:mm}", aux.FechaVencimiento);
+                aux.Estado.Nombre = (string)e.Row.Cells[4].Text;
                 // Obtener la diferencia en días
                 int differenceInDays = dateDifference.Days;
-                if(differenceInDays > 1) {
-                    e.Row.Cells[3].BackColor = System.Drawing.Color.LightGreen;                 
-                }else if(differenceInDays < 2 && differenceInDays >=0)
-                    e.Row.Cells[3].BackColor = System.Drawing.Color.Yellow;
+                if (differenceInDays <= 2 && differenceInDays >= 0 && aux.Estado.Nombre != "Cerrado")
+                {
+                    lblVencimiento.Text += " <i class='fa fa-exclamation-circle icon-danger'></i>";
+                }
+                else if (differenceInDays >= 3 && differenceInDays <=5 && aux.Estado.Nombre != "Cerrado")
+                {
+                    lblVencimiento.Text += " <i class='fa fa-exclamation-triangle icon-warning'></i>";
+                }
+            }
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // Obtener el objeto asociado a la fila actual
+                Incidente aux = (Incidente)e.Row.DataItem;
+                if (aux.Prioridad.Nombre == "Alta")
+                    e.Row.Cells[1].BackColor = System.Drawing.Color.Red;
+                else if (aux.Prioridad.Nombre == "Media")
+                    e.Row.Cells[1].BackColor = System.Drawing.Color.Yellow;
+                else if (aux.Prioridad.Nombre == "Baja")
+                    e.Row.Cells[1].BackColor = System.Drawing.Color.LightGreen;
                 else
-                    e.Row.Cells[3].BackColor = System.Drawing.Color.Red;  
+                    e.Row.Cells[1].BackColor = System.Drawing.Color.Magenta;
             }
         }
     }
