@@ -195,7 +195,7 @@
                 </div>
                 <div class="mb-3 text-end">
                     <%--<asp:Button ID="Button1" Text="Cancelar" CssClass="btn btn-danger" runat="server" />--%>
-                    <asp:Button ID="btnModificarIncidente" Text="Modificar" CssClass="btn btn-secondary me-2" runat="server" OnClick="btnModificarIncidente_Click" />
+                    <asp:Button ID="btnModificarIncidente" Text="Guardar cambios" CssClass="btn btn-secondary me-2" runat="server" OnClick="btnModificarIncidente_Click" />
                 </div>
                 <div class="mb-3">
                     <asp:Label ID="lblCreado" class="form-label" runat="server"></asp:Label>
@@ -291,7 +291,7 @@
                             <asp:BoundField HeaderText="Email" DataField="Email" />
                             <asp:BoundField HeaderText="Dni" DataField="Dni" />
                             <asp:BoundField HeaderText="Rol" DataField="Rol.Descripcion" />
-                            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Seleccionar" HeaderText="Seleccionar" />
+                            <asp:CommandField ShowSelectButton="true" ControlStyle-CssClass="btn btn-primary" SelectText="Asignar" HeaderText="Asignar" />
                         </Columns>
                         <EmptyDataTemplate>
                             <table style="width: 100%;">

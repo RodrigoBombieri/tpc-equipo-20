@@ -384,6 +384,7 @@ namespace TPC_equipo_20
                     mostrarEstado(aux);
 
                 }
+                txtDetalleAccion.Text = string.Empty;
             }
             catch (Exception ex)
             {
